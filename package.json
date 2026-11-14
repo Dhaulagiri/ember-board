@@ -11,6 +11,7 @@
     "vendor": "node scripts/vendor-ui-sdk.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0",
     "@glimmer/component": "^2.2.1",
     "@glimmer/tracking": "^1.1.2",
     "@ui-sdk/core": "link:./vendor/@ui-sdk/core",
@@ -19,7 +20,6 @@
     "lucide": "1.54.0"
   },
   "devDependencies": {
-    "@anthropic-ai/sdk": "^1.8.0",
     "@babel/core": "^7.29.7",
     "@babel/plugin-transform-typescript": "^7.29.9",
     "@glint/ember-tsc": "^1.14.3",

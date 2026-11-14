@@ -602,6 +602,17 @@ kbd {
   }
 }
 
+[data-slot="key"] {
+  display: flex;
+  gap: 6px;
+}
+
+[data-slot="key-note"] {
+  margin: -6px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+
 [data-slot="suggestions"] {
   display: flex;
   flex-direction: column;

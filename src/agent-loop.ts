@@ -1,5 +1,7 @@
+import type Anthropic from "@anthropic-ai/sdk"
 import type { createAgent } from "@ui-sdk/ember/agent"
 import { agentTools } from "@ui-sdk/ember/agent"
+import { agentParams, type AgentRequest } from "../shared/agent-request"
 
 type Agent = ReturnType<typeof createAgent>
 
@@ -44,24 +46,63 @@ const summarize = (result: unknown) => {
   return text.length > 160 ? `${text.slice(0, 157)}…` : text
 }
 
+let browserClient: { key: string; client: Anthropic } | undefined
+
+async function ask(request: AgentRequest, apiKey: string) {
+  if (apiKey) {
+    const { default: Anthropic } = await import("@anthropic-ai/sdk")
+    if (browserClient?.key !== apiKey) {
+      browserClient = {
+        key: apiKey,
+        client: new Anthropic({ apiKey, dangerouslyAllowBrowser: true }),
+      }
+    }
+    try {
+      return await browserClient.client.messages.create(agentParams(request))
+    } catch (error) {
+      throw new Error(
+        error instanceof Anthropic.AuthenticationError
+          ? "Anthropic didn't accept that API key."
+          : error instanceof Error
+            ? error.message
+            : String(error)
+      )
+    }
+  }
+  const response = await fetch("/api/agent", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(request),
+  })
+  const message = await response.json()
+  if (!response.ok) {
+    throw new Error(message.error ?? response.statusText)
+  }
+  return message
+}
+
 async function runAgent(
   agent: Agent,
   task: string,
-  { model, onEvent }: { model: string; onEvent: (event: AgentEvent) => void }
+  {
+    model,
+    apiKey,
+    onEvent,
+  }: { model: string; apiKey: string; onEvent: (event: AgentEvent) => void }
 ) {
   const messages: { role: "user" | "assistant"; content: unknown }[] = [
     { role: "user", content: task },
   ]
   for (let turn = 0; turn < 20; turn++) {
     const started = performance.now()
-    const response = await fetch("/api/agent", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ model, messages, tools: agentTools }),
-    })
-    const message = await response.json()
-    if (!response.ok) {
-      onEvent({ type: "error", text: message.error ?? response.statusText })
+    let message
+    try {
+      message = await ask(
+        { model, messages, tools: agentTools } as AgentRequest,
+        apiKey
+      )
+    } catch (error) {
+      onEvent({ type: "error", text: (error as Error).message })
       return
     }
     onEvent({ type: "usage", usage: message.usage, model })

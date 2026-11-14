@@ -25,6 +25,26 @@ const suggestions = [
   "Push “Billing export to CSV” due date to December 5 and mark it In Review.",
 ]
 
+const storageKey = "ember-board:anthropic-key"
+
+const readKey = () => {
+  try {
+    return sessionStorage.getItem(storageKey) ?? ""
+  } catch {
+    return ""
+  }
+}
+
+const writeKey = (value: string) => {
+  try {
+    if (value) {
+      sessionStorage.setItem(storageKey, value)
+    } else {
+      sessionStorage.removeItem(storageKey)
+    }
+  } catch {}
+}
+
 const models = [
   { value: "claude-haiku-5-5", label: "Haiku 5.5" },
   { value: "claude-sonnet-5-5", label: "Sonnet 5.5" },
@@ -35,6 +55,7 @@ export default class AgentPanel extends Component<Signature> {
   models = models
   @tracked task = suggestions[0]
   @tracked model = "claude-haiku-5-5"
+  @tracked apiKey = readKey()
   @tracked lines: Line[] = []
   @tracked running = false
   @tracked calls = 0
@@ -57,6 +78,14 @@ export default class AgentPanel extends Component<Signature> {
   setModel = (event: Event) =>
     (this.model = (event.target as HTMLSelectElement).value)
   pick = (task: string) => (this.task = task)
+  setKey = (event: Event) => {
+    this.apiKey = (event.target as HTMLInputElement).value.trim()
+    writeKey(this.apiKey)
+  }
+  forgetKey = () => {
+    this.apiKey = ""
+    writeKey("")
+  }
 
   record = (event: AgentEvent) => {
     if (event.type === "usage") {
@@ -101,6 +130,7 @@ export default class AgentPanel extends Component<Signature> {
     try {
       await runAgent(this.args.agent, this.task, {
         model: this.model,
+        apiKey: this.apiKey,
         onEvent: this.record,
       })
     } catch (error) {
@@ -122,6 +152,28 @@ export default class AgentPanel extends Component<Signature> {
           {{/each}}
         </select>
       </header>
+      <div data-slot="key">
+        <input
+          type="password"
+          aria-label="Anthropic API key"
+          placeholder="Anthropic API key (sk-ant-…)"
+          autocomplete="off"
+          spellcheck="false"
+          value={{this.apiKey}}
+          {{on "input" this.setKey}}
+        />
+        {{#if this.apiKey}}
+          <button type="button" {{on "click" this.forgetKey}}>Forget</button>
+        {{/if}}
+      </div>
+      <p data-slot="key-note">
+        {{#if this.apiKey}}
+          Your key stays in this tab and goes only to api.anthropic.com.
+        {{else}}
+          Paste a key to run the agent. It stays in this tab and goes only to
+          api.anthropic.com.
+        {{/if}}
+      </p>
       <form {{on "submit" this.run}}>
         <textarea
           aria-label="Task"
