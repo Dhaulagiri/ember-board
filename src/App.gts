@@ -19,6 +19,7 @@ import { Command } from "@ui-sdk/ember/command"
 import { Dialog } from "@ui-sdk/ember/dialog"
 import { createParts } from "@ui-sdk/ember/primitive"
 import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import AgentPanel from "./AgentPanel.gts"
 import { Board, columns, labelOf, labels, personOf, type Issue } from "./data"
 import { icon } from "./icon"
 import { Draft, IssueDialog } from "./IssueDialog.gts"
@@ -245,6 +246,8 @@ export default class App extends Component<Signature> {
           </k.Instructions>
         </Kanban>
       </main>
+
+      <AgentPanel @agent={{@agent}} />
 
       <IssueDialog
         @board={{this.board}}
