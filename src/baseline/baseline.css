@@ -1,0 +1,138 @@
+.baseline {
+  grid-template-columns: 1fr;
+}
+
+.baseline .card {
+  cursor: pointer;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.35);
+  z-index: 40;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 41;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(560px, calc(100vw - 32px));
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: var(--popup-shadow);
+  padding: 20px;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dd {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dd-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.dd-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 10px;
+  cursor: pointer;
+  background: var(--panel);
+}
+
+.dd-placeholder {
+  color: var(--muted);
+}
+
+.dd-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  z-index: 5;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow: var(--popup-shadow);
+  padding: 4px;
+}
+
+.dd-search {
+  margin-bottom: 4px;
+}
+
+.dd-option {
+  padding: 7px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--lane);
+  }
+}
+
+.cal {
+  right: auto;
+  padding: 10px;
+}
+
+.cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.cal-nav {
+  display: inline-flex;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 32px);
+}
+
+.cal-day {
+  display: grid;
+  place-items: center;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &.out {
+    color: var(--muted);
+  }
+
+  &.sel {
+    background: var(--accent);
+    color: white;
+  }
+
+  &:hover {
+    background: var(--lane);
+  }
+}

@@ -1,3 +1,4 @@
+import { resolve } from "node:path"
 import { defineConfig, type Plugin } from "vite"
 import { ember } from "./ember-plugin.ts"
 import { AgentError, handleAgent } from "./server/agent.ts"
@@ -34,4 +35,12 @@ export default defineConfig({
     dedupe: ["ember-source", "@glimmer/component", "@glimmer/tracking"],
   },
   optimizeDeps: { exclude: ["@glimmer/component"] },
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(import.meta.dirname, "index.html"),
+        baseline: resolve(import.meta.dirname, "baseline.html"),
+      },
+    },
+  },
 })
