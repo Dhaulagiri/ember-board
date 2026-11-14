@@ -12,7 +12,7 @@ pnpm install
 ANTHROPIC_API_KEY=sk-ant-... pnpm dev
 ```
 
-Open http://localhost:5320. The board works without a key; the Agent panel needs one.
+Open http://localhost:5320. The board works without a key. For the Agent panel, either start the server with `ANTHROPIC_API_KEY` as above, or paste a key into the panel.
 
 ## Benchmark
 
@@ -45,4 +45,8 @@ Commit `vendor/` so a deploy builds without the fork.
 
 ## Deploy to Vercel
 
-Import the repository with the defaults from `vercel.json` (Vite, `pnpm build`, `dist`), and set `ANTHROPIC_API_KEY` in the project's environment variables. `api/agent.ts` serves the agent in production, sharing `server/agent.ts` with the dev server. It allows Haiku 5.5 and Sonnet 5.5 only, caps each request at 4,000 output tokens and a task at 60 messages, but anyone with the URL can spend the key, so give it a key with a spend limit.
+Import the repository with the defaults from `vercel.json` (Vite, `pnpm build`, `dist`). No environment variables are needed.
+
+At demo time, paste an Anthropic API key into the Agent panel. The browser then calls the Claude API directly: the key stays in that tab's session storage, goes only to api.anthropic.com, and never reaches the deploy. **Forget** clears it, and closing the tab does too.
+
+To let anyone run the agent without a key, set `ANTHROPIC_API_KEY` in the project's environment variables instead. `api/agent.ts` then serves the agent, sharing its request with the browser through `shared/agent-request.ts`: Haiku 5.5 and Sonnet 5.5 only, at most 4,000 output tokens a request and 60 messages a task. Anyone with the URL can spend that key, so give it a spend limit.
