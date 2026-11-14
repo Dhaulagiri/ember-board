@@ -6,6 +6,7 @@
     "dev": "vite --port ${BOARD_PORT:-5320} --strictPort",
     "build": "vite build",
     "preview": "vite preview --port ${BOARD_PORT:-5320} --strictPort",
+    "bench": "node bench/run.ts",
     "typecheck": "ember-tsc --noEmit",
     "vendor": "node scripts/vendor-ui-sdk.mjs"
   },
