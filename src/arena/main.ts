@@ -1,3 +1,4 @@
+import { explainRenderError } from "./diagnose"
 import { coverage, expectedWidgets, type Expected } from "./expected"
 import { createFrame, problemCount, type Score } from "./frame"
 import { repairBuild, startBuild, type Build, type Stats } from "./generate"
@@ -215,16 +216,20 @@ async function runArm(
     await frame.render(code)
   } catch (error) {
     if (!build) {
-      throw error
+      throw new Error(explainRenderError(code, (error as Error).message))
     }
     column.state.textContent = "Render failed, asking for one repair…"
     column.code.textContent = ""
-    await repairBuild(build, (error as Error).message, {
+    await repairBuild(build, explainRenderError(code, (error as Error).message), {
       apiKey: key.value.trim(),
       onEvent: (event) => event.type === "text" && column.code.append(event.text),
     })
     column.code.textContent = build.code
-    await frame.render(build.code)
+    try {
+      await frame.render(build.code)
+    } catch (repaired) {
+      throw new Error(explainRenderError(build.code, (repaired as Error).message))
+    }
     return { code: build.code, stats: build.stats }
   }
   return { code, stats }
