@@ -190,8 +190,8 @@ function renderScorecard() {
       el(
         "li",
         { dataset: { ok: String(!widget.problems.length) } },
-        `${title} · ${widget.pattern}${widget.label ? ` “${widget.label}”` : ""}${widget.marked ? "" : " (found by role)"}: `,
-        widget.problems.length ? widget.problems.join(" ") : "passes"
+        `${title} · ${widget.pattern}${widget.label ? ` “${widget.label}”` : ""}${widget.native ? " (native element)" : widget.marked ? "" : " (found by role)"}: `,
+        widget.problems.length ? widget.problems.join(" ") : widget.native ? "built in, not pattern-checked" : "passes"
       )
     ),
   ])
