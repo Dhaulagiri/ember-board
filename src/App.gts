@@ -153,6 +153,7 @@ export default class App extends Component<Signature> {
               </Command>
             </d.Content>
           </Dialog>
+          <a href="/arena.html" data-slot="nav-link">Arena</a>
           <Button @onClick={{fn this.edit null}} class="primary">
             {{icon Plus}}
             New issue
