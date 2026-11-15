@@ -9,6 +9,15 @@ type Result = {
 
 const arena = document.getElementById("arena")!
 
+let runtime: Promise<string> | undefined
+const runtimeSource = () =>
+  (runtime ??= fetch("/runtime/runtime.js").then((response) => {
+    if (!response.ok) {
+      throw new Error(`The runtime didn't load (${response.status}).`)
+    }
+    return response.text()
+  }))
+
 function column(title: string, source: string) {
   const section = document.createElement("section")
   section.innerHTML = `
@@ -22,14 +31,22 @@ function column(title: string, source: string) {
   const status = section.querySelector<HTMLElement>("[data-status]")!
   const results = section.querySelector<HTMLElement>("[data-results]")!
   textarea.value = source
-  let ready: Promise<void> = new Promise((resolve) => {
-    const onReady = (event: MessageEvent) => {
-      if (event.source === frame.contentWindow && event.data?.type === "ready") {
-        window.removeEventListener("message", onReady)
+  const ready: Promise<void> = new Promise((resolve) => {
+    const onMessage = async (event: MessageEvent) => {
+      if (event.source !== frame.contentWindow) {
+        return
+      }
+      if (event.data?.type === "loaded") {
+        frame.contentWindow!.postMessage(
+          { type: "boot", code: await runtimeSource() },
+          "*"
+        )
+      } else if (event.data?.type === "ready") {
+        window.removeEventListener("message", onMessage)
         resolve()
       }
     }
-    window.addEventListener("message", onReady)
+    window.addEventListener("message", onMessage)
   })
   const reply = (type: string) =>
     new Promise<any>((resolve, reject) => {
