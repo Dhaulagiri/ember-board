@@ -51,7 +51,6 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, "index.html"),
         baseline: resolve(import.meta.dirname, "baseline.html"),
-        spike: resolve(import.meta.dirname, "spike.html"),
         arena: resolve(import.meta.dirname, "arena.html"),
       },
     },
