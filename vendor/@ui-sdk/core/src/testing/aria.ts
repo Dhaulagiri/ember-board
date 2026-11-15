@@ -27,12 +27,12 @@ const isGone = (el: Element) =>
 const isUnreachable = (el: Element) =>
   !!el.closest('[aria-hidden="true"], [inert]')
 
-// A native input a component renders only so its value submits, like a radio's. No screen
-// reader or Tab reaches it, so it isn't one of the widget's items.
+// A native input a component renders only so its value submits, like a radio's: no screen
+// reader or Tab reaches it. An aria-hidden control that Tab still reaches is kept, since that's a bug.
 const isFormProxy = (el: Element) =>
-  el instanceof HTMLInputElement &&
+  el.localName === "input" &&
   el.getAttribute("aria-hidden") === "true" &&
-  el.tabIndex < 0
+  (el as HTMLElement).tabIndex < 0
 
 // The parent the page renders an element in: the slot it's assigned to, or a shadow root's host.
 const renderedParent = (el: Element) =>
