@@ -42,6 +42,15 @@ const fold = (text: string) =>
 const matches = (label: string, query: string) =>
   fold(label).includes(fold(query))
 
+// A control inside a card, like its Edit button, keeps its own keys and
+// clicks: dragging captures the pointer, which would steal the click.
+const fromControl = (event: Event, card: Element | null | undefined) => {
+  const control = (event.target as Element).closest(
+    "a[href], button, input, select, textarea, [role='button']"
+  )
+  return !!control && control !== card && !!card?.contains(control)
+}
+
 const kanban = /* @__PURE__ */ definePrimitive({
   name: "kanban",
   options: {
@@ -197,9 +206,9 @@ const kanban = /* @__PURE__ */ definePrimitive({
       }),
       on: {
         keydown: (event, { el, api, key }) =>
-          el && api.cardKeydown(event, el, key),
-        pointerdown: (event, { api, key }) =>
-          api.transfer.pointerdown(event, key),
+          el && !fromControl(event, el) && api.cardKeydown(event, el, key),
+        pointerdown: (event, { el, api, key }) =>
+          !fromControl(event, el) && api.transfer.pointerdown(event, key),
       },
       bind: (el, part) => {
         const unbindRoving = part.api.roving.bind(el, part)
