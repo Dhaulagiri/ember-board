@@ -24,6 +24,13 @@ for (const name of ["core", "ember"]) {
   writeFileSync(join(to, "package.json"), `${JSON.stringify(pkg, null, 2)}\n`)
 }
 
+const docs = join(import.meta.dirname, "..", "public", "docs", "ember")
+rmSync(docs, { recursive: true, force: true })
+cpSync(join(ui, "packages", "ember", "docs", "llms.txt"), join(docs, "llms.txt"))
+cpSync(join(ui, "packages", "ember", "docs", "components"), join(docs, "components"), {
+  recursive: true,
+})
+
 const commit = execFileSync("git", ["-C", ui, "rev-parse", "--short", "HEAD"], {
   encoding: "utf8",
 }).trim()
