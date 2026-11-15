@@ -1,0 +1,11 @@
+body { margin: 0; font: 14px/1.4 system-ui, sans-serif; }
+#arena { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px; }
+section { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+h2 { margin: 0; font-size: 16px; }
+textarea { height: 220px; font: 12px ui-monospace, monospace; }
+.actions { display: flex; gap: 8px; align-items: center; }
+iframe { height: 320px; border: 1px solid #d4d4d8; border-radius: 8px; width: 100%; }
+[data-results] { font-size: 12px; padding-left: 18px; }
+[data-results] > li[data-ok="false"] { color: #dc2626; }
+[data-results] > li[data-ok="true"] { color: #16a34a; }
+[data-results] ul { color: #52525b; }
