@@ -1,4 +1,4 @@
-import { AgentError, handleAgent } from "../server/agent"
+import { AgentError, handleAgent } from "../server/agent.js"
 
 export async function POST(request: Request) {
   try {
