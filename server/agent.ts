@@ -1,5 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk"
-import { AgentError, agentParams, type AgentRequest } from "../shared/agent-request"
+import { AgentError, agentParams, type AgentRequest } from "../shared/agent-request.js"
 
 const maxBodyBytes = 400_000
 

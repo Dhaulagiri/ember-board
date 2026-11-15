@@ -1,4 +1,4 @@
-import { CompileError, compileGts } from "../server/compile"
+import { CompileError, compileGts } from "../server/compile.js"
 
 export async function POST(request: Request) {
   try {
