@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs"
+import { appendFileSync, mkdirSync, writeFileSync } from "node:fs"
 import { parseArgs } from "node:util"
 import { chromium } from "playwright"
 
@@ -95,6 +95,10 @@ async function main() {
   const runs = Number(flags.runs)
   const browser = await chromium.launch({ headless: !flags.headed })
   const all: Run[] = []
+  const stamp = new Date().toISOString().replace(/[:.]/g, "-")
+  mkdirSync("bench/results", { recursive: true })
+  const log = `bench/results/arena-${stamp}.jsonl`
+  console.log(`Saving each build to ${log} as it finishes.`)
 
   for (const [index, text] of chosen.entries()) {
     for (let run = 1; run <= runs; run++) {
@@ -115,11 +119,12 @@ async function main() {
       })
       const result = await page.evaluate(() => (window as any).__arenaResult)
       await page.close()
+      appendFileSync(log, `${JSON.stringify({ index: index + 1, run, ...result })}\n`)
       for (const arm of ["plain", "sdk"] as Arm[]) {
         const outcome: Outcome = result.outcomes[arm]
         all.push({ prompt: index + 1, run, arm, expected: result.expected ?? null, ...outcome })
         console.log(
-          `#${index + 1}.${run} ${arm.padEnd(5)} ${outcome.error ? `FAILED ${outcome.error.slice(0, 60)}` : `${problemsOf(outcome)} problems, ${outcome.score?.widgets.length ?? 0} widgets`}${outcome.stats ? `, ${outcome.stats.seconds.toFixed(1)}s, $${outcome.stats.cost.toFixed(4)}` : ""}`
+          `#${index + 1}.${run} ${arm.padEnd(5)} ${outcome.error ? `FAILED ${outcome.error.split("\n")[0].slice(0, 80)}` : `${problemsOf(outcome)} problems, ${outcome.score?.widgets.length ?? 0} widgets`}${outcome.stats ? `, ${outcome.stats.seconds.toFixed(1)}s, $${outcome.stats.cost.toFixed(4)}${outcome.stats.repaired ? ", repaired" : ""}` : ""}`
         )
       }
     }
@@ -189,8 +194,6 @@ async function main() {
   ]
   const report = lines.join("\n")
   console.log(`\n${report}`)
-  const stamp = new Date().toISOString().replace(/[:.]/g, "-")
-  mkdirSync("bench/results", { recursive: true })
   writeFileSync(`bench/results/arena-${stamp}.json`, JSON.stringify({ flags, summary, all }, null, 2))
   writeFileSync(`bench/results/arena-${stamp}.md`, `${report}\n`)
 }
