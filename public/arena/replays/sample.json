@@ -1,7 +1,17 @@
 {
   "prompt": "Project tabs for Overview, Activity and Settings, and a role picker.",
   "model": "none",
-  "note": "Hand-written samples, not built by Claude. For testing the pipeline offline.",
+  "note": "Hand-written samples, not built by Claude. For testing the pipeline offline. The expected widgets were written by hand from the prompt, since this replay predates that check.",
+  "expected": [
+    {
+      "pattern": "tabs",
+      "what": "project tabs"
+    },
+    {
+      "pattern": "combobox",
+      "what": "role picker"
+    }
+  ],
   "arms": {
     "plain": {
       "code": "import Component from \"@glimmer/component\"\nimport { tracked } from \"@glimmer/tracking\"\nimport { on } from \"@ember/modifier\"\nimport { fn } from \"@ember/helper\"\n\nconst tabs = [\"Overview\", \"Activity\", \"Settings\"]\nconst roles = [\"Viewer\", \"Editor\", \"Admin\"]\n\nexport default class Plain extends Component {\n  @tracked tab = \"Overview\"\n  @tracked role = \"Viewer\"\n  @tracked open = false\n  isTab = (tab: string) => (tab === this.tab ? \"active\" : \"\")\n  pickTab = (tab: string) => (this.tab = tab)\n  toggle = () => (this.open = !this.open)\n  pickRole = (role: string) => {\n    this.role = role\n    this.open = false\n  }\n  <template>\n    <div data-widget=\"tabs\">\n      <div class=\"tabs\">\n        {{#each tabs as |tab|}}\n          <div class=\"tab {{this.isTab tab}}\" {{on \"click\" (fn this.pickTab tab)}}>{{tab}}</div>\n        {{/each}}\n      </div>\n      <div class=\"panel\">{{this.tab}} content</div>\n    </div>\n    <div data-widget=\"combobox\" style=\"margin-top: 24px\">\n      <div class=\"trigger\" style=\"cursor: pointer\" {{on \"click\" this.toggle}}>Role: {{this.role}}</div>\n      {{#if this.open}}\n        <div class=\"menu\">\n          {{#each roles as |role|}}\n            <div style=\"cursor: pointer\" {{on \"click\" (fn this.pickRole role)}}>{{role}}</div>\n          {{/each}}\n        </div>\n      {{/if}}\n    </div>\n  </template>\n}\n",

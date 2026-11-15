@@ -47,7 +47,29 @@ type Outcome = {
   }
 }
 
-type Run = { prompt: number; run: number; arm: Arm } & Outcome
+type Run = {
+  prompt: number
+  run: number
+  arm: Arm
+  expected: { pattern: string }[] | null
+} & Outcome
+
+// One found widget per asked-for one, so four switches asked for need four.
+const builtOf = (run: Run) => {
+  if (!run.expected || !run.score) {
+    return null
+  }
+  const left = run.score.widgets.map((widget) => widget.pattern)
+  let built = 0
+  for (const want of run.expected) {
+    const index = left.indexOf(want.pattern)
+    if (index !== -1) {
+      left.splice(index, 1)
+      built++
+    }
+  }
+  return { built, of: run.expected.length }
+}
 
 const median = (values: number[]) => {
   if (!values.length) {
@@ -95,7 +117,7 @@ async function main() {
       await page.close()
       for (const arm of ["plain", "sdk"] as Arm[]) {
         const outcome: Outcome = result.outcomes[arm]
-        all.push({ prompt: index + 1, run, arm, ...outcome })
+        all.push({ prompt: index + 1, run, arm, expected: result.expected ?? null, ...outcome })
         console.log(
           `#${index + 1}.${run} ${arm.padEnd(5)} ${outcome.error ? `FAILED ${outcome.error.slice(0, 60)}` : `${problemsOf(outcome)} problems, ${outcome.score?.widgets.length ?? 0} widgets`}${outcome.stats ? `, ${outcome.stats.seconds.toFixed(1)}s, $${outcome.stats.cost.toFixed(4)}` : ""}`
         )
@@ -113,6 +135,14 @@ async function main() {
       arm,
       builds: mine.length,
       failed: mine.filter((run) => run.error).length,
+      coverage: (() => {
+        const counts = mine.flatMap((run) => {
+          const built = builtOf(run)
+          return built ? [built] : []
+        })
+        const of = counts.reduce((total, count) => total + count.of, 0)
+        return of ? counts.reduce((total, count) => total + count.built, 0) / of : NaN
+      })(),
       repaired: stats.filter((s) => s.repaired).length,
       problems: median(scored.map(problemsOf)),
       widgets: median(scored.map((run) => run.score!.widgets.length)),
@@ -142,6 +172,7 @@ async function main() {
     "",
     "| | Ember | Ember + @ui-sdk/ember |",
     "| --- | --- | --- |",
+    `| Asked-for widgets built (all builds) | ${fmt(plain.coverage * 100, 0, "%")} | ${fmt(sdk.coverage * 100, 0, "%")} |`,
     `| Builds that failed to render | ${plain.failed}/${plain.builds} | ${sdk.failed}/${sdk.builds} |`,
     `| Needed a repair turn | ${plain.repaired} | ${sdk.repaired} |`,
     `| Pattern and keyboard problems | ${fmt(plain.problems)} | ${fmt(sdk.problems)} |`,

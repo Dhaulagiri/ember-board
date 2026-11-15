@@ -27,6 +27,13 @@ const isGone = (el: Element) =>
 const isUnreachable = (el: Element) =>
   !!el.closest('[aria-hidden="true"], [inert]')
 
+// A native input a component renders only so its value submits, like a radio's. No screen
+// reader or Tab reaches it, so it isn't one of the widget's items.
+const isFormProxy = (el: Element) =>
+  el instanceof HTMLInputElement &&
+  el.getAttribute("aria-hidden") === "true" &&
+  el.tabIndex < 0
+
 // The parent the page renders an element in: the slot it's assigned to, or a shadow root's host.
 const renderedParent = (el: Element) =>
   el.assignedSlot ??
@@ -55,8 +62,9 @@ function isUndisplayed(
 }
 
 /**
- * Every element in `scope` with one of `roles`, in page order, leaving out what isn't rendered. With
- * `displayed` false it keeps what styles hide, like a collapsed tree branch's group, for structure checks.
+ * Every element in `scope` with one of `roles`, in page order, leaving out what isn't rendered and
+ * a form's hidden inputs. With `displayed` false it keeps what styles hide, like a collapsed tree
+ * branch's group, for structure checks.
  */
 function withRole(scope: Element, roles: string[], { displayed = true } = {}) {
   const known = new Map<Element, boolean>()
@@ -64,6 +72,7 @@ function withRole(scope: Element, roles: string[], { displayed = true } = {}) {
     (el) =>
       roles.includes(roleOf(el)) &&
       !isGone(el) &&
+      !isFormProxy(el) &&
       (!displayed || !isUndisplayed(el, known))
   )
 }
