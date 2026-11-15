@@ -347,7 +347,7 @@ function resolveTarget(target: PopupFocusTarget, root: ParentNode) {
 }
 
 function usable(el: HTMLElement) {
-  return el.isConnected && !el.closest("[inert]")
+  return el.isConnected && !el.closest("[inert]") && !el.matches(":disabled")
 }
 
 // Whether focus rests on nothing a person can use: the body, or an element
@@ -576,6 +576,7 @@ function createPopupLayer<
   let openedOnPress = false
   let returnMode: ReturnMode = true
   let before: HTMLElement | undefined
+  let focusedOnOpen: HTMLElement | undefined
   let openedWithoutTrigger = store.get().open
   // Where focus goes when what had it is gone: the popup this one opened from
   // returns to its own target, else the focus that the last close left.
@@ -626,11 +627,15 @@ function createPopupLayer<
       focusPending = true
       enterPending = true
       returnMode = true
+      focusedOnOpen = undefined
       const active = isBrowser ? activeElement() : null
       before =
         active && active !== active.ownerDocument.body ? active : undefined
       openedWithoutTrigger = opener === "imperative"
       const openerLayer = before && findLayer(before)
+      if (before && before === openerLayer?.focusedOnOpen?.()) {
+        before = undefined
+      }
       const openerTarget = openerLayer ? undefined : lastClosed()
       upstream = openerLayer?.returnTarget ?? (() => openerTarget)
       const exiting = !!shown
@@ -668,12 +673,13 @@ function createPopupLayer<
     }
     // Focus on the body belongs to no one, like in Safari, where pressing a
     // button doesn't focus it. Focus in a popup nested under this one counts as
-    // inside, and so does focus in a shadow root inside it.
+    // inside, and so does focus in a shadow root inside it or where opening put it.
     const active = activeElement()
     const trigger = options.trigger()
     const hadFocus =
       !active ||
       active === el.ownerDocument.body ||
+      active === focusedOnOpen ||
       composedContains(el, active) ||
       (!!layer &&
         layerContains(layer, active) &&
@@ -874,6 +880,7 @@ function createPopupLayer<
       }
       const target = plan === "popup" ? shown.el : resolve?.()
       if (target) {
+        focusedOnOpen = composedContains(shown.el, target) ? undefined : target
         moveFocus(target)
       }
     }
@@ -1002,6 +1009,7 @@ function createPopupLayer<
         !outsideBox({ x, y }, shown.backdrop.getBoundingClientRect()) &&
         outsideBox({ x, y }, el.getBoundingClientRect()),
       returnTarget,
+      focusedOnOpen: () => focusedOnOpen,
       onOutsidePress: (event) => {
         const target = event.composedPath()[0] as Element | undefined
         options.close("outside-press", {

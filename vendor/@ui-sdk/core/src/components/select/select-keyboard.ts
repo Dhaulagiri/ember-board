@@ -1,7 +1,6 @@
-// Select's keyboard and pointer input: keys on the closed trigger, including
-// typeahead that selects like a native select, keys in the open list and in
-// its search field, and a press on the trigger that drags or holds to an item
-// and releases to choose it.
+// Select's keyboard and pointer input: typeahead on the closed trigger that
+// selects like a native select, keys for the open list and its search field,
+// and a press on the trigger that drags or holds to an item to choose it.
 import { isTypeaheadKey } from "../../foundation/text/typeahead"
 import {
   composedClosest,
@@ -69,15 +68,15 @@ function createSelectKeyboard({
     return true
   }
 
-  // Keys on the closed trigger. Arrows, Home and End open the list on an
-  // item; Enter and Space open it when the trigger isn't a native button,
-  // which opens on click by itself.
+  // Arrows, Home and End open the list on an item; Enter and Space open it when
+  // the trigger isn't a native button, which opens on click by itself. Focus
+  // stays here while the list is open, so the list's keys arrive here too.
   function onTriggerKeyDown(
     event: KeyboardEvent,
     trigger: HTMLElement | undefined
   ) {
     if (store.get().open) {
-      return
+      return onContentKeyDown(event)
     }
     if (event.key === " " && listbox.typing()) {
       event.preventDefault()
@@ -105,7 +104,7 @@ function createSelectKeyboard({
     }
   }
 
-  // Keys in the open list. The search field takes its own.
+  // Keys for the open list. The search field takes its own.
   function onContentKeyDown(event: KeyboardEvent) {
     if (event.target === searchElement()) {
       return onSearchKeyDown(event)
