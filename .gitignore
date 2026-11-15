@@ -3,3 +3,4 @@ dist
 .env
 bench/results
 test-results
+public/runtime/runtime.js

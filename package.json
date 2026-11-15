@@ -3,12 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --port ${BOARD_PORT:-5320} --strictPort",
-    "build": "vite build",
+    "dev": "pnpm build:runtime && vite --port ${BOARD_PORT:-5320} --strictPort",
+    "build": "pnpm build:runtime && vite build",
     "preview": "vite preview --port ${BOARD_PORT:-5320} --strictPort",
     "bench": "node bench/run.ts",
     "typecheck": "ember-tsc --noEmit",
-    "vendor": "node scripts/vendor-ui-sdk.mjs"
+    "vendor": "node scripts/vendor-ui-sdk.mjs",
+    "build:runtime": "vite build -c vite.runtime.config.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",
