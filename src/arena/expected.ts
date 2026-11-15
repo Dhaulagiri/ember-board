@@ -42,11 +42,27 @@ async function expectedWidgets(prompt: string, apiKey: string): Promise<Expected
 
 // Matches what was asked for against what was scored, one found widget per
 // expected one, so asking for four switches needs four.
+const families = [
+  ["combobox", "listbox", "radio-group"],
+  ["switch", "checkbox", "toggle button"],
+]
+
+const sameFamily = (a: string, b: string) => families.some((family) => family.includes(a) && family.includes(b))
+
 function coverage(expected: Expected, found: { pattern: string }[]) {
   const left = found.map((widget) => widget.pattern)
   const missing: Expected = []
+  const unmatched: Expected = []
   for (const want of expected) {
     const index = left.indexOf(want.pattern)
+    if (index === -1) {
+      unmatched.push(want)
+    } else {
+      left.splice(index, 1)
+    }
+  }
+  for (const want of unmatched) {
+    const index = left.findIndex((pattern) => sameFamily(pattern, want.pattern))
     if (index === -1) {
       missing.push(want)
     } else {

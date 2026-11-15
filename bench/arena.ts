@@ -56,14 +56,31 @@ type Run = {
 } & Outcome
 
 // One found widget per asked-for one, so four switches asked for need four.
+const families = [
+  ["combobox", "listbox", "radio-group"],
+  ["switch", "checkbox", "toggle button"],
+]
+
+const sameFamily = (a: string, b: string) => families.some((family) => family.includes(a) && family.includes(b))
+
 const builtOf = (run: Run) => {
   if (!run.expected || !run.score) {
     return null
   }
   const left = run.score.widgets.map((widget) => widget.pattern)
+  const unmatched: string[] = []
   let built = 0
   for (const want of run.expected) {
     const index = left.indexOf(want.pattern)
+    if (index === -1) {
+      unmatched.push(want.pattern)
+    } else {
+      left.splice(index, 1)
+      built++
+    }
+  }
+  for (const want of unmatched) {
+    const index = left.findIndex((pattern) => sameFamily(pattern, want))
     if (index !== -1) {
       left.splice(index, 1)
       built++
