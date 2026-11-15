@@ -91,7 +91,11 @@ const labelOf = (el: Element) =>
 
 // Clickable-looking elements a keyboard can never reach: a pointer cursor,
 // no tab stop of their own, and no focusable element around them. Text in a
-// label that holds a control is fine, since the label's click goes to it.
+// label that holds a control is fine, since the label's click goes to it, and
+// so is a composite's item: arrow keys reach it, which the pattern check tests.
+const composite =
+  "[role=listbox], [role=tree], [role=tablist], [role=radiogroup], [role=menu], [role=menubar], [role=toolbar], [role=grid], [role=treegrid]"
+
 function unreachable() {
   const focusable =
     "a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex='-1'])"
@@ -102,6 +106,7 @@ function unreachable() {
       !el.closest(focusable) &&
       !el.querySelector(focusable) &&
       !el.closest("label")?.querySelector(focusable) &&
+      !el.closest(composite) &&
       el.getClientRects().length > 0
   )
 }
