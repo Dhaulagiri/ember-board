@@ -58,6 +58,7 @@ type Score = {
   widget: string
   pattern: string
   label: string
+  marked: boolean
   problems: string[]
 }
 
@@ -88,7 +89,8 @@ const labelOf = (el: Element) =>
   ""
 
 // Clickable-looking elements a keyboard can never reach: a pointer cursor,
-// no tab stop of their own, and no focusable element around them.
+// no tab stop of their own, and no focusable element around them. Text in a
+// label that holds a control is fine, since the label's click goes to it.
 function unreachable() {
   const focusable =
     "a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex='-1'])"
@@ -98,38 +100,116 @@ function unreachable() {
       !el.matches(focusable) &&
       !el.closest(focusable) &&
       !el.querySelector(focusable) &&
+      !el.closest("label")?.querySelector(focusable) &&
       el.getClientRects().length > 0
   )
 }
 
+// Widgets a build didn't mark are still found by their role, so leaving out
+// data-widget doesn't skip the check.
+const roles: [string, Pattern, (el: HTMLElement) => HTMLElement][] = [
+  ["[role=tablist]", "tabs", (el) => el.parentElement ?? el],
+  ["[role=combobox]", "combobox", (el) => el.parentElement ?? el],
+  ["[role=switch]", "switch", (el) => el],
+  ["[role=radiogroup]", "radio-group", (el) => el],
+  ["[role=slider]", "slider", (el) => el],
+  ["[role=checkbox]", "checkbox", (el) => el],
+  ["[role=tree]", "tree", (el) => el],
+  ["[role=toolbar]", "toolbar", (el) => el],
+  ["[role=menubar]", "menubar", (el) => el],
+]
+
+const shown = (el: Element) => el.getClientRects().length > 0
+
+const frames = () =>
+  new Promise((resolve) =>
+    requestAnimationFrame(() => requestAnimationFrame(resolve))
+  )
+
+function candidates() {
+  const found: { el: HTMLElement; pattern: Pattern; marked: boolean }[] = []
+  const marked = [...document.querySelectorAll<HTMLElement>("#root [data-widget]")]
+  for (const el of marked.filter(shown)) {
+    found.push({ el, pattern: el.dataset.widget as Pattern, marked: true })
+  }
+  for (const [selector, pattern, rootOf] of roles) {
+    for (const el of document.querySelectorAll<HTMLElement>(`#root ${selector}`)) {
+      const covered = marked.some(
+        (mark) => mark.dataset.widget === pattern && (mark === el || mark.contains(el) || el.contains(mark))
+      )
+      if (shown(el) && !covered) {
+        found.push({ el: rootOf(el), pattern, marked: false })
+      }
+    }
+  }
+  return found
+}
+
+// Scores what's on screen, then opens every tab in turn and scores what each
+// shows, so widgets behind a closed tab are checked too.
 async function score() {
   const scores: Score[] = []
-  const widgets = [...document.querySelectorAll<HTMLElement>("[data-widget]")]
-  for (const [index, el] of widgets.entries()) {
-    const pattern = el.dataset.widget as Pattern
-    const result: Score = {
-      widget: `${index + 1}`,
-      pattern,
-      label: labelOf(el),
-      problems: [],
-    }
-    try {
-      await checkPattern(el, pattern)
-    } catch (error) {
-      result.problems = String((error as Error).message ?? error)
-        .split("\n")
-        .map((line) => line.trim())
-        .filter((line) => line && !/^checkPattern found/i.test(line))
-    }
-    scores.push(result)
-    document.body.dispatchEvent(
-      new KeyboardEvent("keydown", { key: "Escape", bubbles: true })
-    )
+  const seen = new Set<string>()
+  const stranded = new Map<Element, string>()
+  // A check presses keys that can switch tabs and redraw a widget, so the
+  // list is read again after each one, and a widget is known by its pattern,
+  // label and place among its twins rather than by its element.
+  const nameOf = (el: HTMLElement, pattern: Pattern) => {
+    const list =
+      pattern === "tabs" ? el.closest("[role=tablist]") ?? el.querySelector("[role=tablist]") : null
+    return list
+      ? list.getAttribute("aria-label") ??
+          [...list.querySelectorAll("[role=tab]")].map((tab) => tab.textContent?.trim()).join(" ")
+      : labelOf(el)
   }
-  return {
-    widgets: scores,
-    unreachable: unreachable().map(labelOf),
+  const next = () => {
+    const counts = new Map<string, number>()
+    for (const candidate of candidates()) {
+      const name = `${candidate.pattern}|${nameOf(candidate.el, candidate.pattern)}`
+      const n = (counts.get(name) ?? 0) + 1
+      counts.set(name, n)
+      if (!seen.has(`${name}|${n}`) && candidate.el.isConnected) {
+        seen.add(`${name}|${n}`)
+        return candidate
+      }
+    }
   }
+  const visit = async () => {
+    for (let found = next(); found; found = next()) {
+      const { el, pattern, marked } = found
+      const result: Score = {
+        widget: `${scores.length + 1}`,
+        pattern,
+        label: nameOf(el, pattern),
+        marked,
+        problems: [],
+      }
+      try {
+        await checkPattern(el, pattern)
+      } catch (error) {
+        result.problems = String((error as Error).message ?? error)
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line && !/^checkPattern found/i.test(line))
+      }
+      scores.push(result)
+      document.body.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Escape", bubbles: true })
+      )
+      await frames()
+    }
+    for (const el of unreachable()) {
+      stranded.set(el, labelOf(el))
+    }
+  }
+  await visit()
+  const tabs = [...document.querySelectorAll<HTMLElement>("#root [role=tab]")]
+  for (const tab of tabs) {
+    tab.click()
+    await frames()
+    await visit()
+  }
+  return { widgets: scores, unreachable: [...stranded.values()] }
 }
 
 window.addEventListener("message", async (event: MessageEvent<Message>) => {

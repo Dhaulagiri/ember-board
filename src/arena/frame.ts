@@ -1,5 +1,11 @@
 type Score = {
-  widgets: { widget: string; pattern: string; label: string; problems: string[] }[]
+  widgets: {
+    widget: string
+    pattern: string
+    label: string
+    marked: boolean
+    problems: string[]
+  }[]
   unreachable: string[]
 }
 
