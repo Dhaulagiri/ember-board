@@ -1,0 +1,15 @@
+{
+  "prompt": "Project tabs for Overview, Activity and Settings, and a role picker.",
+  "model": "none",
+  "note": "Hand-written samples, not built by Claude. For testing the pipeline offline.",
+  "arms": {
+    "plain": {
+      "code": "import Component from \"@glimmer/component\"\nimport { tracked } from \"@glimmer/tracking\"\nimport { on } from \"@ember/modifier\"\nimport { fn } from \"@ember/helper\"\n\nconst tabs = [\"Overview\", \"Activity\", \"Settings\"]\nconst roles = [\"Viewer\", \"Editor\", \"Admin\"]\n\nexport default class Plain extends Component {\n  @tracked tab = \"Overview\"\n  @tracked role = \"Viewer\"\n  @tracked open = false\n  isTab = (tab: string) => (tab === this.tab ? \"active\" : \"\")\n  pickTab = (tab: string) => (this.tab = tab)\n  toggle = () => (this.open = !this.open)\n  pickRole = (role: string) => {\n    this.role = role\n    this.open = false\n  }\n  <template>\n    <div data-widget=\"tabs\">\n      <div class=\"tabs\">\n        {{#each tabs as |tab|}}\n          <div class=\"tab {{this.isTab tab}}\" {{on \"click\" (fn this.pickTab tab)}}>{{tab}}</div>\n        {{/each}}\n      </div>\n      <div class=\"panel\">{{this.tab}} content</div>\n    </div>\n    <div data-widget=\"combobox\" style=\"margin-top: 24px\">\n      <div class=\"trigger\" style=\"cursor: pointer\" {{on \"click\" this.toggle}}>Role: {{this.role}}</div>\n      {{#if this.open}}\n        <div class=\"menu\">\n          {{#each roles as |role|}}\n            <div style=\"cursor: pointer\" {{on \"click\" (fn this.pickRole role)}}>{{role}}</div>\n          {{/each}}\n        </div>\n      {{/if}}\n    </div>\n  </template>\n}\n",
+      "stats": null
+    },
+    "sdk": {
+      "code": "import { Field } from \"@ui-sdk/ember/field\"\nimport { Select } from \"@ui-sdk/ember/select\"\nimport { Tabs } from \"@ui-sdk/ember/tabs\"\n\nconst tabs = [\"Overview\", \"Activity\", \"Settings\"]\nconst roles = [\"Viewer\", \"Editor\", \"Admin\"]\n\n<template>\n  <div data-widget=\"tabs\">\n    <Tabs @defaultValue=\"Overview\" as |t|>\n      <t.List aria-label=\"Project\">\n        {{#each tabs as |tab|}}\n          <t.Tab @value={{tab}}>{{tab}}</t.Tab>\n        {{/each}}\n      </t.List>\n      {{#each tabs as |tab|}}\n        <t.Panel @value={{tab}}>{{tab}} content</t.Panel>\n      {{/each}}\n    </Tabs>\n  </div>\n  <div data-widget=\"combobox\" style=\"margin-top: 24px\">\n    <Field as |f|>\n      <f.Label>Role</f.Label>\n      <Select @defaultValue=\"Viewer\" as |s|>\n        <s.Trigger @field={{f.field}}><s.Value /></s.Trigger>\n        <s.Content>\n          {{#each roles as |role|}}\n            <s.Item @value={{role}}>{{role}}</s.Item>\n          {{/each}}\n        </s.Content>\n      </Select>\n    </Field>\n  </div>\n</template>\n",
+      "stats": null
+    }
+  }
+}
