@@ -298,7 +298,7 @@ async function run() {
         outcomes[arm] = { ...result }
         column.state.textContent = "Rendered"
       } catch (error) {
-        outcomes[arm] = { code: column.code.textContent ?? "", stats: builds[arm]?.stats ?? null, error: (error as Error).message.slice(0, 300) }
+        outcomes[arm] = { code: column.code.textContent ?? "", stats: builds[arm]?.stats ?? replay?.arms[arm]?.stats ?? null, error: (error as Error).message.slice(0, 300) }
         column.state.textContent = (error as Error).message.slice(0, 300)
       }
     })
