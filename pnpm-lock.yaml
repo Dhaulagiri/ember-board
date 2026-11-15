@@ -11,6 +11,15 @@ importers:
       '@anthropic-ai/sdk':
         specifier: ^1.8.0
         version: 1.8.0
+      '@babel/core':
+        specifier: ^7.29.7
+        version: 7.29.13
+      '@babel/plugin-transform-modules-commonjs':
+        specifier: ^7.29.14
+        version: 7.29.14(@babel/core@7.29.13)
+      '@babel/plugin-transform-typescript':
+        specifier: ^7.29.9
+        version: 7.29.9(@babel/core@7.29.13)
       '@glimmer/component':
         specifier: ^2.2.1
         version: 2.2.1
@@ -23,28 +32,6 @@ importers:
       '@ui-sdk/ember':
         specifier: link:./vendor/@ui-sdk/ember
         version: link:vendor/@ui-sdk/ember
-      ember-source:
-        specifier: ~7.4.0
-        version: 7.4.0(@glimmer/component@2.2.1)
-      lucide:
-        specifier: 1.54.0
-        version: 1.54.0
-    devDependencies:
-      '@babel/core':
-        specifier: ^7.29.7
-        version: 7.29.13
-      '@babel/plugin-transform-typescript':
-        specifier: ^7.29.9
-        version: 7.29.9(@babel/core@7.29.13)
-      '@glint/ember-tsc':
-        specifier: ^1.14.3
-        version: 1.14.3(ember-source@7.4.0(@glimmer/component@2.2.1))(typescript@5.9.3)
-      '@glint/template':
-        specifier: ^1.11.1
-        version: 1.11.1
-      '@types/node':
-        specifier: ^24.19.2
-        version: 24.19.2
       babel-plugin-ember-template-compilation:
         specifier: ^4.0.1
         version: 4.0.1
@@ -54,6 +41,22 @@ importers:
       decorator-transforms:
         specifier: ^2.4.0
         version: 2.4.0(@babel/core@7.29.13)
+      ember-source:
+        specifier: ~7.4.0
+        version: 7.4.0(@glimmer/component@2.2.1)
+      lucide:
+        specifier: 1.54.0
+        version: 1.54.0
+    devDependencies:
+      '@glint/ember-tsc':
+        specifier: ^1.14.3
+        version: 1.14.3(ember-source@7.4.0(@glimmer/component@2.2.1))(typescript@5.9.3)
+      '@glint/template':
+        specifier: ^1.11.1
+        version: 1.11.1
+      '@types/node':
+        specifier: ^24.19.2
+        version: 24.19.2
       es-module-lexer:
         specifier: ^2.3.2
         version: 2.3.2
@@ -173,6 +176,12 @@ packages:
 
   '@babel/plugin-syntax-typescript@7.29.7':
     resolution: {integrity: sha512-ngr+82Sh0xMz25TPCZi+nC2iTzjfCdWS2ONXTp/PtSCHCgaCNBpdMqgvJ2ccdLlClVZ7sisIgB914j/JFe+RZA==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+
+  '@babel/plugin-transform-modules-commonjs@7.29.14':
+    resolution: {integrity: sha512-mbv2yy5dqP6e3DbusCx+5AypXkFbyJD/JhG4/XhA+BIADOw5o7W+X0ewSp/h3w7gRL3oR5yny2/K8ljiydj4uA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -1397,6 +1406,14 @@ snapshots:
     dependencies:
       '@babel/core': 7.29.13
       '@babel/helper-plugin-utils': 7.29.7
+
+  '@babel/plugin-transform-modules-commonjs@7.29.14(@babel/core@7.29.13)':
+    dependencies:
+      '@babel/core': 7.29.13
+      '@babel/helper-module-transforms': 7.29.14(@babel/core@7.29.13)
+      '@babel/helper-plugin-utils': 7.29.7
+    transitivePeerDependencies:
+      - supports-color
 
   '@babel/plugin-transform-typescript@7.29.9(@babel/core@7.29.13)':
     dependencies:
