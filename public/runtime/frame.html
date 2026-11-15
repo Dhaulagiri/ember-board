@@ -12,6 +12,16 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="./runtime.js"></script>
+    <script>
+      // The sandboxed frame has an opaque origin, so it can't fetch the runtime
+      // itself behind auth or CORS: the host posts the runtime's source instead.
+      addEventListener("message", function boot(event) {
+        if (event.data && event.data.type === "boot") {
+          removeEventListener("message", boot)
+          new Function(event.data.code)()
+        }
+      })
+      parent.postMessage({ type: "loaded" }, "*")
+    </script>
   </body>
 </html>
