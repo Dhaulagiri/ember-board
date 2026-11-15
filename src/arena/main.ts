@@ -254,7 +254,10 @@ async function run() {
 
   let replay: Replay | undefined
   if (replayName) {
-    replay = await (await fetch(`/arena/replays/${replayName}.json`)).json()
+    // The benchmark hands a saved build in directly to score it again.
+    replay =
+      (window as { __arenaReplay?: Replay }).__arenaReplay ??
+      (await (await fetch(`/arena/replays/${replayName}.json`)).json())
     prompt.value = replay!.prompt
   } else if (!key.value.trim()) {
     status.textContent = "Paste an Anthropic API key first. It stays in this tab and goes only to api.anthropic.com."

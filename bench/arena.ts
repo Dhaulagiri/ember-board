@@ -1,4 +1,4 @@
-import { appendFileSync, mkdirSync, writeFileSync } from "node:fs"
+import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { parseArgs } from "node:util"
 import { chromium } from "playwright"
 
@@ -22,6 +22,7 @@ const { values: flags } = parseArgs({
     prompts: { type: "string", default: String(prompts.length) },
     url: { type: "string", default: "http://localhost:5320" },
     replay: { type: "string" },
+    rescore: { type: "string" },
     headed: { type: "boolean", default: false },
   },
 })
@@ -86,13 +87,39 @@ const problemsOf = (outcome: Outcome) =>
       outcome.score.unreachable.length
     : NaN
 
+// Builds from an earlier run's .jsonl, scored again instead of built again.
+// One the dev server dropped mid-build is left out, so it runs live.
+function savedBuilds(file: string | undefined) {
+  const saved = new Map<string, any>()
+  if (!file) {
+    return saved
+  }
+  for (const line of readFileSync(file, "utf8").split("\n").filter(Boolean)) {
+    const build = JSON.parse(line)
+    const dropped = Object.values(build.outcomes).some((outcome: any) =>
+      /Failed to fetch|ERR_CONNECTION/.test(outcome.error ?? "")
+    )
+    if (!dropped) {
+      saved.set(`${build.index}.${build.run}`, build)
+    }
+  }
+  return saved
+}
+
 async function main() {
   const key = process.env.ANTHROPIC_API_KEY ?? ""
-  if (!key && !flags.replay) {
-    throw new Error("Set ANTHROPIC_API_KEY, or pass --replay <name> to test the runner.")
-  }
   const chosen = prompts.slice(0, Number(flags.prompts))
   const runs = Number(flags.runs)
+  const saved = savedBuilds(flags.rescore)
+  const live = chosen.length * runs - saved.size
+  if (!key && !flags.replay && live > 0) {
+    throw new Error(
+      `${live} builds need Claude: set ANTHROPIC_API_KEY, or pass --replay <name> to test the runner.`
+    )
+  }
+  if (flags.rescore) {
+    console.log(`Scoring ${saved.size} saved builds again, and building ${live} live.`)
+  }
   const browser = await chromium.launch({ headless: !flags.headed })
   const all: Run[] = []
   const stamp = new Date().toISOString().replace(/[:.]/g, "-")
@@ -108,8 +135,24 @@ async function main() {
           sessionStorage.setItem("ember-board:anthropic-key", value)
         } catch {}
       }, key)
-      await page.goto(`${flags.url}/arena.html${flags.replay ? `?replay=${flags.replay}` : ""}`)
-      if (!flags.replay) {
+      const earlier = saved.get(`${index + 1}.${run}`)
+      if (earlier) {
+        await page.addInitScript((replay) => {
+          Object.assign(window, { __arenaReplay: replay })
+        }, {
+          prompt: earlier.prompt,
+          model: earlier.model,
+          note: "A saved build, scored again.",
+          expected: earlier.expected ?? null,
+          arms: {
+            plain: { code: earlier.outcomes.plain.code, stats: earlier.outcomes.plain.stats },
+            sdk: { code: earlier.outcomes.sdk.code, stats: earlier.outcomes.sdk.stats },
+          },
+        })
+      }
+      const replayName = earlier ? "saved" : flags.replay
+      await page.goto(`${flags.url}/arena.html${replayName ? `?replay=${replayName}` : ""}`)
+      if (!replayName) {
         await page.getByLabel("What should Claude build?").fill(text)
         await page.getByLabel("Model").selectOption(flags.model!)
       }
