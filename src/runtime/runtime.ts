@@ -146,7 +146,7 @@ const frames = () =>
   )
 
 function candidates() {
-  const found: { el: HTMLElement; pattern: Pattern; marked: boolean; native?: boolean }[] = []
+  const found: { el: HTMLElement; pattern: Pattern | "toggle button"; marked: boolean; native?: boolean }[] = []
   const marked = [...document.querySelectorAll<HTMLElement>("#root [data-widget]")]
   for (const el of marked.filter(shown)) {
     found.push({ el, pattern: el.dataset.widget as Pattern, marked: true })
@@ -182,6 +182,44 @@ function candidates() {
       }
     }
   }
+  const covers = (pattern: string, el: Element) =>
+    marked.some((mark) => mark.dataset.widget === pattern && (mark === el || mark.contains(el) || el.contains(mark)))
+  const heading = "h1, h2, h3, h4, h5, h6, [role=heading]"
+  const headers = [...document.querySelectorAll<HTMLElement>(`#root :is(${heading}) button[aria-expanded]`)].filter(shown)
+  const accordions = new Set<HTMLElement>()
+  for (const button of headers) {
+    const head = button.closest<HTMLElement>(heading)!
+    let root = head.parentElement ?? head
+    while (
+      root.parentElement &&
+      root.id !== "root" &&
+      !headers.some((other) => other !== button && root.contains(other))
+    ) {
+      root = root.parentElement
+    }
+    if (!headers.some((other) => other !== button && root.contains(other))) {
+      root = head.parentElement ?? head
+    }
+    accordions.add(root)
+  }
+  for (const root of accordions) {
+    if (!covers("accordion", root)) {
+      found.push({ el: root, pattern: "accordion", marked: false })
+    }
+  }
+  for (const button of document.querySelectorAll<HTMLElement>("#root button[aria-expanded]")) {
+    if (
+      !shown(button) ||
+      button.closest(heading) ||
+      button.hasAttribute("aria-haspopup") ||
+      button.getAttribute("role") === "combobox" ||
+      found.some((f) => f.el.contains(button)) ||
+      covers("disclosure", button)
+    ) {
+      continue
+    }
+    found.push({ el: button.parentElement ?? button, pattern: "disclosure", marked: false })
+  }
   return found
 }
 
@@ -194,7 +232,7 @@ async function score() {
   // A check presses keys that can switch tabs and redraw a widget, so the
   // list is read again after each one, and a widget is known by its pattern,
   // label and place among its twins rather than by its element.
-  const nameOf = (el: HTMLElement, pattern: Pattern) => {
+  const nameOf = (el: HTMLElement, pattern: string) => {
     const list =
       pattern === "tabs" ? el.closest("[role=tablist]") ?? el.querySelector("[role=tablist]") : null
     return list
@@ -227,7 +265,7 @@ async function score() {
       }
       try {
         if (!native) {
-          await checkPattern(el, pattern)
+          await checkPattern(el, pattern as Pattern)
         }
       } catch (error) {
         result.problems = String((error as Error).message ?? error)
