@@ -1,3 +1,4 @@
+import { coverage, expectedWidgets, type Expected } from "./expected"
 import { createFrame, problemCount, type Score } from "./frame"
 import { repairBuild, startBuild, type Build, type Stats } from "./generate"
 import { models, type Arm, type Model } from "./prompts"
@@ -7,6 +8,7 @@ type Replay = {
   prompt: string
   model: string
   note: string
+  expected?: Expected | null
   arms: Record<Arm, { code: string; stats: Stats | null }>
 }
 
@@ -128,9 +130,20 @@ document.getElementById("arena")!.append(
 )
 
 const outcomes: Partial<Record<Arm, Outcome>> = {}
+let expected: Expected | null = null
+
+const coverageOf = (outcome: Outcome) =>
+  expected && outcome.score ? coverage(expected, outcome.score.widgets) : null
 
 function renderScorecard() {
   const rows: [string, (outcome: Outcome) => string][] = [
+    [
+      "Asked-for widgets built",
+      (o) => {
+        const built = coverageOf(o)
+        return built ? `${built.built} of ${built.of}` : "—"
+      },
+    ],
     ["Pattern and keyboard problems", (o) => (o.score ? String(problemCount(o.score)) : "—")],
     ["Widgets checked", (o) => (o.score ? String(o.score.widgets.length) : "—")],
     [
@@ -165,16 +178,23 @@ function renderScorecard() {
       )
     )
   )
-  const details = arms.flatMap(({ arm, title }) =>
-    (outcomes[arm]?.score?.widgets ?? []).map((widget) =>
+  const details = arms.flatMap(({ arm, title }) => [
+    ...(outcomes[arm] ? (coverageOf(outcomes[arm]!)?.missing ?? []) : []).map((want) =>
+      el(
+        "li",
+        { dataset: { ok: "false" } },
+        `${title} · missing ${want.pattern} “${want.what}”: asked for, but not built.`
+      )
+    ),
+    ...(outcomes[arm]?.score?.widgets ?? []).map((widget) =>
       el(
         "li",
         { dataset: { ok: String(!widget.problems.length) } },
         `${title} · ${widget.pattern}${widget.label ? ` “${widget.label}”` : ""}${widget.marked ? "" : " (found by role)"}: `,
         widget.problems.length ? widget.problems.join(" ") : "passes"
       )
-    )
-  )
+    ),
+  ])
   scorecard.after(el("ul", { className: "problems" }, ...details))
   document.querySelector(".problems + .problems")?.remove()
   scorecard.hidden = false
@@ -239,6 +259,10 @@ async function run() {
 
   const chosen = model.value as Model
   const builds: Partial<Record<Arm, Build>> = {}
+  expected = null
+  const asked = replay
+    ? Promise.resolve(replay.expected ?? null)
+    : expectedWidgets(prompt.value, key.value.trim()).catch(() => null)
   await Promise.all(
     arms.map(async ({ arm }) => {
       const column = columns[arm]
@@ -284,9 +308,15 @@ async function run() {
       }
     }
   }
+  expected = await asked
   renderScorecard()
   Object.assign(window, {
-    __arenaResult: { prompt: prompt.value, model: model.value, outcomes: structuredClone(outcomes) },
+    __arenaResult: {
+      prompt: prompt.value,
+      model: model.value,
+      expected,
+      outcomes: structuredClone(outcomes),
+    },
   })
   if (!replay) {
     download.hidden = false
@@ -299,6 +329,7 @@ download.addEventListener("click", () => {
     prompt: prompt.value,
     model: model.value,
     note: `Recorded ${new Date().toISOString()}`,
+    expected,
     arms: Object.fromEntries(
       arms.map(({ arm }) => [arm, { code: outcomes[arm]?.code ?? "", stats: outcomes[arm]?.stats ?? null }])
     ) as Replay["arms"],
