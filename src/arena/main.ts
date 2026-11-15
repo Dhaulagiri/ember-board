@@ -276,7 +276,8 @@ async function run() {
       columns[arm].state.textContent = "Scoring…"
       try {
         outcomes[arm]!.score = await frames[arm].score()
-        columns[arm].state.textContent = `${problemCount(outcomes[arm]!.score!)} problems`
+        const count = problemCount(outcomes[arm]!.score!)
+        columns[arm].state.textContent = `${count} ${count === 1 ? "problem" : "problems"}`
       } catch (error) {
         outcomes[arm]!.error = `Scoring failed: ${(error as Error).message}`
       }
