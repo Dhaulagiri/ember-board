@@ -19,15 +19,15 @@ const renamed: Record<string, string> = JSON.parse(
   readFileSync(`${emberRoot}/package.json`, "utf8")
 )["ember-addon"]["renamed-modules"]
 
-function emberModule(id: string) {
+function emberModule(id: string, build: "dev" | "prod") {
   const file = renamed[`${id}/index.js`] ?? renamed[`${id}.js`]
-  return file && `${emberRoot}/dist/dev/packages/${file.slice(13)}`
+  return file && `${emberRoot}/dist/${build}/packages/${file.slice(13)}`
 }
 
-function ember() {
+function ember({ build = "dev" }: { build?: "dev" | "prod" } = {}) {
   const preprocessor = new Preprocessor()
   const compiler = import(
-    `${emberRoot}/dist/dev/packages/ember-template-compiler/index.js`
+    `${emberRoot}/dist/${build}/packages/ember-template-compiler/index.js`
   )
   const plugin: Plugin = {
     name: "ember",
@@ -36,13 +36,13 @@ function ember() {
     // load two copies of a module like @ember/runloop, each with its own run
     // loop. Routing every import through one re-export keeps one.
     resolveId(id) {
-      return emberModule(id) && `\0ember:${id}`
+      return emberModule(id, build) && `\0ember:${id}`
     },
     async load(id) {
       if (!id.startsWith("\0ember:")) {
         return
       }
-      const file = emberModule(id.slice(7))!
+      const file = emberModule(id.slice(7), build)!
       await init
       const [, exports] = parse(readFileSync(file, "utf8"))
       const hasDefault = exports.some(({ n }) => n === "default")
@@ -51,8 +51,8 @@ function ember() {
       }`
     },
     async transform(code, id) {
-      const file = id.split("?")[0]
-      if (!isEmberFile(file)) {
+      const [file, query] = id.split("?")
+      if (!isEmberFile(file) || query?.includes("raw")) {
         return
       }
       const source = file.endsWith(".gts")
