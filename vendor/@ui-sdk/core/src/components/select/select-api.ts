@@ -76,7 +76,8 @@ type SelectState = PopupState & {
   query: string
   // A search field is in the list, so typing filters and focus stays in the field.
   searchable: boolean
-  // Real focus moved into the list for a touch screen reader, instead of staying in the search field.
+  // Real focus moved into the list, where aria-activedescendant doesn't work:
+  // for a touch screen reader, or a list in another tree than the trigger.
   focusInList: boolean
   status: AsyncOptionsStatus
   // Counts items mounting, so parts that depend on the list update.
@@ -101,6 +102,18 @@ type Show = {
   focus?: InitialHighlight
   signal?: AbortSignal
 }
+
+// Focus stays in the search field while there is one, unless a touch screen reader opened the list.
+const searching = (state: SelectState) => state.searchable && !state.focusInList
+
+// Without a search field, focus stays on the trigger, as the APG's select-only
+// combobox asks. A sheet takes focus like a dialog, and a touch screen reader,
+// which ignores aria-activedescendant, gets it in the list.
+const keepsTriggerFocus = (state: SelectState) =>
+  !state.searchable && !state.focusInList && state.presentation !== "sheet"
+
+const highlightsVirtually = (state: SelectState) =>
+  searching(state) || keepsTriggerFocus(state)
 
 function initialSelectState(options: SelectOptions<any, any>): SelectState {
   const empty = () => (options.multiple ? [] : null)
@@ -190,8 +203,6 @@ function selectApiBody(
     triggerElement()?.focus(options)
   const contentElement = () => popup.element() ?? element("content")
   const searchElement = () => element("input") as HTMLInputElement | undefined
-  // Focus stays in the search field while there is one, unless a touch screen reader opened the list.
-  const searching = () => store.get().searchable && !store.get().focusInList
   // The text the list is filtered by: the search field's, while the list is in the page.
   const filterQuery = () => {
     const { searchable, mounted, query } = store.get()
@@ -206,7 +217,7 @@ function selectApiBody(
 
   const listbox = createFilteredListbox({
     store,
-    focus: () => (searching() ? "virtual" : "real"),
+    focus: () => (highlightsVirtually(store.get()) ? "virtual" : "real"),
     items: () => store.get().items,
     emptyItems: () => options().emptyItems,
     // Typing on the closed trigger searches every item, so they show only while searching.
@@ -303,7 +314,9 @@ function selectApiBody(
         }
         const el = element("content")
         if (el) {
-          return trackModality(el, modalityOf(openedBy))
+          return trackModality(el, modalityOf(openedBy), () => [
+            triggerElement(),
+          ])
         }
       },
       open(request, open) {
@@ -337,9 +350,17 @@ function selectApiBody(
   }
 
   // Where focus goes once the list opens: the selected item, or the first or
-  // last that can be chosen. With a search field, focus goes there and the
-  // item is only highlighted.
+  // last that can be chosen. With a search field, focus goes there, and
+  // otherwise stays on the trigger, while the item is only highlighted.
   function initialFocus() {
+    // aria-activedescendant can't reach into another tree, like a list portaled out of the trigger's shadow root.
+    const trigger = triggerElement()
+    if (
+      keepsTriggerFocus(store.get()) &&
+      trigger?.getRootNode() !== contentElement()?.getRootNode()
+    ) {
+      store.set({ focusInList: true })
+    }
     const list = listbox
       .entries()
       .filter((entry) => !entry.pinned && !listbox.disabled(entry))
@@ -356,8 +377,11 @@ function selectApiBody(
     if (target) {
       listbox.highlight(target.key, { focus: false })
     }
-    if (searching()) {
+    if (searching(store.get())) {
       return searchElement() ?? contentElement()
+    }
+    if (keepsTriggerFocus(store.get())) {
+      return trigger
     }
     if (!target) {
       return contentElement()
@@ -577,7 +601,7 @@ function selectApiBody(
           "input-change",
           event
         ),
-      // The pointer highlights what it moves onto, focusing it unless focus stays in the search field.
+      // The pointer highlights what it moves onto, focusing it unless focus stays outside the list.
       hover(key: string, event: PointerEvent) {
         const { open, highlighted } = store.get()
         if (
@@ -588,7 +612,9 @@ function selectApiBody(
           return
         }
         const el = listbox.element(key)
-        const focused = searching() || el?.ownerDocument.activeElement === el
+        const focused =
+          highlightsVirtually(store.get()) ||
+          el?.ownerDocument.activeElement === el
         if (highlighted !== key || !focused) {
           listbox.highlight(key, { event })
         }
@@ -597,10 +623,14 @@ function selectApiBody(
       isEmpty: (state: SelectState) =>
         (!!state.items || state.settled) && listbox.count() === 0,
       itemCount: () => listbox.count(),
-      // The id aria-activedescendant points at while focus stays in the search field.
+      // The id aria-activedescendant points at while focus stays outside the list.
       activeDescendant(state: SelectState) {
         const { highlighted } = state
-        if (!state.open || state.focusInList || highlighted === null) {
+        if (
+          !state.open ||
+          !highlightsVirtually(state) ||
+          highlighted === null
+        ) {
           return undefined
         }
         if (!listbox.element(highlighted)?.isConnected) {
@@ -683,8 +713,11 @@ type SelectItemMeta = {
 interface SelectApi extends ReturnType<typeof selectApiBody> {}
 
 export {
+  highlightsVirtually,
   type InitialHighlight,
   initialSelectState,
+  keepsTriggerFocus,
+  searching,
   type SelectApi,
   selectApi,
   type SelectState,

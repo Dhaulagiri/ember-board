@@ -35,6 +35,9 @@ type Layer = {
   returnTarget?: (
     take?: (target: HTMLElement) => boolean
   ) => HTMLElement | undefined
+  // What its opening focused outside it, like a select's trigger. A popup
+  // opened from there returns through this layer instead.
+  focusedOnOpen?: () => HTMLElement | undefined
   onEscape?: (event: KeyboardEvent) => void
   onOutsidePress?: (event: Event) => void
   onBlur?: (event: FocusEvent) => void

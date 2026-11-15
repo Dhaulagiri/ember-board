@@ -26,7 +26,8 @@ function noteKey(event: KeyboardEvent) {
   if (event.key !== "Enter" && event.key !== " ") {
     return
   }
-  keyTarget = event.target as Node
+  // The document hears a key in a shadow root from its host, not from the element the click reaches.
+  keyTarget = event.composedPath()[0] as Node
   setTimeout(forgetKeyTarget)
 }
 

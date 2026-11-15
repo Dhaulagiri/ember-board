@@ -57,7 +57,13 @@ import type {
   SelectValueProps,
   SelectValueState,
 } from "./select"
-import type { SelectApi, SelectState } from "./select-api"
+import {
+  highlightsVirtually,
+  keepsTriggerFocus,
+  searching,
+  type SelectApi,
+  type SelectState,
+} from "./select-api"
 import { formatLabels, listOf } from "../../foundation/lists/listbox-value"
 import { selects } from "../../foundation/kernel/selects"
 import { direct, live } from "../../foundation/kernel/live"
@@ -156,9 +162,6 @@ const unreadByItems = {
   readonly never[]
 >
 
-// Focus stays in the search field while there is one, unless a touch screen reader moved it into the list.
-const searching = (state: SelectState) => state.searchable && !state.focusInList
-
 const selectSlots = (slot: SlotFactory<SelectState, SelectApi>) => ({
   root: slot(rootPart<SelectState, SelectApi>({ focusOnSelfClick: true })),
 
@@ -172,7 +175,10 @@ const selectSlots = (slot: SlotFactory<SelectState, SelectApi>) => ({
   trigger: slot<TriggerProps, SelectTriggerState>({
     role: "combobox",
     focus: "native",
-    keys: ["ArrowDown", "ArrowUp", "Home", "End", "Enter", " ", "typeahead"],
+    keys: (state) =>
+      state.open && keepsTriggerFocus(state)
+        ? [...listStepKeys, "Home", "End", "Enter", " ", "Tab", "typeahead"]
+        : ["ArrowDown", "ArrowUp", "Home", "End", "Enter", " ", "typeahead"],
     props: {
       disabled: "boolean",
       // Internal: passed by renderers. Select has no `field` slot, so no element attribute either.
@@ -205,6 +211,11 @@ const selectSlots = (slot: SlotFactory<SelectState, SelectApi>) => ({
     },
     // Settling that there's no label drops the reference without rendering the trigger again.
     direct: direct(["aria-labelledby"]),
+    live: live((state, { api }) => ({
+      "aria-activedescendant": keepsTriggerFocus(state)
+        ? api.internal.activeDescendant(state)
+        : undefined,
+    })),
     on: {
       keydown: (event, { api, el }) => api.internal.onTriggerKeyDown(event, el),
       pointerdown(event, { api, el, props, store }) {
@@ -431,7 +442,8 @@ const selectSlots = (slot: SlotFactory<SelectState, SelectApi>) => ({
 
   item: slot<ItemProps, SelectItemState>({
     role: "option",
-    focus: (state) => (searching(state) ? "active-descendant" : "roving"),
+    focus: (state) =>
+      highlightsVirtually(state) ? "active-descendant" : "roving",
     props: {
       label: "string",
       disabled: "boolean",
@@ -466,11 +478,11 @@ const selectSlots = (slot: SlotFactory<SelectState, SelectApi>) => ({
     })),
     on: {
       pointermove: (event, { api, key }) => api.internal.hover(key, event),
-      // Presses keep focus in the search field, so typing goes on.
+      // Presses keep focus on the trigger or in the search field, so typing goes on.
       pointerdown: (event, context) =>
-        searching(context.store.get()) && holdFocus(event, context),
+        highlightsVirtually(context.store.get()) && holdFocus(event, context),
       mousedown: (event, context) =>
-        searching(context.store.get()) && holdFocus(event, context),
+        highlightsVirtually(context.store.get()) && holdFocus(event, context),
     },
     press: ({ api, key }, event) => api.internal.choose(key, event),
     bind(el, context) {
