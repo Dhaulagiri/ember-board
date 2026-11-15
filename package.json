@@ -9,7 +9,8 @@
     "bench": "node bench/run.ts",
     "typecheck": "ember-tsc --noEmit",
     "vendor": "node scripts/vendor-ui-sdk.mjs",
-    "build:runtime": "vite build -c vite.runtime.config.ts"
+    "build:runtime": "vite build -c vite.runtime.config.ts",
+    "bench:arena": "node bench/arena.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",

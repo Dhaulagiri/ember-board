@@ -211,6 +211,7 @@ async function runArm(
 }
 
 async function run() {
+  Object.assign(window, { __arenaResult: undefined })
   go.disabled = true
   download.hidden = true
   status.textContent = ""
@@ -284,6 +285,9 @@ async function run() {
     }
   }
   renderScorecard()
+  Object.assign(window, {
+    __arenaResult: { prompt: prompt.value, model: model.value, outcomes: structuredClone(outcomes) },
+  })
   if (!replay) {
     download.hidden = false
   }
