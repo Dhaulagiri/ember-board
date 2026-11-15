@@ -59,6 +59,7 @@ type Score = {
   pattern: string
   label: string
   marked: boolean
+  native: boolean
   problems: string[]
 }
 
@@ -119,6 +120,19 @@ const roles: [string, Pattern, (el: HTMLElement) => HTMLElement][] = [
   ["[role=menubar]", "menubar", (el) => el],
 ]
 
+// Native controls count as the widget they stand for, with the browser's own
+// keyboard and screen reader support, so they're built but not pattern-checked.
+// A component's aria-hidden form input isn't one.
+const natives: [string, Pattern][] = [
+  ["select:not([multiple])", "combobox"],
+  ["input[type=checkbox]:not([role])", "checkbox"],
+  ["input[type=range]:not([role])", "slider"],
+  ["input[type=radio]:not([role])", "radio-group"],
+]
+
+const isOwnControl = (el: HTMLElement) =>
+  el.getAttribute("aria-hidden") !== "true" && el.tabIndex >= 0
+
 const shown = (el: Element) => el.getClientRects().length > 0
 
 const frames = () =>
@@ -127,10 +141,31 @@ const frames = () =>
   )
 
 function candidates() {
-  const found: { el: HTMLElement; pattern: Pattern; marked: boolean }[] = []
+  const found: { el: HTMLElement; pattern: Pattern; marked: boolean; native?: boolean }[] = []
   const marked = [...document.querySelectorAll<HTMLElement>("#root [data-widget]")]
   for (const el of marked.filter(shown)) {
     found.push({ el, pattern: el.dataset.widget as Pattern, marked: true })
+  }
+  const radioNames = new Set<string>()
+  for (const [selector, pattern] of natives) {
+    for (const el of document.querySelectorAll<HTMLInputElement>(`#root ${selector}`)) {
+      if (!shown(el) || !isOwnControl(el)) {
+        continue
+      }
+      if (pattern === "radio-group") {
+        if (radioNames.has(el.name)) {
+          continue
+        }
+        radioNames.add(el.name)
+      }
+      const root =
+        pattern === "radio-group" ? (el.closest("fieldset") ?? el.parentElement ?? el) : el
+      const mark = marked.find((m) => m.dataset.widget === pattern && m.contains(el))
+      if (mark) {
+        found.splice(found.findIndex((f) => f.el === mark), 1)
+      }
+      found.push({ el: root as HTMLElement, pattern, marked: !!mark, native: true })
+    }
   }
   for (const [selector, pattern, rootOf] of roles) {
     for (const el of document.querySelectorAll<HTMLElement>(`#root ${selector}`)) {
@@ -176,16 +211,19 @@ async function score() {
   }
   const visit = async () => {
     for (let found = next(); found; found = next()) {
-      const { el, pattern, marked } = found
+      const { el, pattern, marked, native } = found
       const result: Score = {
         widget: `${scores.length + 1}`,
         pattern,
         label: nameOf(el, pattern),
         marked,
+        native: !!native,
         problems: [],
       }
       try {
-        await checkPattern(el, pattern)
+        if (!native) {
+          await checkPattern(el, pattern)
+        }
       } catch (error) {
         result.problems = String((error as Error).message ?? error)
           .split("\n")
@@ -203,9 +241,10 @@ async function score() {
     }
   }
   await visit()
-  const tabs = [...document.querySelectorAll<HTMLElement>("#root [role=tab]")]
-  for (const tab of tabs) {
-    tab.click()
+  // Found again each time: a build that redraws its tabs replaces the buttons.
+  const tabCount = document.querySelectorAll("#root [role=tab]").length
+  for (let index = 0; index < tabCount; index++) {
+    document.querySelectorAll<HTMLElement>("#root [role=tab]")[index]?.click()
     await frames()
     await visit()
   }

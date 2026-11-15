@@ -4,6 +4,7 @@ type Score = {
     pattern: string
     label: string
     marked: boolean
+    native: boolean
     problems: string[]
   }[]
   unreachable: string[]
