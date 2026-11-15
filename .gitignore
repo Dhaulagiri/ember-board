@@ -4,3 +4,4 @@ dist
 bench/results
 test-results
 public/runtime/runtime.js
+mise.local.toml
