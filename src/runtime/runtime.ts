@@ -207,6 +207,11 @@ function candidates() {
       found.push({ el: root, pattern: "accordion", marked: false })
     }
   }
+  for (const el of document.querySelectorAll<HTMLElement>("#root :is(button, [role=button])[aria-pressed]")) {
+    if (shown(el) && !covers("toggle button", el)) {
+      found.push({ el, pattern: "toggle button", marked: false, native: true })
+    }
+  }
   for (const button of document.querySelectorAll<HTMLElement>("#root button[aria-expanded]")) {
     if (
       !shown(button) ||
