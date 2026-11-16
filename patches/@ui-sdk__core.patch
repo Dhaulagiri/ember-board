@@ -1,0 +1,186 @@
+diff --git a/dist/components/select/select-api.js b/dist/components/select/select-api.js
+index 963a3ff49d7ba0a908700e8031a71630899c5a57..ef8c53d11456b17a8462bea4770bd77826e0d5e4 100644
+--- a/dist/components/select/select-api.js
++++ b/dist/components/select/select-api.js
+@@ -32,6 +32,9 @@ import "../../foundation/lists/item-icon.js";
+ import { createValueSelection } from "../../foundation/lists/listbox-value.js";
+ import { createChange } from "../../foundation/kernel/input-source.js";
+ import { elements } from "../../foundation/kernel/elements.js";
++var searching = (state) => state.searchable && !state.focusInList;
++var keepsTriggerFocus = (state) => !state.searchable && !state.focusInList && state.presentation !== "sheet";
++var highlightsVirtually = (state) => searching(state) || keepsTriggerFocus(state);
+ function initialSelectState(options) {
+   const empty = () => options.multiple ? [] : null;
+   return {
+@@ -107,7 +110,6 @@ function selectApiBody(context) {
+   const focusTrigger = (options2) => triggerElement()?.focus(options2);
+   const contentElement = () => popup.element() ?? element("content");
+   const searchElement = () => element("input");
+-  const searching = () => store.get().searchable && !store.get().focusInList;
+   const filterQuery = () => {
+     const { searchable, mounted, query } = store.get();
+     return searchable && mounted ? query : "";
+@@ -119,7 +121,7 @@ function selectApiBody(context) {
+   });
+   const listbox = createFilteredListbox({
+     store,
+-    focus: () => searching() ? "virtual" : "real",
++    focus: () => highlightsVirtually(store.get()) ? "virtual" : "real",
+     items: () => store.get().items,
+     emptyItems: () => options().emptyItems,
+     // Typing on the closed trigger searches every item, so they show only while searching.
+@@ -198,7 +200,7 @@ function selectApiBody(context) {
+         }
+         const el = element("content");
+         if (el) {
+-          return trackModality(el, modalityOf(openedBy));
++          return trackModality(el, modalityOf(openedBy), () => [triggerElement()]);
+         }
+       },
+       open(request, open) {
+@@ -225,6 +227,10 @@ function selectApiBody(context) {
+     }
+   }
+   function initialFocus() {
++    const trigger = triggerElement();
++    if (keepsTriggerFocus(store.get()) && trigger?.getRootNode() !== contentElement()?.getRootNode()) {
++      store.set({ focusInList: true });
++    }
+     const list = listbox.entries().filter((entry) => !entry.pinned && !listbox.disabled(entry));
+     const selected = list.find(
+       (entry) => selection.isSelected(entry.key, entry.value)
+@@ -234,9 +240,12 @@ function selectApiBody(context) {
+     if (target) {
+       listbox.highlight(target.key, { focus: false });
+     }
+-    if (searching()) {
++    if (searching(store.get())) {
+       return searchElement() ?? contentElement();
+     }
++    if (keepsTriggerFocus(store.get())) {
++      return trigger;
++    }
+     if (!target) {
+       return contentElement();
+     }
+@@ -422,7 +431,7 @@ function selectApiBody(context) {
+           return;
+         }
+         const el = listbox.element(key);
+-        const focused = searching() || el?.ownerDocument.activeElement === el;
++        const focused = highlightsVirtually(store.get()) || el?.ownerDocument.activeElement === el;
+         if (highlighted !== key || !focused) {
+           listbox.highlight(key, { event });
+         }
+@@ -433,7 +442,7 @@ function selectApiBody(context) {
+       // The id aria-activedescendant points at while focus stays in the search field.
+       activeDescendant(state) {
+         const { highlighted } = state;
+-        if (!state.open || state.focusInList || highlighted === null) {
++        if (!state.open || !highlightsVirtually(state) || highlighted === null) {
+           return void 0;
+         }
+         if (!listbox.element(highlighted)?.isConnected) {
+@@ -493,7 +502,10 @@ function selectApiBody(context) {
+ }
+ var selectApi = selectApiBody;
+ export {
++  highlightsVirtually,
+   initialSelectState,
++  keepsTriggerFocus,
++  searching,
+   selectApi,
+   syncSelectState
+ };
+diff --git a/dist/components/select/select-keyboard.js b/dist/components/select/select-keyboard.js
+index a98639449e131679e711ea3237defbd5ffcf3c22..d319793c14e2a7baa69b21eebda165c8e7b38272 100644
+--- a/dist/components/select/select-keyboard.js
++++ b/dist/components/select/select-keyboard.js
+@@ -41,7 +41,7 @@ function createSelectKeyboard({
+   }
+   function onTriggerKeyDown(event, trigger) {
+     if (store.get().open) {
+-      return;
++      return onContentKeyDown(event);
+     }
+     if (event.key === " " && listbox.typing()) {
+       event.preventDefault();
+diff --git a/dist/components/select/select-parts.js b/dist/components/select/select-parts.js
+index 7fe48b5f4ff9146259ca0cb4d5a19c22787a5e08..785fad8ded93efb6069fc319314ebcd5c96cdbcc 100644
+--- a/dist/components/select/select-parts.js
++++ b/dist/components/select/select-parts.js
+@@ -1,5 +1,6 @@
+ // src/components/select/select-parts.ts
+ import { dev } from "#dev";
++import { highlightsVirtually, keepsTriggerFocus, searching } from "./select-api.js";
+ import { popupContentAttrs } from "../../foundation/popups/popup.js";
+ import {
+   ownsEvent,
+@@ -101,7 +102,6 @@ var unreadByItems = {
+   described: [],
+   modal: []
+ };
+-var searching = (state) => state.searchable && !state.focusInList;
+ var selectSlots = (slot) => ({
+   root: slot(rootPart({ focusOnSelfClick: true })),
+   label: slot({
+@@ -113,7 +113,7 @@ var selectSlots = (slot) => ({
+   trigger: slot({
+     role: "combobox",
+     focus: "native",
+-    keys: ["ArrowDown", "ArrowUp", "Home", "End", "Enter", " ", "typeahead"],
++    keys: (state) => state.open && keepsTriggerFocus(state) ? [...listStepKeys, "Home", "End", "Enter", " ", "Tab", "typeahead"] : ["ArrowDown", "ArrowUp", "Home", "End", "Enter", " ", "typeahead"],
+     props: {
+       disabled: "boolean",
+       // Internal: passed by renderers. Select has no `field` slot, so no element attribute either.
+@@ -141,6 +141,9 @@ var selectSlots = (slot) => ({
+     },
+     // Settling that there's no label drops the reference without rendering the trigger again.
+     direct: direct(["aria-labelledby"]),
++    live: live((state, { api }) => ({
++      "aria-activedescendant": keepsTriggerFocus(state) ? api.internal.activeDescendant(state) : void 0
++    })),
+     on: {
+       keydown: (event, { api, el }) => api.internal.onTriggerKeyDown(event, el),
+       pointerdown(event, { api, el, props, store }) {
+@@ -333,7 +336,7 @@ var selectSlots = (slot) => ({
+   }),
+   item: slot({
+     role: "option",
+-    focus: (state) => searching(state) ? "active-descendant" : "roving",
++    focus: (state) => highlightsVirtually(state) ? "active-descendant" : "roving",
+     props: {
+       label: "string",
+       disabled: "boolean",
+@@ -369,8 +372,8 @@ var selectSlots = (slot) => ({
+     on: {
+       pointermove: (event, { api, key }) => api.internal.hover(key, event),
+       // Presses keep focus in the search field, so typing goes on.
+-      pointerdown: (event, context) => searching(context.store.get()) && holdFocus(event, context),
+-      mousedown: (event, context) => searching(context.store.get()) && holdFocus(event, context)
++      pointerdown: (event, context) => highlightsVirtually(context.store.get()) && holdFocus(event, context),
++      mousedown: (event, context) => highlightsVirtually(context.store.get()) && holdFocus(event, context)
+     },
+     press: ({ api, key }, event) => api.internal.choose(key, event),
+     bind(el, context) {
+diff --git a/dist/testing/aria.js b/dist/testing/aria.js
+index 42ba2acabcac67777d0f84fe27bd91127e8b1d91..42ad2faad76a6f73aa3bb44bf5940384e8cdce2b 100644
+--- a/dist/testing/aria.js
++++ b/dist/testing/aria.js
+@@ -13,6 +13,7 @@ var referenceAttributes = [
+   "aria-owns"
+ ];
+ var isGone = (el) => !el.isConnected || !!el.closest("[hidden], [inert]");
++var isFormProxy = (el) => el.localName === "input" && el.getAttribute("aria-hidden") === "true" && el.tabIndex < 0;
+ var isUnreachable = (el) => !!el.closest('[aria-hidden="true"], [inert]');
+ var renderedParent = (el) => el.assignedSlot ?? el.parentElement ?? (el.parentNode?.host || null);
+ function isUndisplayed(el, known = /* @__PURE__ */ new Map()) {
+@@ -31,7 +32,7 @@ function isUndisplayed(el, known = /* @__PURE__ */ new Map()) {
+ function withRole(scope, roles, { displayed = true } = {}) {
+   const known = /* @__PURE__ */ new Map();
+   return [...scope.querySelectorAll("*")].filter(
+-    (el) => roles.includes(roleOf(el)) && !isGone(el) && (!displayed || !isUndisplayed(el, known))
++    (el) => roles.includes(roleOf(el)) && !isGone(el) && !isFormProxy(el) && (!displayed || !isUndisplayed(el, known))
+   );
+ }
+ var hasBoolean = (el, attribute) => ["true", "false"].includes(el.getAttribute(attribute) ?? "");

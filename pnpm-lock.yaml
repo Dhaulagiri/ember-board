@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@ui-sdk/core':
+    hash: 517568fad0d21ec18f592a43e38be9985f37dc0f87144344fb93bfaaa6909e1b
+    path: patches/@ui-sdk__core.patch
+
 importers:
 
   .:
@@ -28,7 +33,7 @@ importers:
         version: 1.1.2
       '@ui-sdk/core':
         specifier: ^0.1.0-beta.5
-        version: 0.1.0-beta.5
+        version: 0.1.0-beta.5(patch_hash=517568fad0d21ec18f592a43e38be9985f37dc0f87144344fb93bfaaa6909e1b)
       babel-plugin-ember-template-compilation:
         specifier: ^4.0.1
         version: 4.0.1
@@ -1714,7 +1719,7 @@ snapshots:
     dependencies:
       undici-types: 7.24.6
 
-  '@ui-sdk/core@0.1.0-beta.5': {}
+  '@ui-sdk/core@0.1.0-beta.5(patch_hash=517568fad0d21ec18f592a43e38be9985f37dc0f87144344fb93bfaaa6909e1b)': {}
 
   '@volar/kit@2.4.31(typescript@5.9.3)':
     dependencies:

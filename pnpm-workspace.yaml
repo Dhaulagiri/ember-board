@@ -1,0 +1,2 @@
+patchedDependencies:
+  '@ui-sdk/core': patches/@ui-sdk__core.patch
