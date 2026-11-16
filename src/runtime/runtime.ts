@@ -11,10 +11,10 @@ import * as emberTemplate from "@ember/template"
 import * as templateFactory from "@ember/template-factory"
 import { checkPattern, type Pattern } from "@ui-sdk/core/testing"
 import * as decoratorRuntime from "decorator-transforms/runtime"
-import emberPackage from "../../vendor/ember-ui-sdk/package.json"
+import emberPackage from "../../node_modules/ember-ui-sdk/package.json"
 
 const entries = import.meta.glob<Record<string, unknown>>(
-  "../../vendor/ember-ui-sdk/src/*.ts",
+  "../../node_modules/ember-ui-sdk/src/*.ts",
   { eager: true }
 )
 
@@ -35,7 +35,7 @@ const modules: Record<string, unknown> = {
 for (const [name, path] of Object.entries(
   emberPackage.exports as Record<string, string>
 )) {
-  const entry = entries[`../../vendor/ember-ui-sdk/${path.slice(2)}`]
+  const entry = entries[`../../node_modules/ember-ui-sdk/${path.slice(2)}`]
   if (entry) {
     modules[`ember-ui-sdk/${name.slice(2)}`] = entry
   }

@@ -3,14 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm build:runtime && vite --port ${BOARD_PORT:-5320} --strictPort",
-    "build": "pnpm build:runtime && vite build",
+    "dev": "pnpm copy-docs && pnpm build:runtime && vite --port ${BOARD_PORT:-5320} --strictPort",
+    "build": "pnpm copy-docs && pnpm build:runtime && vite build",
     "preview": "vite preview --port ${BOARD_PORT:-5320} --strictPort",
     "bench": "node bench/run.ts",
     "typecheck": "ember-tsc --noEmit",
-    "vendor": "node scripts/vendor-ui-sdk.mjs",
     "build:runtime": "vite build -c vite.runtime.config.ts",
-    "bench:arena": "node bench/arena.ts"
+    "bench:arena": "node bench/arena.ts",
+    "copy-docs": "node scripts/copy-docs.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",
@@ -24,7 +24,7 @@
     "content-tag": "^4.2.1",
     "decorator-transforms": "^2.4.0",
     "ember-source": "~7.4.0",
-    "ember-ui-sdk": "link:./vendor/ember-ui-sdk",
+    "ember-ui-sdk": "^0.1.0",
     "lucide": "1.54.0"
   },
   "devDependencies": {

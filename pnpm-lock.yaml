@@ -47,8 +47,8 @@ importers:
         specifier: ~7.4.0
         version: 7.4.0(@glimmer/component@2.2.1)
       ember-ui-sdk:
-        specifier: link:./vendor/ember-ui-sdk
-        version: link:vendor/ember-ui-sdk
+        specifier: ^0.1.0
+        version: 0.1.0(@glimmer/component@2.2.1)(@glimmer/tracking@1.1.2)(ember-source@7.4.0(@glimmer/component@2.2.1))
       lucide:
         specifier: 1.54.0
         version: 1.54.0
@@ -742,6 +742,13 @@ packages:
     engines: {node: '>= 20.19'}
     peerDependencies:
       '@glimmer/component': '>= 1.1.2'
+
+  ember-ui-sdk@0.1.0:
+    resolution: {integrity: sha512-VZwybcSTNqN7BbtbMM9Pr5WP/ZOT0pQSWsTTpof35T2v+6Y6/JjeN9mxoD3ucanuooAU2gYvMA3DGdg26c7I+Q==}
+    peerDependencies:
+      '@glimmer/component': ^2.0.0
+      '@glimmer/tracking': ^1.1.2
+      ember-source: ^7.0.0
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -1934,6 +1941,13 @@ snapshots:
       simple-html-tokenizer: 0.5.11
     transitivePeerDependencies:
       - supports-color
+
+  ember-ui-sdk@0.1.0(@glimmer/component@2.2.1)(@glimmer/tracking@1.1.2)(ember-source@7.4.0(@glimmer/component@2.2.1)):
+    dependencies:
+      '@glimmer/component': 2.2.1
+      '@glimmer/tracking': 1.1.2
+      '@ui-sdk/core': 0.1.0-beta.5(patch_hash=517568fad0d21ec18f592a43e38be9985f37dc0f87144344fb93bfaaa6909e1b)
+      ember-source: 7.4.0(@glimmer/component@2.2.1)
 
   emoji-regex@8.0.0: {}
 

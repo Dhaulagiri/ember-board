@@ -5,3 +5,4 @@ bench/results
 test-results
 public/runtime/runtime.js
 mise.local.toml
+public/docs/ember

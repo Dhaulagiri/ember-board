@@ -45,7 +45,7 @@ export default defineConfig({
   resolve: {
     dedupe: ["ember-source", "@glimmer/component", "@glimmer/tracking"],
   },
-  optimizeDeps: { exclude: ["@glimmer/component"] },
+  optimizeDeps: { exclude: ["@glimmer/component", "@ui-sdk/core", "ember-ui-sdk"] },
   build: {
     rollupOptions: {
       input: {
