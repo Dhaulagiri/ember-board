@@ -58,15 +58,9 @@ Every task runs on both boards with the same model, prompt and success check, an
 
 ## ui-sdk version
 
-`@ui-sdk/core` comes from npm. `ember-ui-sdk` isn't published yet, so `vendor/ember-ui-sdk` holds a copy of its source from [ui-sdk-ember](https://github.com/Dhaulagiri/ui-sdk-ember), linked as a dependency. `vendor/VERSION` says which commit it came from. To refresh it from a checkout of ui-sdk-ember next to this folder:
+`@ui-sdk/core` and [`ember-ui-sdk`](https://www.npmjs.com/package/ember-ui-sdk) both come from npm. `@ui-sdk/core` carries a pnpm patch (`patches/`) with two fixes not yet released upstream: Select keeps focus on its trigger, and `checkPattern` skips hidden form inputs.
 
-```bash
-pnpm vendor
-```
-
-Commit `vendor/` and `public/docs/ember` so a deploy builds without that checkout.
-
-Once `ember-ui-sdk` is on npm, switch to it by changing one line in `package.json`, from `"ember-ui-sdk": "link:./vendor/ember-ui-sdk"` to `"ember-ui-sdk": "^0.1.0"`. Then run `pnpm install` and delete `vendor/` and `scripts/vendor-ui-sdk.mjs`. The arena runtime also reads the package from `vendor/ember-ui-sdk` (`src/runtime/runtime.ts`); point those paths at `node_modules/ember-ui-sdk`, and copy `node_modules/ember-ui-sdk/docs` to `public/docs/ember` in the build.
+`ember-ui-sdk` ships `.gts` source, so Vite compiles it with the app instead of pre-bundling it, and `@ui-sdk/core` is left out of pre-bundling too so both share one copy. The arena runtime builds every entry from `node_modules/ember-ui-sdk`, and `pnpm dev` and `pnpm build` copy the package's docs to `public/docs/ember` for the ui-sdk build to read.
 
 ## Deploy to Vercel
 
