@@ -1,6 +1,6 @@
 import type Anthropic from "@anthropic-ai/sdk"
-import type { createAgent } from "@ui-sdk/ember/agent"
-import { agentTools } from "@ui-sdk/ember/agent"
+import type { createAgent } from "ember-ui-sdk/agent"
+import { agentTools } from "ember-ui-sdk/agent"
 import { agentParams, type AgentRequest } from "../shared/agent-request"
 
 type Agent = ReturnType<typeof createAgent>

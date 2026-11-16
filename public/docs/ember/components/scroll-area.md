@@ -5,7 +5,7 @@ Add styled scrollbars, edge indicators, and follow-to-end behavior to native scr
 Use a scroll area when content needs its own scrolling region with scrollbars that match your design. The browser still does the scrolling, so the wheel, touch, keyboard and find in page work as usual.
 
 ```glimmer-ts title="basic.gts"
-import { ScrollArea } from "@ui-sdk/ember/scroll-area"
+import { ScrollArea } from "ember-ui-sdk/scroll-area"
 
 const tags = Array.from(
   { length: 50 },
@@ -36,7 +36,7 @@ Scroll the tags with the wheel, the keyboard or the scrollbar thumb. The scrollb
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -60,7 +60,7 @@ The viewport is the real scroller. Give the root a size, and the viewport the ro
 Import the root and use the parts it yields:
 
 ```gts
-import { ScrollArea } from "@ui-sdk/ember/scroll-area"
+import { ScrollArea } from "ember-ui-sdk/scroll-area"
 
 <template>
   <ScrollArea as |s|>
@@ -74,7 +74,7 @@ import { ScrollArea } from "@ui-sdk/ember/scroll-area"
 </template>
 ```
 
-`@ui-sdk/ember/scroll-area` also exports each part by name, such as `ScrollAreaViewport` and `ScrollAreaThumb`.
+`ember-ui-sdk/scroll-area` also exports each part by name, such as `ScrollAreaViewport` and `ScrollAreaThumb`.
 
 ## Horizontal
 
@@ -83,7 +83,7 @@ A horizontal scrollbar scrolls the inline axis. With one, the content grows as w
 ```glimmer-ts title="horizontal.gts"
 import Component from "@glimmer/component"
 import { htmlSafe } from "@ember/template"
-import { ScrollArea } from "@ui-sdk/ember/scroll-area"
+import { ScrollArea } from "ember-ui-sdk/scroll-area"
 
 const swatches = [
   { name: "Sand", color: "#e6d8bf" },
@@ -131,7 +131,7 @@ Drag the scrollbar, or use Shift and the wheel, to scroll the palette from Sand 
 With both scrollbars, each stops short of the corner where they meet, which `s.Corner` fills.
 
 ```glimmer-ts title="both-axes.gts"
-import { ScrollArea } from "@ui-sdk/ember/scroll-area"
+import { ScrollArea } from "ember-ui-sdk/scroll-area"
 
 const releases = [
   {
@@ -282,7 +282,7 @@ The root holds how far the content reaches past each edge, as `--scroll-area-ove
 These variables aren't inherited, so scrolling restyles the root and never the content. An element that reads one takes it from the root with `inherit`, like the fades here, which are children of the root: `--scroll-area-overflow-y-start: inherit`. The first scroll area registers the six names for the whole page with `CSS.registerProperty`. A page that needs them to inherit calls it first, with `inherits: true`. An `@property` rule can't, since a registration in script wins.
 
 ```glimmer-ts title="edge-fade.gts"
-import { ScrollArea } from "@ui-sdk/ember/scroll-area"
+import { ScrollArea } from "ember-ui-sdk/scroll-area"
 
 const notes = [
   {
@@ -358,7 +358,7 @@ Scroll the release notes. The top fade grows in as you leave the top, and the bo
 Leave out the Scrollbar parts to keep the browser's own scrollbars, with everything else: data attributes, edge variables, sticking to the end and the controller.
 
 ```glimmer-ts title="native-scrollbars.gts"
-import { ScrollArea } from "@ui-sdk/ember/scroll-area"
+import { ScrollArea } from "ember-ui-sdk/scroll-area"
 
 const messages = [
   { from: "Hollis Grant", subject: "Launch checklist for Thursday" },
@@ -407,7 +407,7 @@ Scroll the inbox with the browser's own scrollbar. The scroll area still tracks 
 Style the attribute: give the scrollbar `opacity: 0`, and `opacity: 1` under `[data-visible]`. A hidden scrollbar ignores the pointer, so it never catches presses meant for the content under it.
 
 ```glimmer-ts title="type.gts"
-import { ScrollArea, type ScrollAreaType } from "@ui-sdk/ember/scroll-area"
+import { ScrollArea, type ScrollAreaType } from "ember-ui-sdk/scroll-area"
 
 const types: ScrollAreaType[] = ["hover", "scroll", "auto", "always"]
 const tags = Array.from(
@@ -447,7 +447,7 @@ Hover and scroll each list to compare. The auto and always scrollbars show from 
 With `"scroll"` and `"hover"`, `@scrollHideDelay` keeps a scrollbar for a while after scrolling stops or the pointer leaves, in ms. It defaults to 600.
 
 ```glimmer-ts title="hide-delay.gts"
-import { ScrollArea } from "@ui-sdk/ember/scroll-area"
+import { ScrollArea } from "ember-ui-sdk/scroll-area"
 
 const delays = [
   { value: 0, label: "No delay" },
@@ -496,7 +496,7 @@ import { tracked } from "@glimmer/tracking"
 import {
   ScrollArea,
   createScrollAreaController,
-} from "@ui-sdk/ember/scroll-area"
+} from "ember-ui-sdk/scroll-area"
 import { useLog } from "./log"
 
 const tags = Array.from(
@@ -566,7 +566,7 @@ For a chat or a log, set `@stickToEnd={{true}}` to start at the bottom and keep 
 Pass `@render={{true}}` to any part to render a different element in its place. Bind the yielded `part` to your element and read `state` for the part's values. The root and viewport state can drive content, such as a hint that shows until you reach the end. See [State](#state) for each part's fields.
 
 ```glimmer-ts title="render.gts"
-import { ScrollArea } from "@ui-sdk/ember/scroll-area"
+import { ScrollArea } from "ember-ui-sdk/scroll-area"
 
 const tags = Array.from(
   { length: 50 },

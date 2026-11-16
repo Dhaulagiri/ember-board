@@ -7,9 +7,9 @@ A token input is a text field that holds tokens alongside the text, like the peo
 ```glimmer-ts title="demo.gts"
 import Component from "@glimmer/component"
 import { X } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { TokenInput } from "@ui-sdk/ember/token-input"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { TokenInput } from "ember-ui-sdk/token-input"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 import { icon } from "./icon"
 
 const people = [
@@ -67,7 +67,7 @@ Type @ and choose a person with the arrow keys and Enter. Remove a token with Ba
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -90,7 +90,7 @@ TokenInput as |t|
 Import the root and use the parts it yields:
 
 ```gts
-import { TokenInput } from "@ui-sdk/ember/token-input"
+import { TokenInput } from "ember-ui-sdk/token-input"
 
 const draft = [
   "Explain ",
@@ -126,8 +126,8 @@ import {
   toText,
   TokenInput,
   type TokenInputValue,
-} from "@ui-sdk/ember/token-input"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+} from "ember-ui-sdk/token-input"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -314,10 +314,10 @@ Choose what Backspace does at a token with `@tokenDeletion`:
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown, File } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
-import { TokenInput } from "@ui-sdk/ember/token-input"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
+import { TokenInput } from "ember-ui-sdk/token-input"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -445,8 +445,8 @@ Use `toText`, `fromText`, and `toLabel` to convert values yourself. Supply a cus
 
 ```glimmer-ts title="codec.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { fromText, toText, TokenInput } from "@ui-sdk/ember/token-input"
+import { Field } from "ember-ui-sdk/field"
+import { fromText, toText, TokenInput } from "ember-ui-sdk/token-input"
 import { useLog } from "./log"
 
 const chat = {
@@ -498,9 +498,9 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { Check } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Field } from "@ui-sdk/ember/field"
-import { TokenInput } from "@ui-sdk/ember/token-input"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Field } from "ember-ui-sdk/field"
+import { TokenInput } from "ember-ui-sdk/token-input"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -594,9 +594,9 @@ Pass `@value` and update it in `@onValueChange`. The change details include the 
 ```glimmer-ts title="controlled.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { toText, TokenInput } from "@ui-sdk/ember/token-input"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { toText, TokenInput } from "ember-ui-sdk/token-input"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 import { useLog } from "./log"
 
 const files = [
@@ -675,12 +675,12 @@ Use `createTokenInputController()` to insert, update, or remove tokens from code
 ```glimmer-ts title="controller.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
+import { Field } from "ember-ui-sdk/field"
 import {
   createTokenInputController,
   TokenInput,
   type Token,
-} from "@ui-sdk/ember/token-input"
+} from "ember-ui-sdk/token-input"
 
 const draft = [
   "Compare ",
@@ -778,8 +778,8 @@ Set `@submitShortcut="mod+enter"` for a multiline message. Enter then inserts a 
 
 ```glimmer-ts title="submit-shortcut.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { toLabel, TokenInput } from "@ui-sdk/ember/token-input"
+import { Field } from "ember-ui-sdk/field"
+import { toLabel, TokenInput } from "ember-ui-sdk/token-input"
 import { useLog } from "./log"
 
 export default class SubmitShortcut extends Component {

@@ -5,8 +5,8 @@ Name any control with a label, and let a press on the label reach it.
 A plain `<label>` only reaches inputs, buttons and selects. Label names any control by its `for`, including a radio group or a slider, and a press on the label moves focus into it.
 
 ```glimmer-ts title="basic.gts"
-import { Label } from "@ui-sdk/ember/label"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Label } from "ember-ui-sdk/label"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 const speeds = [
   { value: "standard", label: "Standard" },
@@ -36,7 +36,7 @@ Press Shipping speed. Focus moves to the checked option, and a screen reader nam
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Usage
@@ -44,8 +44,8 @@ npm install @ui-sdk/ember @ui-sdk/core
 Import the label and point its `for` at the control's `id`:
 
 ```gts
-import { Label } from "@ui-sdk/ember/label"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Label } from "ember-ui-sdk/label"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 <template>
   <Label for="plan">Plan</Label>
@@ -65,8 +65,8 @@ Inside a [Field](./field.md), use the field's own label part, which also ties th
 A label for a slider names its thumb, so the thumb reads as **Volume**, and a press on the label focuses it.
 
 ```glimmer-ts title="slider.gts"
-import { Label } from "@ui-sdk/ember/label"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Label } from "ember-ui-sdk/label"
+import { Slider } from "ember-ui-sdk/slider"
 
 <template>
   <Slider id="volume" @defaultValue={{75}} as |s|>
@@ -91,8 +91,8 @@ Press Volume, then use the arrow keys. The thumb moves, and a screen reader read
 Point the label at a switch beside it. A press on the label turns the switch on and off.
 
 ```glimmer-ts title="switch.gts"
-import { Label } from "@ui-sdk/ember/label"
-import { Switch } from "@ui-sdk/ember/switch"
+import { Label } from "ember-ui-sdk/label"
+import { Switch } from "ember-ui-sdk/switch"
 
 <template>
   <div data-slot="row">
@@ -111,8 +111,8 @@ Press Email me product updates. The switch turns on.
 Put the control inside the label instead of pointing at it, and you need no `id`.
 
 ```glimmer-ts title="wrap.gts"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Label } from "@ui-sdk/ember/label"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Label } from "ember-ui-sdk/label"
 import { Check } from "lucide"
 import { icon } from "./icon"
 

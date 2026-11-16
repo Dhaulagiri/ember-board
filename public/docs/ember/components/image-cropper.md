@@ -13,7 +13,7 @@ Use an image cropper to choose the part of a photo to keep, like a profile pictu
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -49,7 +49,7 @@ The viewport, image and selection are needed. The rest are optional.
 Import the root and use the parts it yields:
 
 ```gts
-import { ImageCropper } from "@ui-sdk/ember/image-cropper"
+import { ImageCropper } from "ember-ui-sdk/image-cropper"
 
 <template>
   <ImageCropper
@@ -89,7 +89,7 @@ import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { ImageCropper } from "@ui-sdk/ember/image-cropper"
+import { ImageCropper } from "ember-ui-sdk/image-cropper"
 
 const photo = `data:image/svg+xml,${encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420"><rect width="640" height="420" fill="#e5e5e5"/><circle cx="460" cy="150" r="56" fill="#fafafa"/><path d="M0 280 120 170l110 100 120-130 130 125 90-60 70 40v175H0z" fill="#a3a3a3"/><path d="M0 330l160-80 120 70 150-80 210 85v95H0z" fill="#525252"/><path d="M0 380q160-35 320-10t320-5v55H0z" fill="#262626"/></svg>`
@@ -164,7 +164,7 @@ import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
 import { cropImage, type ImageCrop } from "@ui-sdk/core/image"
-import { ImageCropper } from "@ui-sdk/ember/image-cropper"
+import { ImageCropper } from "ember-ui-sdk/image-cropper"
 
 const photo = `data:image/svg+xml,${encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420"><rect width="640" height="420" fill="#e5e5e5"/><circle cx="460" cy="150" r="56" fill="#fafafa"/><path d="M0 280 120 170l110 100 120-130 130 125 90-60 70 40v175H0z" fill="#a3a3a3"/><path d="M0 330l160-80 120 70 150-80 210 85v95H0z" fill="#525252"/><path d="M0 380q160-35 320-10t320-5v55H0z" fill="#262626"/></svg>`
@@ -255,7 +255,7 @@ Pass `@crop` and update it in `@onCropChange`, which also receives the details. 
 import {
   ImageCropper,
   createImageCropperController,
-} from "@ui-sdk/ember/image-cropper"
+} from "ember-ui-sdk/image-cropper"
 
 const controller = createImageCropperController()
 

@@ -3,7 +3,7 @@
 Show a task’s progress, or an indeterminate state while its progress is unknown.
 
 ```glimmer-ts title="basic.gts"
-import { Progress } from "@ui-sdk/ember/progress"
+import { Progress } from "ember-ui-sdk/progress"
 
 <template>
   <Progress @value={{60}} as |p|>
@@ -21,7 +21,7 @@ Read the export bar. Its label and 60% value are available both visually and to 
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -48,7 +48,7 @@ The value is already part of the root's accessible description. The visible valu
 Import the root and use the parts it yields:
 
 ```gts
-import { Progress } from "@ui-sdk/ember/progress"
+import { Progress } from "ember-ui-sdk/progress"
 
 <template>
   <Progress @value={{40}} as |p|>
@@ -61,7 +61,7 @@ import { Progress } from "@ui-sdk/ember/progress"
 </template>
 ```
 
-`@ui-sdk/ember/progress` also exports each part by name, such as `ProgressLabel` and `ProgressTrack`.
+`ember-ui-sdk/progress` also exports each part by name, such as `ProgressLabel` and `ProgressTrack`.
 
 ## Indeterminate
 
@@ -70,7 +70,7 @@ Leave out `@value` when you do not know how much work is complete. Every part ge
 The indicator has no inline width in this state. This example sweeps a short highlight across the track, and shows a still, full-width fill when reduced motion is on.
 
 ```glimmer-ts title="indeterminate.gts"
-import { Progress } from "@ui-sdk/ember/progress"
+import { Progress } from "ember-ui-sdk/progress"
 
 <template>
   <Progress @value={{null}} as |p|>
@@ -92,7 +92,7 @@ Pass the latest `@value` as your task progresses. The parts get `data-progressin
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { Progress } from "@ui-sdk/ember/progress"
+import { Progress } from "ember-ui-sdk/progress"
 import { useLog } from "./log"
 
 const total = 5
@@ -157,7 +157,7 @@ Progress displays your state; it has no change callback.
 `@min` and `@max` default to 0 and 100. A value outside that range is clamped for the fill, the percentage and `aria-valuenow`, but the state's `value` and a format other than percent keep it as you passed it. A value of 3 between 1 and 5 fills half the track.
 
 ```glimmer-ts title="min-max.gts"
-import { Progress } from "@ui-sdk/ember/progress"
+import { Progress } from "ember-ui-sdk/progress"
 
 <template>
   <Progress @value={{3}} @min={{1}} @max={{5}} as |p|>
@@ -177,7 +177,7 @@ Compare step 3 of 5 with the fill. Because the range starts at 1, the value is h
 Pass `Intl.NumberFormat` options to `@format` for units or decimal places. A function can return custom text, such as the time remaining.
 
 ```glimmer-ts title="format.gts"
-import { Progress } from "@ui-sdk/ember/progress"
+import { Progress } from "ember-ui-sdk/progress"
 
 const bars = [
   {
@@ -234,7 +234,7 @@ Set `dir="rtl"` on the surrounding content to fill the track from the right.
 Use `@getValueLabel` to give screen readers more context than the visible number. Its details include `formatted`, `percent`, `min`, and `max`. Handle a `null` value when the task can be indeterminate; `percent` is also `null` and `formatted` is empty then.
 
 ```glimmer-ts title="value-label.gts"
-import { Progress } from "@ui-sdk/ember/progress"
+import { Progress } from "ember-ui-sdk/progress"
 
 const valueLabel = (
   value: number | null,

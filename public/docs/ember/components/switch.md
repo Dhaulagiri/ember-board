@@ -5,7 +5,7 @@ Turn a setting on or off.
 Use a switch for a setting that takes effect as soon as it changes, like Airplane mode or a notification preference. Keep its label the same in both states: the label says what the setting is, and the switch shows whether it's on.
 
 ```glimmer-ts title="basic.gts"
-import { Switch } from "@ui-sdk/ember/switch"
+import { Switch } from "ember-ui-sdk/switch"
 
 <template>
   <label data-slot="label">
@@ -22,7 +22,7 @@ Click Airplane mode, or focus the switch and press Space, to turn it on and off.
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -41,7 +41,7 @@ Wrap the switch and its text in a label. The thumb stays mounted and gets the sw
 Import the root and use the parts it yields:
 
 ```gts
-import { Switch } from "@ui-sdk/ember/switch"
+import { Switch } from "ember-ui-sdk/switch"
 
 <template>
   <label>
@@ -58,8 +58,8 @@ import { Switch } from "@ui-sdk/ember/switch"
 Use `Field` with its `f.Label` and `f.Description` when a setting needs more explanation. The field connects both to the switch.
 
 ```glimmer-ts title="description.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Switch } from "@ui-sdk/ember/switch"
+import { Field } from "ember-ui-sdk/field"
+import { Switch } from "ember-ui-sdk/switch"
 
 <template>
   <Field as |f|>
@@ -81,8 +81,8 @@ Click Weekly digest. The field connects the label and description to the switch.
 A setting can fill a whole card. Here the label's `::after` covers the card, so a click anywhere on it toggles the switch, and `:has([data-checked])` marks the cards that are on.
 
 ```glimmer-ts title="choice-card.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Switch } from "@ui-sdk/ember/switch"
+import { Field } from "ember-ui-sdk/field"
+import { Switch } from "ember-ui-sdk/switch"
 
 const settings = [
   {
@@ -121,7 +121,7 @@ Click anywhere on the Public profile card to turn it on. Each card's switch keep
 `@disabled={{true}}` prevents focus and changes, and leaves the switch out of form submissions. A disabled `fieldset` does the same.
 
 ```glimmer-ts title="disabled.gts"
-import { Switch } from "@ui-sdk/ember/switch"
+import { Switch } from "ember-ui-sdk/switch"
 
 <template>
   <div data-slot="stack">
@@ -148,8 +148,8 @@ Security alerts are always on, so that switch is disabled. Clicking it leaves it
 `@readOnly={{true}}` keeps the switch focusable and included in form submissions, while preventing the user from changing it. Use it for a setting managed somewhere else.
 
 ```glimmer-ts title="read-only.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Switch } from "@ui-sdk/ember/switch"
+import { Field } from "ember-ui-sdk/field"
+import { Switch } from "ember-ui-sdk/switch"
 
 <template>
   <Field as |f|>
@@ -174,7 +174,7 @@ Pass `@checked` and update it in `@onCheckedChange` to own the value. A [control
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { Switch, createSwitchController } from "@ui-sdk/ember/switch"
+import { Switch, createSwitchController } from "ember-ui-sdk/switch"
 import { useLog } from "./log"
 
 export default class Controlled extends Component {
@@ -219,8 +219,8 @@ Set `@name` to include the switch in a native form. A switch that's on submits i
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { FieldSet } from "@ui-sdk/ember/field"
-import { Switch } from "@ui-sdk/ember/switch"
+import { FieldSet } from "ember-ui-sdk/field"
+import { Switch } from "ember-ui-sdk/switch"
 import { useLog } from "./log"
 
 export default class Form extends Component {
@@ -277,8 +277,8 @@ Turn on Product updates and press Save. The console logs the submitted values, a
 ```glimmer-ts title="invalid.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { Switch } from "@ui-sdk/ember/switch"
+import { Field } from "ember-ui-sdk/field"
+import { Switch } from "ember-ui-sdk/switch"
 import { useLog } from "./log"
 
 export default class Invalid extends Component {
@@ -324,7 +324,7 @@ The example ignores presses while a save is running, and shows a spinner in the 
 ```glimmer-ts title="async.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Switch, createSwitchController } from "@ui-sdk/ember/switch"
+import { Switch, createSwitchController } from "ember-ui-sdk/switch"
 import { LoaderCircle } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -394,7 +394,7 @@ Turn on Automatic backups. The thumb shows a spinner while it saves, then the sw
 Pass `@render={{true}}` to the switch or its thumb to render your own element. The part yields `{ part, state }`: bind `part` to the element so its role, label and keyboard behavior stay connected, and read `state` to change its content. See [Parts and Composition](#custom-rendering) for the rendering contract.
 
 ```glimmer-ts title="render.gts"
-import { Switch } from "@ui-sdk/ember/switch"
+import { Switch } from "ember-ui-sdk/switch"
 import { Moon, Sun } from "lucide"
 import { icon } from "./icon"
 

@@ -5,7 +5,7 @@ Pick a score from a row of stars, whole or half, with a preview as the pointer m
 Use a rating to collect a score, like how a stay went, or to show one, like an average. Each star is a radio, so it works like a radio group, with one value and a single tab stop.
 
 ```glimmer-ts title="basic.gts"
-import { Rating } from "@ui-sdk/ember/rating"
+import { Rating } from "ember-ui-sdk/rating"
 import { Star } from "lucide"
 import { icon } from "./icon"
 
@@ -31,7 +31,7 @@ Choose a star, then use the arrow keys to change the score.
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -50,7 +50,7 @@ Rating as |r|
 Import the root and use the parts it yields:
 
 ```gts
-import { Rating } from "@ui-sdk/ember/rating"
+import { Rating } from "ember-ui-sdk/rating"
 import { Star } from "lucide"
 import { icon } from "./icon"
 
@@ -84,7 +84,7 @@ For half stars and averages, paint the icon up to `calc(var(--rating-fill) * 100
 Set `@step={{0.5}}` to split each star in two. Each half is its own radio, named like "2.5 stars", and a press on the first half of a star picks the half score.
 
 ```glimmer-ts title="half-stars.gts"
-import { Rating } from "@ui-sdk/ember/rating"
+import { Rating } from "ember-ui-sdk/rating"
 import { Star } from "lucide"
 import { icon } from "./icon"
 
@@ -116,7 +116,7 @@ While a pointer moves over the stars, they show the score under it: `--rating-fi
 Set `@deselectable={{true}}` to let people clear their score: a press on the checked star, or Space on it, sets the score back to `null`.
 
 ```glimmer-ts title="deselectable.gts"
-import { Rating } from "@ui-sdk/ember/rating"
+import { Rating } from "ember-ui-sdk/rating"
 import { Star } from "lucide"
 import { icon } from "./icon"
 
@@ -146,7 +146,7 @@ Set `@readOnly={{true}}` to show a score that can't change, like an average. Any
 Name a read-only rating with `@getValueLabel`, so its name includes the score. An `aria-label` would replace it.
 
 ```glimmer-ts title="read-only.gts"
-import { Rating } from "@ui-sdk/ember/rating"
+import { Rating } from "ember-ui-sdk/rating"
 import { Star } from "lucide"
 import { icon } from "./icon"
 
@@ -176,7 +176,7 @@ An average of 4.2, named Rated 4.2 out of 5.
 Set `@disabled={{true}}` to stop every star from being focused or changed. A disabled rating submits nothing.
 
 ```glimmer-ts title="disabled.gts"
-import { Rating } from "@ui-sdk/ember/rating"
+import { Rating } from "ember-ui-sdk/rating"
 import { Star } from "lucide"
 import { icon } from "./icon"
 
@@ -207,7 +207,7 @@ Pass `@value` and update it in `@onValueChange` for the reason. Call `details.ca
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { Rating, createRatingController } from "@ui-sdk/ember/rating"
+import { Rating, createRatingController } from "ember-ui-sdk/rating"
 import { Star } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -262,8 +262,8 @@ Each radio renders a hidden native radio, so the rating takes part in forms. Set
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { Rating } from "@ui-sdk/ember/rating"
+import { Field } from "ember-ui-sdk/field"
+import { Rating } from "ember-ui-sdk/rating"
 import { Star } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"

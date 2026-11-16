@@ -8,7 +8,7 @@ Use a Toolbar to group the controls of an editor, a canvas or a table. Tab enter
 import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { Bold, Italic, Link, Underline } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -64,7 +64,7 @@ Tab into the toolbar, then use Left and Right to move between Bold, Italic, Unde
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -89,7 +89,7 @@ Put buttons, links and fields straight inside the toolbar. `t.Group` names a set
 Import the root and use the parts it yields:
 
 ```gts
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 
 <template>
   <Toolbar aria-label="Formatting" as |t|>
@@ -110,7 +110,7 @@ A [Toggle](./toggle.md) group inside a toolbar joins its navigation instead of a
 ```glimmer-ts title="toggle-group.gts"
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { AlignCenter, AlignLeft, AlignRight, List, ListOrdered } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -185,7 +185,7 @@ Use `t.Group` to name related controls. Set `@disabled={{true}}` on the group to
 import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { ClipboardPaste, Copy, Redo, Scissors, Undo } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -238,8 +238,8 @@ Render a [Menu](./menu.md) trigger through `t.Button`. In a horizontal toolbar, 
 import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
-import { Menu } from "@ui-sdk/ember/menu"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Menu } from "ember-ui-sdk/menu"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -294,8 +294,8 @@ A [Select](./select.md) trigger joins the same way. It keeps its select behavior
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
-import { Select } from "@ui-sdk/ember/select"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Select } from "ember-ui-sdk/select"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { Check, ChevronsUpDown, ZoomIn, ZoomOut } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -382,8 +382,8 @@ Use `t.Input` for a text field, or render another field through it, like a [Numb
 Entering a field with an arrow puts its caret at the far end in that direction: press the same arrow again to leave, or the other arrow to edit. A number input keeps Up and Down for stepping its value.
 
 ```glimmer-ts title="input.gts"
-import { NumberInput } from "@ui-sdk/ember/number-input"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { NumberInput } from "ember-ui-sdk/number-input"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 
@@ -430,7 +430,7 @@ Move into Font size and press Up or Down to change it. In Find, type a word, the
 import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { Check, MessageSquare } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -490,7 +490,7 @@ Set `@orientation="vertical"` to move with Up and Down, like a canvas tool palet
 import Component from "@glimmer/component"
 import { array, fn } from "@ember/helper"
 import { on } from "@ember/modifier"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { MousePointer2, Pencil, Square, Trash2, Type } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -555,7 +555,7 @@ A disabled item stays reachable with `aria-disabled`, so people can find it, but
 import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { useLog } from "./log"
 
 export default class Disabled extends Component {
@@ -597,7 +597,7 @@ Arrow keys wrap from the last item to the first by default. Set `@loop={{false}}
 import Component from "@glimmer/component"
 import { concat, fn } from "@ember/helper"
 import { on } from "@ember/modifier"
-import { Toolbar } from "@ui-sdk/ember/toolbar"
+import { Toolbar } from "ember-ui-sdk/toolbar"
 import { useLog } from "./log"
 
 const labels = ["First", "Previous", "Next", "Last"]
@@ -627,7 +627,7 @@ Create a controller with `createToolbarController()` and pass it as `@controller
 import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
-import { createToolbarController, Toolbar } from "@ui-sdk/ember/toolbar"
+import { createToolbarController, Toolbar } from "ember-ui-sdk/toolbar"
 import { Bold, Italic, Link } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"

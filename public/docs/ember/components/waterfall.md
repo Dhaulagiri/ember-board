@@ -5,7 +5,7 @@ Show a trace or a page's requests as bars on a shared time axis, with spans that
 Use a Waterfall for anything with a start and a duration that nests: a browser's network requests, an OpenTelemetry trace, the steps of a build. Each span is a row with its own bar, placed on one time axis, and screen reader and keyboard users get a treegrid they can walk span by span.
 
 ```glimmer-ts title="network.gts"
-import { Waterfall } from "@ui-sdk/ember/waterfall"
+import { Waterfall } from "ember-ui-sdk/waterfall"
 
 const requests = [
   { value: "document", label: "/", start: 0, duration: 182 },
@@ -63,7 +63,7 @@ Use the arrow keys to move between requests. Press Right to move into a row's ce
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -97,7 +97,7 @@ Pass every span as `@items` and render a `w.Row` for each with the span's `@valu
 Each span has a `value`, a `label`, a `start` and a `duration` in milliseconds, and the spans it started as `children`:
 
 ```gts
-import { Waterfall, type WaterfallData } from "@ui-sdk/ember/waterfall"
+import { Waterfall, type WaterfallData } from "ember-ui-sdk/waterfall"
 
 const requests: WaterfallData = [
   { value: "document", label: "/", start: 0, duration: 182 },
@@ -154,7 +154,7 @@ import {
   createWaterfallController,
   visibleWaterfallRows,
   Waterfall,
-} from "@ui-sdk/ember/waterfall"
+} from "ember-ui-sdk/waterfall"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -303,7 +303,7 @@ import {
   Waterfall,
   WaterfallTick,
   type WaterfallData,
-} from "@ui-sdk/ember/waterfall"
+} from "ember-ui-sdk/waterfall"
 import { icon } from "./icon"
 
 const trace: WaterfallData = [
@@ -416,7 +416,7 @@ A trace can have thousands of spans. Render only the rows in view: flatten the o
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { ChevronRight } from "lucide"
-import { visibleWaterfallRows, Waterfall } from "@ui-sdk/ember/waterfall"
+import { visibleWaterfallRows, Waterfall } from "ember-ui-sdk/waterfall"
 import { icon } from "./icon"
 
 const trace = Array.from({ length: 2000 }, (_, job) => ({

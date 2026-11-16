@@ -5,7 +5,7 @@ Divide groups of content with a horizontal or vertical line.
 Use a separator between groups of content that a reader should take as separate, like a profile's header and its bio.
 
 ```glimmer-ts title="basic.gts"
-import { Separator } from "@ui-sdk/ember/separator"
+import { Separator } from "ember-ui-sdk/separator"
 
 <template>
   <div data-slot="stack">
@@ -27,7 +27,7 @@ Read the profile with a screen reader. It announces a separator between Hollis G
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Usage
@@ -35,7 +35,7 @@ npm install @ui-sdk/ember @ui-sdk/core
 Import the separator and put it between two groups of content:
 
 ```gts
-import { Separator } from "@ui-sdk/ember/separator"
+import { Separator } from "ember-ui-sdk/separator"
 
 <template>
   <section>
@@ -51,7 +51,7 @@ import { Separator } from "@ui-sdk/ember/separator"
 Set `@orientation="vertical"` for a line between items in a row. It takes the row's height.
 
 ```glimmer-ts title="vertical.gts"
-import { Separator } from "@ui-sdk/ember/separator"
+import { Separator } from "ember-ui-sdk/separator"
 
 <template>
   <nav aria-label="Legal" data-slot="row">
@@ -71,7 +71,7 @@ Read across Privacy, Terms and Cookies. A screen reader announces a vertical sep
 A vertical separator stretches to the tallest item in its row, so it spans a number and its label.
 
 ```glimmer-ts title="menu.gts"
-import { Separator } from "@ui-sdk/ember/separator"
+import { Separator } from "ember-ui-sdk/separator"
 
 <template>
   <div data-slot="row">
@@ -100,7 +100,7 @@ Compare the lines with the stats. Each one runs the full height of Projects, Fol
 Put a separator between each pair of rows to divide a list of details.
 
 ```glimmer-ts title="list.gts"
-import { Separator } from "@ui-sdk/ember/separator"
+import { Separator } from "ember-ui-sdk/separator"
 
 <template>
   <div data-slot="stack">
@@ -129,7 +129,7 @@ Read the plan details with a screen reader. It announces a separator between Pla
 Set `@decorative={{true}}` when the line only adds visual structure and the content around it already conveys the division. It is removed from the accessibility tree instead of being announced.
 
 ```glimmer-ts title="decorative.gts"
-import { Separator } from "@ui-sdk/ember/separator"
+import { Separator } from "ember-ui-sdk/separator"
 
 <template>
   <div data-slot="stack">

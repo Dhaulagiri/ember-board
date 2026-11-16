@@ -5,8 +5,8 @@ Enter multiple lines of text, grow the field as you type, and connect it to a fo
 A textarea is a native multi-line text field for messages, notes and descriptions. It works inside a field and a form, can grow with its text, and reports the same change reasons as Input.
 
 ```glimmer-ts title="basic.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 <template>
   <Field @name="message" as |f|>
@@ -21,7 +21,7 @@ Click Message to focus the textarea, then type. Press Enter to start a new line.
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ npm install @ui-sdk/ember @ui-sdk/core
 `Textarea` renders a native `<textarea>`. Pass `rows`, `placeholder`, `maxlength` and other native attributes directly.
 
 ```gts
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 <template>
   <Textarea aria-label="Message" placeholder="Type your message here…" />
@@ -41,8 +41,8 @@ import { Textarea } from "@ui-sdk/ember/textarea"
 Wrap the textarea in a [Field](./field.md) to give it a visible label and a description. Pass the field's `f.field` as `@field` so the textarea is connected to the field's label, description and errors.
 
 ```glimmer-ts title="field.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 <template>
   <Field @name="feedback" as |f|>
@@ -60,8 +60,8 @@ Click Feedback to focus the textarea. A screen reader reads the description with
 Set `@autoResize={{true}}` to grow and shrink the textarea with its text. CSS `min-height` and `max-height` set its limits; past the maximum, the text scrolls inside it.
 
 ```glimmer-ts title="auto-resize.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 <template>
   <Field @name="notes" as |f|>
@@ -83,8 +83,8 @@ Pass `@value` and update it in `@onValueChange`. Here the character count is der
 ```glimmer-ts title="controlled.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 export default class Controlled extends Component {
   @tracked bio =
@@ -120,8 +120,8 @@ A textarea submits its value through a native form under its field's `name`. Pas
 ```glimmer-ts title="button.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea, createInputController } from "@ui-sdk/ember/textarea"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea, createInputController } from "ember-ui-sdk/textarea"
 import { useLog } from "./log"
 
 export default class Button extends Component {
@@ -161,8 +161,8 @@ Type a message and press Send Message. The console logs it and the textarea clea
 Set `@disabled={{true}}` on the textarea or its field to prevent editing and leave it out of the tab order and the submitted values.
 
 ```glimmer-ts title="disabled.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 <template>
   <Field @disabled={{true}} as |f|>
@@ -179,8 +179,8 @@ Try to edit Reply or reach it with Tab. The disabled textarea keeps its value bu
 Set `@invalid={{true}}` on the field for an error your app decides. The field shows its error, associates it with the textarea and sets `aria-invalid`. [Field](./field.md#validation) covers native constraints and error matches.
 
 ```glimmer-ts title="invalid.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 <template>
   <Field @invalid={{true}} as |f|>

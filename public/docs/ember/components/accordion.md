@@ -6,7 +6,7 @@ Use an Accordion for content people can explore one section at a time, such as a
 
 ```glimmer-ts title="basic.gts"
 import { array } from "@ember/helper"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -71,7 +71,7 @@ Press “What is your return policy?”. Its answer opens and the shipping answe
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -99,7 +99,7 @@ Give every item a unique `@value`. Put its trigger inside a heading, then add th
 Import the root and use the parts it yields:
 
 ```gts
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 
 <template>
   <Accordion as |a|>
@@ -113,7 +113,7 @@ import { Accordion } from "@ui-sdk/ember/accordion"
 </template>
 ```
 
-`@ui-sdk/ember/accordion` also exports each part by name, such as `AccordionItem` and `AccordionTrigger`.
+`ember-ui-sdk/accordion` also exports each part by name, such as `AccordionItem` and `AccordionTrigger`.
 
 ## Multiple
 
@@ -121,7 +121,7 @@ Set `@multiple={{true}}` to let several items stay open. Opening one then leaves
 
 ```glimmer-ts title="multiple.gts"
 import { array } from "@ember/helper"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -177,7 +177,7 @@ Open Privacy and security. Notification settings stays open; close either sectio
 Set `@disabled={{true}}` on an item or on a single trigger to prevent changes, or on the accordion to disable every item. Disabled triggers stay in the tab order so people can still discover them. A disabled `<fieldset>` around the accordion disables it too.
 
 ```glimmer-ts title="disabled.gts"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -246,7 +246,7 @@ The open trigger reports `aria-disabled="true"` because pressing it leaves its p
 
 ```glimmer-ts title="collapsible.gts"
 import { array } from "@ember/helper"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -308,7 +308,7 @@ import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Accordion, createAccordionController } from "@ui-sdk/ember/accordion"
+import { Accordion, createAccordionController } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -401,9 +401,9 @@ A closed panel normally unmounts. Add `@keepMounted={{true}}` to one panel or th
 
 ```glimmer-ts title="keep-mounted.gts"
 import { array } from "@ember/helper"
-import { Accordion } from "@ui-sdk/ember/accordion"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Accordion } from "ember-ui-sdk/accordion"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea } from "ember-ui-sdk/textarea"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -455,7 +455,7 @@ Write a message, switch to Formatting, then return to Reply to this thread. Your
 Add `@hiddenUntilFound={{true}}` to keep closed panels available to the browser's Find command. A match opens the item immediately, without an animation, with the [reason](#reasons) `find-in-page`.
 
 ```glimmer-ts title="find-in-page.gts"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -511,7 +511,7 @@ Use your browser’s Find command to search for “pineapple”. The closed “W
 A link to an element inside a closed panel can reveal it too. Give the target an `id` and link to it with a hash, such as `href="#refund-timeline"`.
 
 ```glimmer-ts title="deep-link.gts"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -613,7 +613,7 @@ The panel stays mounted until its exit animation finishes. An item's `@onOpenCha
 
 ```glimmer-ts title="animation.gts"
 import { array } from "@ember/helper"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -674,7 +674,7 @@ import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Accordion, createAccordionController } from "@ui-sdk/ember/accordion"
+import { Accordion, createAccordionController } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -785,7 +785,7 @@ Press Expand all or Collapse all. Open an individual week near the bottom to scr
 Put another accordion inside a panel when a section has its own expandable sections. Each accordion tracks its own items. Give the inner headings a lower level than the outer headings.
 
 ```glimmer-ts title="nested.gts"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -888,7 +888,7 @@ Combine a search field with a controlled accordion: filter the questions and set
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -1098,7 +1098,7 @@ Pass `@render={{true}}` to a part to choose another heading level or element. Th
 ```glimmer-ts title="render.gts"
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
-import { Accordion } from "@ui-sdk/ember/accordion"
+import { Accordion } from "ember-ui-sdk/accordion"
 
 const steps = [
   {

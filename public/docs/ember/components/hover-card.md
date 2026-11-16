@@ -5,7 +5,7 @@ Preview a link on hover or keyboard focus while keeping its normal navigation.
 A hover card shows a preview of where a link goes, like a person's profile, to someone who pauses on it. The link still works as a link.
 
 ```glimmer-ts title="basic.gts"
-import { HoverCard } from "@ui-sdk/ember/hover-card"
+import { HoverCard } from "ember-ui-sdk/hover-card"
 
 <template>
   <HoverCard as |h|>
@@ -30,7 +30,7 @@ Hover @hollis, or Tab to it and wait, to open Hollis Grant's profile preview. Mo
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -53,7 +53,7 @@ The card only adds a preview for people who pause on the link: everything in it 
 Import the root and use the parts it yields:
 
 ```gts
-import { HoverCard } from "@ui-sdk/ember/hover-card"
+import { HoverCard } from "ember-ui-sdk/hover-card"
 
 <template>
   <HoverCard as |h|>
@@ -76,8 +76,8 @@ import { HoverCard } from "@ui-sdk/ember/hover-card"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { HoverCard } from "@ui-sdk/ember/hover-card"
-import { Select } from "@ui-sdk/ember/select"
+import { HoverCard } from "ember-ui-sdk/hover-card"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const sides = [
@@ -197,7 +197,7 @@ Pass `@open` and update it in `@onOpenChange`. Every change carries a [reason](#
 A feed or a list can share one card instead of rendering one per link. Connect the links and the card to one `createHoverCardController<Payload>()`. Each link passes a `@payload`, like its person, and the content reads it from its state. Only the link that opened the card gets `data-open`. `controller.open({ payload })` opens the card from code.
 
 ```gts
-import { HoverCard, createHoverCardController } from "@ui-sdk/ember/hover-card"
+import { HoverCard, createHoverCardController } from "ember-ui-sdk/hover-card"
 
 const profile = createHoverCardController<Person>()
 

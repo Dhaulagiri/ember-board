@@ -6,8 +6,8 @@ Use a Listbox when the choices should stay in view. It works like a native selec
 
 ```glimmer-ts title="basic.gts"
 import { array } from "@ember/helper"
-import { Field } from "@ui-sdk/ember/field"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Field } from "ember-ui-sdk/field"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -56,7 +56,7 @@ Choose Comments, then hold Shift and choose New sign-ins to select the range. A 
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -80,7 +80,7 @@ You can also name the list with a [Field label](./field.md) or `aria-labelledby`
 Import the root and use the parts it yields:
 
 ```gts
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 
 <template>
   <Listbox aria-label="Toppings" @defaultValue="basil" as |l|>
@@ -96,7 +96,7 @@ import { Listbox } from "@ui-sdk/ember/listbox"
 </template>
 ```
 
-`@ui-sdk/ember/listbox` also exports each part by name, such as `ListboxItem` and `ListboxItemIndicator`.
+`ember-ui-sdk/listbox` also exports each part by name, such as `ListboxItem` and `ListboxItemIndicator`.
 
 ## Multiple
 
@@ -114,7 +114,7 @@ Changing a Shift range preserves the options selected before that range began.
 ```glimmer-ts title="multiple.gts"
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -179,7 +179,7 @@ Taps and screen-reader presses toggle an option instead, since they do not have 
 ```glimmer-ts title="activation.gts"
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { File } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -238,7 +238,7 @@ Set `@activation="manual"` on a single list to browse without selecting. Space, 
 
 ```glimmer-ts title="manual.gts"
 import Component from "@glimmer/component"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -289,7 +289,7 @@ Add `@deselectable={{true}}` to let pressing the selected option clear a single 
 
 ```glimmer-ts title="deselectable.gts"
 import Component from "@glimmer/component"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -346,7 +346,7 @@ Use `l.Group` with `g.Label` to name a group. Arrow keys and ranges continue acr
 
 ```glimmer-ts title="groups.gts"
 import { array } from "@ember/helper"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -406,7 +406,7 @@ Move from Apple through the list with Down Arrow. Navigation continues into the 
 Wrap an icon in `i.Icon` so screen readers and typeahead skip it. Add `@mirror={{true}}` to a directional icon to flip it in right-to-left text.
 
 ```glimmer-ts title="icons.gts"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Archive, ArrowRight, Mail, Pencil, Star } from "lucide"
 import { icon } from "./icon"
 
@@ -449,7 +449,7 @@ Set `@orientation="horizontal"` to move with Left and Right Arrow. Arrow keys no
 The list reads `dir="rtl"` from the page or an ancestor, so Left Arrow moves to the next option in right-to-left text.
 
 ```glimmer-ts title="horizontal.gts"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 
 const sizes = [
   { value: "xs", label: "XS" },
@@ -481,7 +481,7 @@ import Component from "@glimmer/component"
 import { array } from "@ember/helper"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -546,7 +546,7 @@ Try choosing Olive. Then press Disable the List to make every option unavailable
 Use `@readOnly={{true}}` when people should be able to browse the list without changing its value. The list remains focusable and its value still submits.
 
 ```glimmer-ts title="read-only.gts"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -594,7 +594,7 @@ The list can live outside its form: set `@form` to the form’s ID, as this exam
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
 import { on } from "@ember/modifier"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -663,7 +663,7 @@ Pass objects as item values when the selection should carry more than an ID. `@i
 
 ```glimmer-ts title="data.gts"
 import Component from "@glimmer/component"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -737,7 +737,7 @@ A controller can select all options, clear the selection, or focus the list from
 ```glimmer-ts title="controller.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Listbox, createListboxController } from "@ui-sdk/ember/listbox"
+import { Listbox, createListboxController } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -807,7 +807,7 @@ Give a long list a maximum height and `overflow-y: auto`. It starts scrolled to 
 
 ```glimmer-ts title="scrollable.gts"
 import Component from "@glimmer/component"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -870,7 +870,7 @@ Render an option as a link when choosing it should navigate. Pass `@render={{tru
 
 ```glimmer-ts title="render.gts"
 import Component from "@glimmer/component"
-import { Listbox } from "@ui-sdk/ember/listbox"
+import { Listbox } from "ember-ui-sdk/listbox"
 import { ExternalLink } from "lucide"
 import { icon } from "./icon"
 

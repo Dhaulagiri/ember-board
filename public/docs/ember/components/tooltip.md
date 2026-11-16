@@ -6,7 +6,7 @@ A tooltip names a control or adds a short hint when the pointer rests on it or k
 
 ```glimmer-ts title="basic.gts"
 import { Bookmark } from "lucide"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 import { icon } from "./icon"
 
 <template>
@@ -32,7 +32,7 @@ The tooltip starts open. Hover the button or reach it with Tab to show it again,
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -56,7 +56,7 @@ The content has the `tooltip` role, and it's in the page from the start, hidden,
 Import the root and use the parts it yields:
 
 ```gts
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 
 <template>
   <Tooltip as |t|>
@@ -71,7 +71,7 @@ import { Tooltip } from "@ui-sdk/ember/tooltip"
 `@side` picks where the tooltip opens: `top` by default. It flips to the other side when there isn't room, and shifts along the trigger to stay on screen. `data-side` says where it landed.
 
 ```glimmer-ts title="side.gts"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 
 const sides = [
   { side: "top", label: "Top" },
@@ -109,9 +109,9 @@ Position the tooltip against something other than the trigger with `@anchor`: an
 
 ```glimmer-ts title="anchor.gts"
 import { Info } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 import { icon } from "./icon"
 
 <template>
@@ -155,7 +155,7 @@ import { registerDestructor } from "@ember/destroyable"
 import { Save } from "lucide"
 import { on } from "@ember/modifier"
 import { registerShortcut } from "@ui-sdk/core/shortcuts"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -223,9 +223,9 @@ A natively disabled button can't receive focus, and some browsers send it no poi
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 import { useLog } from "./log"
 
 export default class DisabledButton extends Component {
@@ -277,7 +277,7 @@ For an info button whose only job is the tip, add `@toggleable={{true}}`: pressi
 
 ```glimmer-ts title="toggleable.gts"
 import { Info } from "lucide"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 import { icon } from "./icon"
 
 <template>
@@ -315,10 +315,10 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { Check, Copy } from "lucide"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 import { icon } from "./icon"
 
-const command = "npm install @ui-sdk/ember"
+const command = "npm install ember-ui-sdk"
 
 export default class CopyExample extends Component {
   command = command
@@ -376,7 +376,7 @@ To show a tooltip only when text is cut off, cancel the open in `@onOpenChange` 
 ```glimmer-ts title="truncated.gts"
 import Component from "@glimmer/component"
 import { File } from "lucide"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 import { icon } from "./icon"
 
 const files = [
@@ -439,8 +439,8 @@ Pass `@open` and read each change in `@onOpenChange`. Every change carries a [re
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -510,7 +510,7 @@ import {
   Tooltip,
   TooltipTrigger,
   createTooltipController,
-} from "@ui-sdk/ember/tooltip"
+} from "ember-ui-sdk/tooltip"
 import { icon } from "./icon"
 
 const formats = [
@@ -577,7 +577,7 @@ For people who ask for less motion, drop the scale in a `prefers-reduced-motion`
 ```glimmer-ts title="animation.gts"
 import Component from "@glimmer/component"
 import { Archive } from "lucide"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -646,7 +646,7 @@ Tooltips render in place and show in the top layer, so no ancestor clips or cove
 Pass `@render={{true}}` to a part to render it as your own element. It yields `{ part, state }`: bind `part` to your element as a modifier, and read the state in the block.
 
 ```glimmer-ts title="custom-rendering.gts"
-import { Tooltip } from "@ui-sdk/ember/tooltip"
+import { Tooltip } from "ember-ui-sdk/tooltip"
 
 <template>
   <Tooltip as |t|>

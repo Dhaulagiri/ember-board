@@ -30,7 +30,7 @@ const plainSystem = `${shared}
 - Import only from @glimmer/component, @glimmer/tracking, @ember/modifier, @ember/helper, @ember/template and @ember/object. No other packages and no icon libraries.`
 
 const sdkSystem = (index: string) => `${shared}
-- Build it with @ui-sdk/ember. Import only from @ui-sdk/ember/*, @glimmer/component, @glimmer/tracking, @ember/modifier, @ember/helper, @ember/template and @ember/object. No other packages and no icon libraries.
+- Build it with ember-ui-sdk. Import only from ember-ui-sdk/*, @glimmer/component, @glimmer/tracking, @ember/modifier, @ember/helper, @ember/template and @ember/object. No other packages and no icon libraries.
 - Before using a component, call read_docs for its page. Ask for one section by name when that's all you need.
 
 The package's docs index, llms.txt:
@@ -40,7 +40,7 @@ ${index}`
 const readDocsTool: Anthropic.Tool = {
   name: "read_docs",
   description:
-    "Reads a @ui-sdk/ember component's docs page, like \"select\" or \"date-picker\". Without section, returns its overview, composition and usage, and lists its other sections. With section, returns that section, like \"Forms\" or \"Controlled\".",
+    "Reads a ember-ui-sdk component's docs page, like \"select\" or \"date-picker\". Without section, returns its overview, composition and usage, and lists its other sections. With section, returns that section, like \"Forms\" or \"Controlled\".",
   input_schema: {
     type: "object",
     properties: {

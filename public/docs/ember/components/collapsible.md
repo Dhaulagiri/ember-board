@@ -5,7 +5,7 @@ Show and hide a panel, preserve its contents, and animate its height.
 Use a collapsible to show and hide one panel of content. For a set of panels, use an [accordion](./accordion.md).
 
 ```glimmer-ts title="basic.gts"
-import { Collapsible } from "@ui-sdk/ember/collapsible"
+import { Collapsible } from "ember-ui-sdk/collapsible"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -51,7 +51,7 @@ Press Order #4189, or focus it and press Enter or Space, to show the items.
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -71,7 +71,7 @@ The root and panel render divs, and the trigger renders a native button. Put oth
 Import the root and use the parts it yields:
 
 ```gts
-import { Collapsible } from "@ui-sdk/ember/collapsible"
+import { Collapsible } from "ember-ui-sdk/collapsible"
 
 <template>
   <Collapsible as |c|>
@@ -81,7 +81,7 @@ import { Collapsible } from "@ui-sdk/ember/collapsible"
 </template>
 ```
 
-`@ui-sdk/ember/collapsible` also exports each part by name, such as `CollapsibleTrigger` and `CollapsiblePanel`.
+`ember-ui-sdk/collapsible` also exports each part by name, such as `CollapsibleTrigger` and `CollapsiblePanel`.
 
 ## Disabled
 
@@ -99,9 +99,9 @@ Set `@disabled={{true}}` on the root to stop its trigger from opening or closing
 Panels unmount when they close, so Tab skips their contents. Set `@keepMounted={{true}}` on the panel to keep it mounted and hidden, so a field keeps what you typed into it.
 
 ```glimmer-ts title="keep-mounted.gts"
-import { Collapsible } from "@ui-sdk/ember/collapsible"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Collapsible } from "ember-ui-sdk/collapsible"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea } from "ember-ui-sdk/textarea"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -141,7 +141,7 @@ Open Add a delivery note, type a note, then close and reopen the panel. Your not
 Set `@hiddenUntilFound={{true}}` on the panel to keep it in the DOM as `hidden="until-found"`. Browser Find and links to content inside the panel can reveal it. The panel opens without an animation so the match is visible immediately.
 
 ```glimmer-ts title="find-in-page.gts"
-import { Collapsible } from "@ui-sdk/ember/collapsible"
+import { Collapsible } from "ember-ui-sdk/collapsible"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 
@@ -186,7 +186,7 @@ import { tracked } from "@glimmer/tracking"
 import {
   Collapsible,
   createCollapsibleController,
-} from "@ui-sdk/ember/collapsible"
+} from "ember-ui-sdk/collapsible"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -273,7 +273,7 @@ Animate the measured `--collapsible-panel-height` between zero and the content's
 
 ```glimmer-ts title="animation.gts"
 import Component from "@glimmer/component"
-import { Collapsible } from "@ui-sdk/ember/collapsible"
+import { Collapsible } from "ember-ui-sdk/collapsible"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -329,7 +329,7 @@ Open and close Release notes. The console logs when each animation finishes.
 Pass `@render={{true}}` to a part to choose its element. The part yields `{ part, state }`, so read `state` in the template to change content. The trigger below renders inside a heading, and the panel renders as an ordered list.
 
 ```glimmer-ts title="render.gts"
-import { Collapsible } from "@ui-sdk/ember/collapsible"
+import { Collapsible } from "ember-ui-sdk/collapsible"
 import { ChevronDown } from "lucide"
 import { icon } from "./icon"
 

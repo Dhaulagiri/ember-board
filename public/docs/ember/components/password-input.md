@@ -5,8 +5,8 @@ Enter a password, show or hide it, and use it in a native form.
 A Password Input is a native password field with a button that shows and hides what's typed. It keeps the caret in place, offers the right password to password managers, and hides the password again when its form submits.
 
 ```glimmer-ts title="basic.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { PasswordInput } from "@ui-sdk/ember/password-input"
+import { Field } from "ember-ui-sdk/field"
+import { PasswordInput } from "ember-ui-sdk/password-input"
 import { Eye, EyeOff } from "lucide"
 import { icon } from "./icon"
 
@@ -43,7 +43,7 @@ Type a password, then choose Show password to reveal or hide it. Clicking the to
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -65,7 +65,7 @@ Put form options such as `@name`, `@form`, `@required`, `@disabled`, and `@readO
 Import the root and use the parts it yields:
 
 ```gts
-import { PasswordInput } from "@ui-sdk/ember/password-input"
+import { PasswordInput } from "ember-ui-sdk/password-input"
 
 <template>
   <PasswordInput @name="password" as |p|>
@@ -84,8 +84,8 @@ The example derives a checklist from the current value. Those rules belong to th
 ```glimmer-ts title="new-password.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { PasswordInput } from "@ui-sdk/ember/password-input"
+import { Field } from "ember-ui-sdk/field"
+import { PasswordInput } from "ember-ui-sdk/password-input"
 import { Check, Eye, EyeOff, X } from "lucide"
 import { icon } from "./icon"
 
@@ -173,8 +173,8 @@ Type a password and watch the checklist update. Try adding digits and both upper
 Set `@defaultVisible={{true}}` to start with the text visible, and `@defaultValue` for its initial value. This can be useful for a Wi-Fi password someone needs to read or copy.
 
 ```glimmer-ts title="default-visible.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { PasswordInput } from "@ui-sdk/ember/password-input"
+import { Field } from "ember-ui-sdk/field"
+import { PasswordInput } from "ember-ui-sdk/password-input"
 import { Eye, EyeOff } from "lucide"
 import { icon } from "./icon"
 
@@ -218,8 +218,8 @@ Read the Wi-Fi password, then choose Show password to hide it. Choose it again t
 Use `data-capslock` or the part's `capsLock` state for a warning. It updates from key events while the input is focused. The example reserves space for the icon and warning.
 
 ```glimmer-ts title="caps-lock.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { PasswordInput } from "@ui-sdk/ember/password-input"
+import { Field } from "ember-ui-sdk/field"
+import { PasswordInput } from "ember-ui-sdk/password-input"
 import { Eye, EyeOff, Lock } from "lucide"
 import { icon } from "./icon"
 
@@ -259,8 +259,8 @@ Focus Password and press Caps Lock. The warning appears while Caps Lock is on. T
 Set `@disabled={{true}}` on the root, its Field, or an enclosing fieldset to disable both the input and the toggle. The value is omitted from form submission.
 
 ```glimmer-ts title="disabled.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { PasswordInput } from "@ui-sdk/ember/password-input"
+import { Field } from "ember-ui-sdk/field"
+import { PasswordInput } from "ember-ui-sdk/password-input"
 import { Eye, EyeOff } from "lucide"
 import { icon } from "./icon"
 
@@ -299,8 +299,8 @@ Try to edit Password or press its toggle. Both controls are disabled and are ski
 Set `@readOnly={{true}}` when the value can be read but not edited. The input stays focusable, the toggle still works, and the value still participates in form submission.
 
 ```glimmer-ts title="read-only.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { PasswordInput } from "@ui-sdk/ember/password-input"
+import { Field } from "ember-ui-sdk/field"
+import { PasswordInput } from "ember-ui-sdk/password-input"
 import { Eye, EyeOff } from "lucide"
 import { icon } from "./icon"
 
@@ -341,8 +341,8 @@ Pass `@visible` and update it in `@onVisibleChange` to control visibility. The [
 ```glimmer-ts title="controlled.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { PasswordInput } from "@ui-sdk/ember/password-input"
+import { Field } from "ember-ui-sdk/field"
+import { PasswordInput } from "ember-ui-sdk/password-input"
 import { Eye, EyeOff } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -395,11 +395,11 @@ Create one with `createPasswordInputController()` and pass it as `@controller` f
 ```glimmer-ts title="controller.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
+import { Field } from "ember-ui-sdk/field"
 import {
   PasswordInput,
   createPasswordInputController,
-} from "@ui-sdk/ember/password-input"
+} from "ember-ui-sdk/password-input"
 import { Eye, EyeOff } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -468,9 +468,9 @@ The native input participates in `FormData`, validation, and reset. Use `@form` 
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { PasswordInput } from "@ui-sdk/ember/password-input"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { PasswordInput } from "ember-ui-sdk/password-input"
 import { Eye, EyeOff } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"

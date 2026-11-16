@@ -23,7 +23,7 @@ const suggestions = [
 ]
 const arms: { arm: Arm; title: string }[] = [
   { arm: "plain", title: "Ember" },
-  { arm: "sdk", title: "Ember + @ui-sdk/ember" },
+  { arm: "sdk", title: "Ember + ember-ui-sdk" },
 ]
 
 const read = (key: string) => {
@@ -86,7 +86,7 @@ const header = el(
   el("p", {
     className: "lede",
     textContent:
-      "Claude builds what you describe twice, with the same model and instructions: once in plain Ember, once with @ui-sdk/ember and its docs. Both run in sandboxed frames, and a grader presses keys against each widget's WAI-ARIA pattern.",
+      "Claude builds what you describe twice, with the same model and instructions: once in plain Ember, once with ember-ui-sdk and its docs. Both run in sandboxed frames, and a grader presses keys against each widget's WAI-ARIA pattern.",
   }),
   replayName
     ? el("p", { className: "replay", textContent: `Replay "${replayName}": recorded output, not built live.` })

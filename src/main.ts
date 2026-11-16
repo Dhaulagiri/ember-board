@@ -1,5 +1,5 @@
 import { renderComponent } from "@ember/renderer"
-import { agentTools, createAgent } from "@ui-sdk/ember/agent"
+import { agentTools, createAgent } from "ember-ui-sdk/agent"
 import App from "./App.gts"
 import { Board } from "./data"
 import "./styles.css"

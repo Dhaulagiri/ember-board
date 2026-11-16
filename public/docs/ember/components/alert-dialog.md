@@ -5,7 +5,7 @@ Ask someone to confirm an action before you continue.
 Use an alert dialog when someone needs to answer a question before an action continues, such as deleting a project.
 
 ```glimmer-ts title="basic.gts"
-import { AlertDialog } from "@ui-sdk/ember/alert-dialog"
+import { AlertDialog } from "ember-ui-sdk/alert-dialog"
 
 <template>
   <AlertDialog as |d|>
@@ -33,7 +33,7 @@ Open the dialog with Enter to start on Cancel. Tab stays inside, clicking outsid
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -60,7 +60,7 @@ A Close part reports its `@value` when it closes. `@value="confirm"` is the agre
 Import the root and use the parts it yields:
 
 ```gts
-import { AlertDialog } from "@ui-sdk/ember/alert-dialog"
+import { AlertDialog } from "ember-ui-sdk/alert-dialog"
 
 <template>
   <AlertDialog as |d|>
@@ -82,7 +82,7 @@ Pass `@open` and update it in `@onOpenChange` when your app needs to read or con
 ```glimmer-ts title="controlled.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { AlertDialog } from "@ui-sdk/ember/alert-dialog"
+import { AlertDialog } from "ember-ui-sdk/alert-dialog"
 
 export default class Controlled extends Component {
   @tracked open = false
@@ -119,7 +119,7 @@ Choose Review Changes, then Keep Editing or Discard.
 Give the trigger a `@shortcut` to open the dialog from the keyboard, and put `d.Shortcut` inside it to show the keys. [Dialog](./dialog.md#keyboard-shortcut) covers the shortcut syntax.
 
 ```glimmer-ts title="shortcut.gts"
-import { AlertDialog } from "@ui-sdk/ember/alert-dialog"
+import { AlertDialog } from "ember-ui-sdk/alert-dialog"
 
 <template>
   <AlertDialog as |d|>
@@ -170,7 +170,7 @@ The content has `data-starting-style` while it opens and `data-ending-style` whi
 ```
 
 ```glimmer-ts title="animation.gts"
-import { AlertDialog } from "@ui-sdk/ember/alert-dialog"
+import { AlertDialog } from "ember-ui-sdk/alert-dialog"
 
 <template>
   <AlertDialog as |d|>
@@ -201,7 +201,7 @@ An alert dialog opened inside another joins its stack, such as a second confirma
 ```glimmer-ts title="nested.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { AlertDialog } from "@ui-sdk/ember/alert-dialog"
+import { AlertDialog } from "ember-ui-sdk/alert-dialog"
 
 export default class Nested extends Component {
   @tracked open = false
@@ -260,7 +260,7 @@ An `@action` on a Close part runs before it closes the dialog. Return a Promise 
 
 ```glimmer-ts title="async-action.gts"
 import Component from "@glimmer/component"
-import { AlertDialog } from "@ui-sdk/ember/alert-dialog"
+import { AlertDialog } from "ember-ui-sdk/alert-dialog"
 
 export default class AsyncAction extends Component {
   attempts = 0
@@ -325,13 +325,13 @@ The root's `@pendingAnnouncement` sets what screen readers hear after a second o
 
 ## Confirm From Anywhere
 
-The shared `confirm()` asks a question without any dialog markup. Render `OverlayHost` from `@ui-sdk/ember/overlays` once near the root of your app, and it shows each question as an alert dialog. `confirm()` resolves `true` when someone agrees. [Confirm Options](#confirm-options) lists what you can pass.
+The shared `confirm()` asks a question without any dialog markup. Render `OverlayHost` from `ember-ui-sdk/overlays` once near the root of your app, and it shows each question as an alert dialog. `confirm()` resolves `true` when someone agrees. [Confirm Options](#confirm-options) lists what you can pass.
 
 ```glimmer-ts title="confirm-anywhere.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { confirm } from "@ui-sdk/ember/alert-dialog"
-import { OverlayHost } from "@ui-sdk/ember/overlays"
+import { confirm } from "ember-ui-sdk/alert-dialog"
+import { OverlayHost } from "ember-ui-sdk/overlays"
 import { useLog } from "./log"
 
 export default class ConfirmAnywhere extends Component {
@@ -366,7 +366,7 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { fn } from "@ember/helper"
-import { AlertDialog, createConfirm } from "@ui-sdk/ember/alert-dialog"
+import { AlertDialog, createConfirm } from "ember-ui-sdk/alert-dialog"
 
 const initial = ["Acme", "Globex", "Initech"]
 
@@ -449,7 +449,7 @@ Calls to the same confirm function wait their turn. You can ask two questions at
 ```glimmer-ts title="queue.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { AlertDialog, createConfirm } from "@ui-sdk/ember/alert-dialog"
+import { AlertDialog, createConfirm } from "ember-ui-sdk/alert-dialog"
 import { useLog } from "./log"
 
 export default class Queue extends Component {

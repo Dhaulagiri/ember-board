@@ -13,12 +13,12 @@ import {
   Undo2,
 } from "lucide"
 import type { TransferLists } from "@ui-sdk/core"
-import type { createAgent } from "@ui-sdk/ember/agent"
-import { Button } from "@ui-sdk/ember/button"
-import { Command } from "@ui-sdk/ember/command"
-import { Dialog } from "@ui-sdk/ember/dialog"
-import { createParts } from "@ui-sdk/ember/primitive"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import type { createAgent } from "ember-ui-sdk/agent"
+import { Button } from "ember-ui-sdk/button"
+import { Command } from "ember-ui-sdk/command"
+import { Dialog } from "ember-ui-sdk/dialog"
+import { createParts } from "ember-ui-sdk/primitive"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import AgentPanel from "./AgentPanel.gts"
 import { Board, columns, labelOf, labels, personOf, type Issue } from "./data"
 import { icon } from "./icon"
@@ -123,7 +123,7 @@ export default class App extends Component<Signature> {
             <span data-slot="logo">A</span>
             <div>
               <h1>Acme · Sprint 24</h1>
-              <p>Built with Ember and @ui-sdk/ember</p>
+              <p>Built with Ember and ember-ui-sdk</p>
             </div>
           </div>
           <Dialog

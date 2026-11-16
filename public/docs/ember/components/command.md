@@ -14,7 +14,7 @@ import {
   Smile,
   User,
 } from "lucide"
-import { Command } from "@ui-sdk/ember/command"
+import { Command } from "ember-ui-sdk/command"
 import { icon } from "./icon"
 
 const suggestions = [
@@ -93,7 +93,7 @@ Type “bil” to find Billing. Arrow keys move the highlight; Escape clears the
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -118,7 +118,7 @@ Use `c.Group` and `g.Label` to name related commands, with a `c.Separator` betwe
 Import the root and use the parts it yields:
 
 ```gts
-import { Command } from "@ui-sdk/ember/command"
+import { Command } from "ember-ui-sdk/command"
 
 <template>
   <Command as |c|>
@@ -148,8 +148,8 @@ import {
   Smile,
   User,
 } from "lucide"
-import { Command } from "@ui-sdk/ember/command"
-import { Dialog } from "@ui-sdk/ember/dialog"
+import { Command } from "ember-ui-sdk/command"
+import { Dialog } from "ember-ui-sdk/dialog"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -237,7 +237,7 @@ An item’s `@shortcut` can run it while the command list is mounted, even when 
 ```glimmer-ts title="shortcuts.gts"
 import Component from "@glimmer/component"
 import { CreditCard, Settings, User } from "lucide"
-import { Command } from "@ui-sdk/ember/command"
+import { Command } from "ember-ui-sdk/command"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -303,7 +303,7 @@ import {
   Smile,
   User,
 } from "lucide"
-import { Command } from "@ui-sdk/ember/command"
+import { Command } from "ember-ui-sdk/command"
 import { icon } from "./icon"
 
 const commands = [
@@ -363,8 +363,8 @@ Data commands are sorted by score. Commands written directly in markup keep thei
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { Command } from "@ui-sdk/ember/command"
-import { Select } from "@ui-sdk/ember/select"
+import { Command } from "ember-ui-sdk/command"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const commands = [
@@ -473,7 +473,7 @@ Backspace in an empty search goes back and restores the previous page’s query.
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { ArrowLeft, Moon, Users } from "lucide"
-import { Command, createCommandController } from "@ui-sdk/ember/command"
+import { Command, createCommandController } from "ember-ui-sdk/command"
 import { icon } from "./icon"
 
 const themes = [
@@ -599,7 +599,7 @@ const suggested = [{ type: "group", label: "Suggested", items: recent }]
 
 ```glimmer-ts title="data.gts"
 import Component from "@glimmer/component"
-import { Command } from "@ui-sdk/ember/command"
+import { Command } from "ember-ui-sdk/command"
 import { useLog } from "./log"
 
 const commands = [
@@ -681,14 +681,14 @@ Choose Change theme to open its commands. Press Cmd+I / Ctrl+I to run Open inbox
 
 ## Async Results
 
-Use `useAsyncOptions` from `@ui-sdk/ember/async-options` to wait for typing to pause and discard stale results. Send query changes to its `setQuery()`, render the returned items, and pass `@status`. Set `@filter={{false}}` to keep the server’s order.
+Use `useAsyncOptions` from `ember-ui-sdk/async-options` to wait for typing to pause and discard stale results. Send query changes to its `setQuery()`, render the returned items, and pass `@status`. Set `@filter={{false}}` to keep the server’s order.
 
 `c.Status` describes loading and failures, and the list gets `aria-busy` while loading. `@onLoadMore` can request another page when scrolling or highlighting reaches the last command. Without a status part, `@announcement` controls the result-count message after typing pauses.
 
 ```glimmer-ts title="async.gts"
 import Component from "@glimmer/component"
-import { useAsyncOptions } from "@ui-sdk/ember/async-options"
-import { Command } from "@ui-sdk/ember/command"
+import { useAsyncOptions } from "ember-ui-sdk/async-options"
+import { Command } from "ember-ui-sdk/command"
 
 function searchIssues(query: string, { signal }: { signal: AbortSignal }) {
   const issues = [
@@ -771,7 +771,7 @@ An item’s `@onSelect` runs before `@onAction`. Call `preventDefault()` on its 
 ```glimmer-ts title="pending.gts"
 import Component from "@glimmer/component"
 import { LoaderCircle } from "lucide"
-import { Command } from "@ui-sdk/ember/command"
+import { Command } from "ember-ui-sdk/command"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -839,7 +839,7 @@ import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { htmlSafe } from "@ember/template"
 import { tracked } from "@glimmer/tracking"
-import { Command } from "@ui-sdk/ember/command"
+import { Command } from "ember-ui-sdk/command"
 
 const commands = Array.from({ length: 10_000 }, (_, index) => ({
   value: `command-${index + 1}`,
@@ -929,7 +929,7 @@ Pass them with their change callbacks, or use `@defaultValue`, `@defaultQuery`, 
 ```glimmer-ts title="controlled.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Command } from "@ui-sdk/ember/command"
+import { Command } from "ember-ui-sdk/command"
 import { useLog } from "./log"
 
 const themes = [
@@ -1002,7 +1002,7 @@ Create a `createCommandController()` for one instance and pass it as `@controlle
 ```glimmer-ts title="controller.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Command, createCommandController } from "@ui-sdk/ember/command"
+import { Command, createCommandController } from "ember-ui-sdk/command"
 import { useLog } from "./log"
 
 const themes = [
@@ -1091,7 +1091,7 @@ Pass `@render={{true}}` to an item to render it as an anchor when it should navi
 ```glimmer-ts title="custom-rendering.gts"
 import Component from "@glimmer/component"
 import { CornerDownLeft } from "lucide"
-import { Command } from "@ui-sdk/ember/command"
+import { Command } from "ember-ui-sdk/command"
 import { icon } from "./icon"
 
 const pages = ["Composition", "Installation", "Styling"]

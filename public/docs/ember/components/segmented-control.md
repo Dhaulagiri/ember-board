@@ -5,8 +5,8 @@ Pick one of a few options from a row of buttons, with an indicator that slides t
 Use a segmented control to switch between a few views or settings, like List and Grid. It works like a radio group, with one value and a single tab stop, and its indicator slides to the checked item.
 
 ```glimmer-ts title="basic.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { SegmentedControl } from "@ui-sdk/ember/segmented-control"
+import { Field } from "ember-ui-sdk/field"
+import { SegmentedControl } from "ember-ui-sdk/segmented-control"
 
 <template>
   <Field as |f|>
@@ -26,7 +26,7 @@ Choose Grid, then use the arrow keys to move between views. The label above name
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -47,7 +47,7 @@ Give each item a `@value`. The control's value is the checked item's value, and 
 Import the root and use the parts it yields:
 
 ```gts
-import { SegmentedControl } from "@ui-sdk/ember/segmented-control"
+import { SegmentedControl } from "ember-ui-sdk/segmented-control"
 
 <template>
   <SegmentedControl aria-label="View" @defaultValue="list" as |s|>
@@ -88,8 +88,8 @@ Name the control with `aria-label`, or put it in a [Field](./field.md) whose lab
 Set `@orientation="vertical"` to stack the items. Arrow keys on both axes still move between them, as in any radio group, and `data-orientation` on every part lets one stylesheet lay out both directions.
 
 ```glimmer-ts title="vertical.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { SegmentedControl } from "@ui-sdk/ember/segmented-control"
+import { Field } from "ember-ui-sdk/field"
+import { SegmentedControl } from "ember-ui-sdk/segmented-control"
 
 <template>
   <Field as |f|>
@@ -111,7 +111,7 @@ Choose Bottom, then press the Up arrow. The indicator follows down the column.
 Set `@disabled={{true}}` on the control or on one item. Disabled items can't be focused or checked, and arrow keys skip them. A disabled control submits nothing.
 
 ```glimmer-ts title="disabled.gts"
-import { SegmentedControl } from "@ui-sdk/ember/segmented-control"
+import { SegmentedControl } from "ember-ui-sdk/segmented-control"
 
 <template>
   <div data-slot="stack">
@@ -144,7 +144,7 @@ import { tracked } from "@glimmer/tracking"
 import {
   SegmentedControl,
   createSegmentedControlController,
-} from "@ui-sdk/ember/segmented-control"
+} from "ember-ui-sdk/segmented-control"
 import { useLog } from "./log"
 
 export default class Controlled extends Component {
@@ -190,8 +190,8 @@ Each item renders a hidden native radio, so the control takes part in forms. Set
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { SegmentedControl } from "@ui-sdk/ember/segmented-control"
+import { Field } from "ember-ui-sdk/field"
+import { SegmentedControl } from "ember-ui-sdk/segmented-control"
 import { useLog } from "./log"
 
 export default class Form extends Component {

@@ -6,8 +6,8 @@ Use a Number Input for quantities, prices and measurements. It keeps a numeric v
 
 ```glimmer-ts title="basic.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, MoveHorizontal, Plus } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -58,7 +58,7 @@ Drag the Quantity label sideways to scrub the value, or click it to focus the in
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -84,7 +84,7 @@ Typing updates the value when the text is valid and within bounds. Enter or blur
 Import the root and use the parts it yields:
 
 ```gts
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { NumberInput } from "ember-ui-sdk/number-input"
 
 <template>
   <NumberInput @defaultValue={{1}} @min={{0}} as |n|>
@@ -102,8 +102,8 @@ import { NumberInput } from "@ui-sdk/ember/number-input"
 Wrap the number input in [Field](./field.md) to give it a visible label and a description.
 
 ```glimmer-ts title="field.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 
@@ -139,8 +139,8 @@ Click Tickets to focus the input, then type or step its value. Screen readers re
 Use `@min` and `@max` to set bounds. A step button disables at its bound. Typed values outside the bounds are clamped when committed.
 
 ```glimmer-ts title="min-max.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 
@@ -176,8 +176,8 @@ Change Guests between 1 and 8. Type 20 and press Enter to clamp it to 8. At eith
 `@step` sets the usual increment, and defaults to 1. Steps are measured from `@min`, or from zero when no minimum is set. When they don't land on `@max`, End and the increment button stop at the highest step below it, so stepping keeps the value on the step grid, as [Slider](./slider.md#step-and-bounds) does. Shift, Page Up and Page Down use `@largeStep`, ten steps by default, and Alt (Option) with an arrow key uses `@smallStep`, a tenth of a step. [Keyboard](#keyboard) lists every key.
 
 ```glimmer-ts title="step.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 
@@ -222,8 +222,8 @@ Step Hours by 0.25. Hold Shift to move by 1, or hold Alt (Option) with an arrow 
 Pass `Intl.NumberFormat` options through `@format`. The input displays and parses that format while keeping a numeric value. For percentages, `0.15` is displayed as `15%`, and `@step` defaults to the smallest percent the format shows: `0.01` for whole percents, `0.0001` with two fraction digits.
 
 ```glimmer-ts title="format.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 
@@ -290,8 +290,8 @@ Edit Price, Discount, or Weight and leave the field to format it. Try entering 5
 Set `@locale` to choose separators, currency symbols, and grouping. Without it, the input follows the page's language or the browser's language after mounting. Server markup uses English when no locale is provided; set a locale explicitly when that first render matters.
 
 ```glimmer-ts title="locale.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 
@@ -360,8 +360,8 @@ Edit Preis using a comma for decimals, or step Budget to see Indian digit groupi
 Set `@wheel={{true}}` to step with the mouse wheel while the input is focused. It is off by default.
 
 ```glimmer-ts title="wheel.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 
@@ -399,7 +399,7 @@ Focus Font size and scroll over it to change the value. Move focus away and scro
 ```glimmer-ts title="scrub.gts"
 import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { MoveHorizontal } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -497,8 +497,8 @@ Pass `@value` and update it in `@onValueChange` for the reason. `@onValueChange`
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -572,11 +572,11 @@ Create one with `createNumberInputController()` and pass it as `@controller` to 
 ```glimmer-ts title="controller.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
+import { Field } from "ember-ui-sdk/field"
 import {
   NumberInput,
   createNumberInputController,
-} from "@ui-sdk/ember/number-input"
+} from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -651,8 +651,8 @@ A hidden input submits the plain numeric value under `@name`. Formatting does no
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -753,8 +753,8 @@ Pass `@render={{true}}` to a part to render your own element. The part yields `{
 
 ```glimmer-ts title="render.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { NumberInput } from "@ui-sdk/ember/number-input"
+import { Field } from "ember-ui-sdk/field"
+import { NumberInput } from "ember-ui-sdk/number-input"
 import { Minus, Plus } from "lucide"
 import { icon } from "./icon"
 

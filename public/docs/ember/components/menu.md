@@ -13,7 +13,7 @@ Start with a trigger and a few actions. Add groups, checkboxes, radio choices, o
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -37,7 +37,7 @@ Return a promise from `@onAction` or an item’s `@onSelect` to keep the item pe
 Import the root and use the parts it yields:
 
 ```gts
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 
 <template>
   <Menu as |m|>
@@ -57,7 +57,7 @@ Nest a `m.Sub` with its own `s.Trigger` and `s.Content` to add another level. Ho
 ```glimmer-ts title="submenu.gts"
 import Component from "@glimmer/component"
 import { ChevronRight } from "lucide"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -131,7 +131,7 @@ In markup, this is a hint: your app owns the key handler. [Data menus](#menus-as
 
 ```glimmer-ts title="shortcuts.gts"
 import Component from "@glimmer/component"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 import { useLog } from "./log"
 
 export default class Shortcuts extends Component {
@@ -170,7 +170,7 @@ Put decorative icons in `m.ItemIcon` so screen readers and typeahead ignore them
 ```glimmer-ts title="icons.gts"
 import Component from "@glimmer/component"
 import { Code, Download, Link, Mail, Reply, Share } from "lucide"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -234,7 +234,7 @@ Checkbox items toggle independently and stay open by default. Pass `@checked` an
 ```glimmer-ts title="checkboxes.gts"
 import Component from "@glimmer/component"
 import { Check } from "lucide"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -297,7 +297,7 @@ Radio items choose one value in their group and stay open by default. Pass `@val
 
 ```glimmer-ts title="radio-group.gts"
 import Component from "@glimmer/component"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 import { useLog } from "./log"
 
 const positions = [
@@ -362,7 +362,7 @@ A `m.ContextTrigger` opens at a right-click or long press. Give the area a tab s
 Set `@disabled={{true}}` to leave that area’s native browser menu available. Context triggers can pass a payload too.
 
 ```glimmer-ts title="context-menu.gts"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 import { useLog } from "./log"
 import Component from "@glimmer/component"
 
@@ -465,7 +465,7 @@ Disabled items remain focusable so people can discover them, but cannot run or o
 ```glimmer-ts title="disabled.gts"
 import Component from "@glimmer/component"
 import { Check, ChevronRight } from "lucide"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -567,7 +567,7 @@ The menu stays mounted through an exit animation. `data-starting-style`, `data-e
 ```glimmer-ts title="animation.gts"
 import Component from "@glimmer/component"
 import { ChevronRight } from "lucide"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -627,7 +627,7 @@ Use `data-presentation` or the content’s `presentation` state for the two layo
 ```glimmer-ts title="presentation.gts"
 import Component from "@glimmer/component"
 import { ChevronRight, Download, Link, Share, Trash } from "lucide"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -703,7 +703,7 @@ Connect external triggers and one menu to a `createMenuController<File>()`. Each
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { Ellipsis } from "lucide"
-import { Menu, MenuTrigger, createMenuController } from "@ui-sdk/ember/menu"
+import { Menu, MenuTrigger, createMenuController } from "ember-ui-sdk/menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -791,8 +791,8 @@ Open the actions for different files. One menu shows the active row; opening fro
 `@onCheckedChange` reports the checkbox’s value in `details.value`; `@onValueChange` reports the radio group’s name in `details.group`. Either change can be canceled. You can also render your own parts from the same data while `@items` keeps the shortcuts registered. Lists and Menus covers the data shape.
 
 ```gts
-import { Menu } from "@ui-sdk/ember/menu"
-import type { MenuData } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
+import type { MenuData } from "ember-ui-sdk/menu"
 
 const fileMenu: MenuData = [
   { value: "open", label: "Open…", shortcut: "mod+o" },

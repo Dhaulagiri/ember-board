@@ -6,7 +6,7 @@ Calendar shows dates directly on the page. Use it for a booking flow, a schedule
 
 ```glimmer-ts title="basic.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -36,7 +36,7 @@ Choose a date, then use Previous or Next to change the month. Arrow keys move th
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -60,7 +60,7 @@ Each grid is named by its month and has the `grid` role.
 Import the root and use the parts it yields:
 
 ```gts
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 
 <template>
   <Calendar @defaultValue="2026-10-16" as |c|>
@@ -91,7 +91,7 @@ A value with the wrong shape for its mode is treated as no selection.
 ```glimmer-ts title="range.gts"
 import { array } from "@ember/helper"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -135,7 +135,7 @@ Choose a start date, then move to an end date to preview the range. Choose the e
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 export default class Multiple extends Component {
@@ -180,7 +180,7 @@ Unavailable dates cannot be selected, but stay focusable so keyboard and screen 
 
 ```glimmer-ts title="unavailable.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 const unavailable = [
@@ -223,7 +223,7 @@ Try an unavailable date, then choose an available one. Unavailable days remain f
 
 ```glimmer-ts title="min-max.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -256,7 +256,7 @@ Move toward either end of the allowed dates. Keyboard navigation and month butto
 
 ```glimmer-ts title="disabled.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -285,7 +285,7 @@ Try choosing a date or changing months. A disabled calendar has no available con
 
 ```glimmer-ts title="read-only.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -320,7 +320,7 @@ Set `@months={{2}}` and render grids with offsets `0` and `1`. Arrow keys move b
 
 ```glimmer-ts title="two-months.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -356,7 +356,7 @@ Move between October and November with arrow keys. Next advances both visible mo
 
 ```glimmer-ts title="fixed-weeks.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -391,7 +391,7 @@ They update the first displayed month with the `select-change` reason. Their sta
 
 ```glimmer-ts title="month-year-select.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -430,8 +430,8 @@ The month and year selects are native `select` elements. To use your own select,
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
-import { Select } from "@ui-sdk/ember/select"
+import { Calendar } from "ember-ui-sdk/calendar"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const months = [
@@ -555,7 +555,7 @@ Previous and Next are named "Previous month" and "Next month". Pass `aria-label`
 
 ```glimmer-ts title="locale.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -588,7 +588,7 @@ Set `@weekdayFormat` for the weekday headers and `@monthFormat` for the heading 
 
 ```glimmer-ts title="formats.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -631,7 +631,7 @@ A day's block receives its state, including the date, label, selection, and whet
 
 ```glimmer-ts title="custom-day.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 const priceOf = (date: string) => 80 + ((Number(date.slice(8)) * 7) % 5) * 10
@@ -696,7 +696,7 @@ A range cannot include an unavailable date unless `@allowUnavailable={{true}}` i
 
 ```glimmer-ts title="range-limits.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 const unavailable = { from: "2026-10-17", to: "2026-10-18" }
@@ -739,7 +739,7 @@ The calendar's state has `anchor`, the start while an end is being picked, and `
 ```glimmer-ts title="range-progress.gts"
 import Component from "@glimmer/component"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -796,7 +796,7 @@ Use `@value` with `@onValueChange` and `@month` with `@onMonthChange` to control
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -856,7 +856,7 @@ Today gets `aria-current="date"` and `data-today`. When there is no selection or
 
 ```glimmer-ts title="time-zone.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar } from "@ui-sdk/ember/calendar"
+import { Calendar } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 <template>
@@ -898,7 +898,7 @@ import Component from "@glimmer/component"
 import { todayDate } from "@ui-sdk/core/date"
 import { ChevronLeft, ChevronRight } from "lucide"
 import { on } from "@ember/modifier"
-import { Calendar, createCalendarController } from "@ui-sdk/ember/calendar"
+import { Calendar, createCalendarController } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 export default class Controller extends Component {
@@ -953,7 +953,7 @@ import { on } from "@ember/modifier"
 import { fn } from "@ember/helper"
 import { addDays, endOfMonth, startOfMonth } from "@ui-sdk/core/date"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar, createCalendarController } from "@ui-sdk/ember/calendar"
+import { Calendar, createCalendarController } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 const today = "2026-10-16"
@@ -1016,11 +1016,11 @@ Choose Last 7 Days, This Month or Next 30 Days. The range is selected and the ca
 
 ## Custom Rendering
 
-Write the grid yourself when you need its markup. Import `CalendarWeekday` and `CalendarDay` from `@ui-sdk/ember/calendar`; each yields its state. Preserve empty cells marked `hidden` so dates shown by another month do not appear twice.
+Write the grid yourself when you need its markup. Import `CalendarWeekday` and `CalendarDay` from `ember-ui-sdk/calendar`; each yields its state. Preserve empty cells marked `hidden` so dates shown by another month do not appear twice.
 
 ```glimmer-ts title="custom-grid.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Calendar, CalendarDay, CalendarWeekday } from "@ui-sdk/ember/calendar"
+import { Calendar, CalendarDay, CalendarWeekday } from "ember-ui-sdk/calendar"
 import { icon } from "./icon"
 
 function isoWeek(date: string) {

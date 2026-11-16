@@ -13,7 +13,7 @@ import {
   CircleCheck,
   CircleQuestionMark,
 } from "lucide"
-import { NavigationMenu } from "@ui-sdk/ember/navigation-menu"
+import { NavigationMenu } from "ember-ui-sdk/navigation-menu"
 import { icon } from "./icon"
 
 const gettingStarted = [
@@ -171,7 +171,7 @@ Open each section, then use Tab or the arrow keys to move through its links.
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -201,7 +201,7 @@ The viewport holds the open panel and follows its size and position. Size it wit
 Import the root and use the parts it yields:
 
 ```gts
-import { NavigationMenu } from "@ui-sdk/ember/navigation-menu"
+import { NavigationMenu } from "ember-ui-sdk/navigation-menu"
 
 <template>
   <NavigationMenu aria-label="Main" as |n|>
@@ -229,7 +229,7 @@ import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
 import { tracked } from "@glimmer/tracking"
 import { ChevronDown } from "lucide"
-import { NavigationMenu } from "@ui-sdk/ember/navigation-menu"
+import { NavigationMenu } from "ember-ui-sdk/navigation-menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -332,7 +332,7 @@ Put a link's icon in a `c.LinkIcon`, before its text, like the With Icon panel i
 
 ```glimmer-ts title="vertical.gts"
 import { ChevronRight } from "lucide"
-import { NavigationMenu } from "@ui-sdk/ember/navigation-menu"
+import { NavigationMenu } from "ember-ui-sdk/navigation-menu"
 import { icon } from "./icon"
 
 const sections = [
@@ -439,7 +439,7 @@ Resting the pointer on a trigger opens its panel. With `@openOnHover={{false}}`,
 
 ```glimmer-ts title="click-only.gts"
 import { ChevronDown } from "lucide"
-import { NavigationMenu } from "@ui-sdk/ember/navigation-menu"
+import { NavigationMenu } from "ember-ui-sdk/navigation-menu"
 import { icon } from "./icon"
 
 const sections = [
@@ -543,7 +543,7 @@ A navigation menu inside another menu's content is a submenu. It renders a plain
 
 ```glimmer-ts title="nested.gts"
 import { ChevronDown, ChevronRight } from "lucide"
-import { NavigationMenu } from "@ui-sdk/ember/navigation-menu"
+import { NavigationMenu } from "ember-ui-sdk/navigation-menu"
 import { icon } from "./icon"
 
 const gettingStarted = [
@@ -665,7 +665,7 @@ The viewport and contents get `data-starting-style` for their first frame and `d
 ```glimmer-ts title="animation.gts"
 import Component from "@glimmer/component"
 import { ChevronDown } from "lucide"
-import { NavigationMenu } from "@ui-sdk/ember/navigation-menu"
+import { NavigationMenu } from "ember-ui-sdk/navigation-menu"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -878,7 +878,7 @@ Panels render in place and show in the top layer, so no ancestor clips or covers
 import Component from "@glimmer/component"
 import { concat } from "@ember/helper"
 import { Minus, Plus } from "lucide"
-import { NavigationMenu } from "@ui-sdk/ember/navigation-menu"
+import { NavigationMenu } from "ember-ui-sdk/navigation-menu"
 import { icon } from "./icon"
 
 const sections = [

@@ -7,8 +7,8 @@ Wrap a few [Menus](./menu.md) in a Menubar to connect their triggers. Tab enters
 ```glimmer-ts title="demo.gts"
 import Component from "@glimmer/component"
 import { Check, ChevronRight } from "lucide"
-import { Menu } from "@ui-sdk/ember/menu"
-import { Menubar } from "@ui-sdk/ember/menubar"
+import { Menu } from "ember-ui-sdk/menu"
+import { Menubar } from "ember-ui-sdk/menubar"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -135,7 +135,7 @@ Tab into the bar and use Left and Right to choose a menu, or point at another tr
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -163,7 +163,7 @@ Each Menu joins its surrounding Menubar automatically. There are no separate men
 Import the root and use the parts it yields:
 
 ```gts
-import { Menubar } from "@ui-sdk/ember/menubar"
+import { Menubar } from "ember-ui-sdk/menubar"
 
 <template>
   <Menubar aria-label="Application" as |mb|>
@@ -191,7 +191,7 @@ A submenu still uses the Menu’s `m.Sub`, its trigger, and its content. The arr
 
 ```glimmer-ts title="submenu.gts"
 import { ChevronRight } from "lucide"
-import { Menubar } from "@ui-sdk/ember/menubar"
+import { Menubar } from "ember-ui-sdk/menubar"
 import { icon } from "./icon"
 
 <template>
@@ -249,7 +249,7 @@ Open File and enter Share with the arrow key. Go back to File, then move to Edit
 Pass `@orientation="vertical"` to move between triggers with Up and Down. The arrow toward the popup opens it; the arrow back closes it and returns to the trigger.
 
 ```glimmer-ts title="vertical.gts"
-import { Menubar } from "@ui-sdk/ember/menubar"
+import { Menubar } from "ember-ui-sdk/menubar"
 
 const labels = ["Inbox", "Drafts", "Archive"]
 
@@ -275,9 +275,9 @@ Use Up and Down to choose Inbox, Drafts, or Archive. Right opens its menu in lef
 Each Menu can take `@items` and register its shortcuts while closed. The [Menu data example](./menu.md#menus-as-data) explains the item shapes and callbacks.
 
 ```gts
-import { Menu } from "@ui-sdk/ember/menu"
-import { Menubar } from "@ui-sdk/ember/menubar"
-import type { MenuData } from "@ui-sdk/ember/menu"
+import { Menu } from "ember-ui-sdk/menu"
+import { Menubar } from "ember-ui-sdk/menubar"
+import type { MenuData } from "ember-ui-sdk/menu"
 
 const file: MenuData = [
   { value: "new", label: "New File", shortcut: "mod+alt+n" },
@@ -337,7 +337,7 @@ Create one with `createMenubarController()` and pass it as `@controller`. `focus
 
 ```gts
 import { on } from "@ember/modifier"
-import { Menubar, createMenubarController } from "@ui-sdk/ember/menubar"
+import { Menubar, createMenubarController } from "ember-ui-sdk/menubar"
 
 const menubar = createMenubarController()
 

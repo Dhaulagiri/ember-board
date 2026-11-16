@@ -13,7 +13,7 @@ Use a Select when someone needs to choose from a set of options. It handles open
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -37,7 +37,7 @@ Start with a label, a trigger, and a list of items. `s.Value` shows the selected
 Import the root and use the parts it yields:
 
 ```gts
-import { Select } from "@ui-sdk/ember/select"
+import { Select } from "ember-ui-sdk/select"
 
 <template>
   <Select @placeholder="Select a role" as |s|>
@@ -65,7 +65,7 @@ Pass an array to `@items` when your options come from data. A string is both the
 These are option examples; add the label and trigger shown above. `@items` can also include groups and separators, checked with `ListData`:
 
 ```ts
-import type { ListData } from "@ui-sdk/ember/select"
+import type { ListData } from "ember-ui-sdk/select"
 
 const plans: ListData = [
   { value: "free", label: "Free" },
@@ -78,10 +78,10 @@ The select can render bare items from this data. To style them, keep `@items` on
 
 ```glimmer-ts title="data.gts"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
-import type { ListData } from "@ui-sdk/ember/select"
+import type { ListData } from "ember-ui-sdk/select"
 
 const plans = [
   { value: "free", label: "Free" },
@@ -155,8 +155,8 @@ Put related items inside `SelectGroup` and name each group with `SelectGroupLabe
 
 ```glimmer-ts title="groups.gts"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const fonts = [
@@ -247,8 +247,8 @@ import {
   TextAlignEnd,
   TextAlignStart,
 } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 <template>
@@ -302,8 +302,8 @@ Set an item's `@label` when its content includes extra text that shouldn't be ma
 
 ```glimmer-ts title="typeahead.gts"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const countries = [
@@ -364,8 +364,8 @@ A disabled select can't be focused or changed and doesn't submit a value. A read
 
 ```glimmer-ts title="disabled.gts"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const countries = [
@@ -440,8 +440,8 @@ Keep the clear button beside the trigger: a button can't contain another button.
 ```glimmer-ts title="clearable.gts"
 import Component from "@glimmer/component"
 import { Check, ChevronDown, X } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -509,8 +509,8 @@ Set `@multiple` to select more than one value. The value becomes an array, and c
 ```glimmer-ts title="multiple.gts"
 import Component from "@glimmer/component"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -587,8 +587,8 @@ Add `SelectSelectAll` to select or clear every enabled item. It shows a mixed st
 
 ```glimmer-ts title="select-all.gts"
 import { Check, ChevronDown, Minus } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const regions = [
@@ -662,8 +662,8 @@ Groups with no matching items hide automatically. `SelectItemText` can highlight
 
 ```glimmer-ts title="search-groups.gts"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const regions = [
@@ -741,15 +741,15 @@ Arrow keys move the highlight while focus stays in the search field. On a touch 
 
 Use `@filter={{false}}` when the server already filters your options. Connect `@query` and `@onQueryChange` to your loader, and pass its items and status to `Select`.
 
-This example uses `useAsyncOptions` from `@ui-sdk/ember/async-options` to replace stale requests and load another page through `@onLoadMore`. `SelectStatus` shows loading and result counts. Without a status part, Select announces result counts through the page's live region.
+This example uses `useAsyncOptions` from `ember-ui-sdk/async-options` to replace stale requests and load another page through `@onLoadMore`. `SelectStatus` shows loading and result counts. Without a status part, Select announces result counts through the page's live region.
 
 ```glimmer-ts title="async-search.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { useAsyncOptions } from "@ui-sdk/ember/async-options"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { useAsyncOptions } from "ember-ui-sdk/async-options"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const countryList = [
@@ -884,8 +884,8 @@ A value can be an object. Tell Select how to identify it, display it, and compar
 ```glimmer-ts title="object-values.gts"
 import Component from "@glimmer/component"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -967,8 +967,8 @@ import { htmlSafe } from "@ember/template"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 type Item = { value: string; label: string }
@@ -1093,9 +1093,9 @@ Set `@alignItemWithTrigger` on `SelectContent` to place the selected item over t
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const priorities = [
@@ -1163,8 +1163,8 @@ Limit the content's height and allow vertical scrolling. `--available-height` te
 
 ```glimmer-ts title="scrollable.gts"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const timezones = [
@@ -1259,8 +1259,8 @@ Inside a [Field](./field.md), the field's label names the trigger, its descripti
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -1328,8 +1328,8 @@ The example also uses `@autoComplete="country"` for autofill and `@form="select-
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -1452,8 +1452,8 @@ The content gets `data-presentation`, and its render state includes `@presentati
 
 ```glimmer-ts title="presentation.gts"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Select } from "@ui-sdk/ember/select"
+import { Field } from "ember-ui-sdk/field"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const statuses = [

@@ -8,7 +8,7 @@ Use a Tree when items have children, like files in folders or pages in a docs si
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
 import { ChevronRight, File, Folder, FolderOpen } from "lucide"
-import { Tree } from "@ui-sdk/ember/tree"
+import { Tree } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 
 const files = [
@@ -101,7 +101,7 @@ Expand components to see its files. Use the arrow keys to move between rows and 
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -127,7 +127,7 @@ Give the tree an accessible name and every item a unique `@value`. An item with 
 Import the root and use the parts it yields:
 
 ```gts
-import { Tree } from "@ui-sdk/ember/tree"
+import { Tree } from "ember-ui-sdk/tree"
 
 <template>
   <Tree aria-label="Project files" as |t|>
@@ -154,7 +154,7 @@ import { Tree } from "@ui-sdk/ember/tree"
 Pass `@items` to give the tree its full hierarchy, including collapsed branches. Each `TreeItemData` has a `value`, a `label`, and optional `children`. With no children of its own, the tree renders bare parts from the data:
 
 ```gts
-import { Tree } from "@ui-sdk/ember/tree"
+import { Tree } from "ember-ui-sdk/tree"
 
 const items = [
   {
@@ -183,7 +183,7 @@ Selection and activation are separate. This example uses `@activation="automatic
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
 import { ChevronRight, LoaderCircle } from "lucide"
-import { Tree, treeFromPaths } from "@ui-sdk/ember/tree"
+import { Tree, treeFromPaths } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -285,7 +285,7 @@ The default `@mode="single"` uses one string value or `null`. Use `"multiple"` f
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
 import { ChevronRight } from "lucide"
-import { Tree } from "@ui-sdk/ember/tree"
+import { Tree } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -393,7 +393,7 @@ Add `@checkable={{true}}` and `t.Checkbox` for a checked state separate from sel
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
 import { ChevronRight } from "lucide"
-import { Tree } from "@ui-sdk/ember/tree"
+import { Tree } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -499,7 +499,7 @@ Set `@mode="none"` for a navigation tree, then render labels as links. `@current
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { ChevronRight } from "lucide"
-import { Tree } from "@ui-sdk/ember/tree"
+import { Tree } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 
 const pages = [
@@ -613,8 +613,8 @@ import Component from "@glimmer/component"
 import { array } from "@ember/helper"
 import { tracked } from "@glimmer/tracking"
 import { ChevronRight } from "lucide"
-import { Switch } from "@ui-sdk/ember/switch"
-import { Tree } from "@ui-sdk/ember/tree"
+import { Switch } from "ember-ui-sdk/switch"
+import { Tree } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 
 const items = [
@@ -720,7 +720,7 @@ import Component from "@glimmer/component"
 import { get } from "@ember/helper"
 import { tracked } from "@glimmer/tracking"
 import { ChevronRight, LoaderCircle, RotateCw } from "lucide"
-import { Tree } from "@ui-sdk/ember/tree"
+import { Tree } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 
 const top = [
@@ -844,7 +844,7 @@ import { on } from "@ember/modifier"
 import { htmlSafe } from "@ember/template"
 import { tracked } from "@glimmer/tracking"
 import { ChevronRight } from "lucide"
-import { Tree, visibleTreeRows } from "@ui-sdk/ember/tree"
+import { Tree, visibleTreeRows } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 
 const items = Array.from({ length: 100 }, (_, folder) => ({
@@ -957,7 +957,7 @@ Expand folders or press End to focus Folder 100. The tree has 10,100 items, but 
 ```glimmer-ts title="find-in-page.gts"
 import Component from "@glimmer/component"
 import { ChevronRight } from "lucide"
-import { Tree } from "@ui-sdk/ember/tree"
+import { Tree } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 
 const items = [
@@ -1085,7 +1085,7 @@ A `createTreeController()` instance can expand or collapse branches, change sele
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { ChevronRight } from "lucide"
-import { createTreeController, Tree } from "@ui-sdk/ember/tree"
+import { createTreeController, Tree } from "ember-ui-sdk/tree"
 import { icon } from "./icon"
 
 const sections = [

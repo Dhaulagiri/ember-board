@@ -5,9 +5,9 @@ Edit or explore something beside its trigger.
 A popover keeps a small task close to the thing it belongs to. Put fields, buttons, or other interactive content inside; it handles placement, focus, and dismissal.
 
 ```glimmer-ts title="basic.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Popover } from "ember-ui-sdk/popover"
 
 <template>
   <Popover as |p|>
@@ -37,7 +37,7 @@ Press Share to open the popover, then close it with Cancel, Copy Link, Escape, o
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -61,7 +61,7 @@ The content has the dialog role. Its title names it and its description adds con
 Import the root and use the parts it yields:
 
 ```gts
-import { Popover } from "@ui-sdk/ember/popover"
+import { Popover } from "ember-ui-sdk/popover"
 
 <template>
   <Popover as |p|>
@@ -83,9 +83,9 @@ An ordinary form can save a value and then close the popover. Focus starts on th
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Popover } from "ember-ui-sdk/popover"
 import { useLog } from "./log"
 
 export default class Form extends Component {
@@ -135,8 +135,8 @@ Set `@dismissible` to false while there is unsaved work. Escape and outside pres
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Field } from "ember-ui-sdk/field"
+import { Popover } from "ember-ui-sdk/popover"
 import { useLog } from "./log"
 
 export default class Draft extends Component {
@@ -249,8 +249,8 @@ Open Add Note, type something, then press Escape or click outside. Keep Editing 
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { Popover } from "@ui-sdk/ember/popover"
-import { Select } from "@ui-sdk/ember/select"
+import { Popover } from "ember-ui-sdk/popover"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const sides = [
@@ -351,8 +351,8 @@ import { fn } from "@ember/helper"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { Popover } from "@ui-sdk/ember/popover"
-import { Select } from "@ui-sdk/ember/select"
+import { Popover } from "ember-ui-sdk/popover"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const choices = [
@@ -449,7 +449,7 @@ import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { CircleQuestionMark } from "lucide"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Popover } from "ember-ui-sdk/popover"
 import { icon } from "./icon"
 
 const sides = [
@@ -530,8 +530,8 @@ Set `@anchor` to position against something other than the trigger. It accepts a
 
 ```glimmer-ts title="anchor.gts"
 import { Check, SlidersHorizontal } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Popover } from "ember-ui-sdk/popover"
 import { icon } from "./icon"
 
 const types = [
@@ -594,10 +594,10 @@ Press the filters button. The popover lines up with the search field instead of 
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { Popover } from "@ui-sdk/ember/popover"
-import { Select } from "@ui-sdk/ember/select"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Field } from "ember-ui-sdk/field"
+import { Popover } from "ember-ui-sdk/popover"
+import { Select } from "ember-ui-sdk/select"
+import { Textarea } from "ember-ui-sdk/textarea"
 import { icon } from "./icon"
 
 const modes = [
@@ -691,9 +691,9 @@ Choose a mode, open Add Comment, and try Tab or clicking the page.
 Use `@initialFocus` to choose the first focused element, or `"none"` to leave focus where it is. `@finalFocus` controls where focus returns. Opening on hover leaves focus alone; opening with touch focuses the panel itself so no on-screen keyboard appears.
 
 ```glimmer-ts title="focus.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Popover } from "ember-ui-sdk/popover"
 
 <template>
   <div data-slot="row">
@@ -743,7 +743,7 @@ Open each one: Rename focuses its field, Publish focuses its Publish button, and
 ```glimmer-ts title="hover.gts"
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Popover } from "ember-ui-sdk/popover"
 import { useLog } from "./log"
 
 export default class Hover extends Component {
@@ -779,10 +779,10 @@ Pass `@open` and update it in `@onOpenChange` to keep the popover's state in you
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Popover } from "ember-ui-sdk/popover"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -854,9 +854,9 @@ Check Open or press Set Status, then close the popover. The console logs each ch
 Set a trigger's `@shortcut` to toggle the popover from the keyboard. `mod+i` means Command+I on Apple platforms and Control+I elsewhere. The Shortcut part displays the platform's keys, and the trigger advertises them through `aria-keyshortcuts`.
 
 ```glimmer-ts title="shortcut.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Popover } from "ember-ui-sdk/popover"
 
 <template>
   <Popover as |p|>
@@ -893,12 +893,12 @@ import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
+import { Field } from "ember-ui-sdk/field"
 import {
   Popover,
   PopoverTrigger,
   createPopoverController,
-} from "@ui-sdk/ember/popover"
+} from "ember-ui-sdk/popover"
 import { useLog } from "./log"
 
 type Member = { name: string; role: string }
@@ -1017,7 +1017,7 @@ The content has `data-starting-style` while it opens and `data-ending-style` whi
 
 ```glimmer-ts title="animation.gts"
 import Component from "@glimmer/component"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Popover } from "ember-ui-sdk/popover"
 import { useLog } from "./log"
 
 export default class Animation extends Component {
@@ -1051,9 +1051,9 @@ Open What's New, then press Got It. The console logs Opening, Open, Closing, and
 Style `data-presentation` for both layouts. The sheet manages its own position and movement, so leave its translation alone and avoid the floating panel's fixed width. `--sheet-backdrop` sets the dim behind it.
 
 ```glimmer-ts title="presentation.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Popover } from "ember-ui-sdk/popover"
 
 <template>
   <Popover @presentation="sheet" as |p|>
@@ -1092,7 +1092,7 @@ Popovers render in place by default and use the browser's top layer. `@container
 Every part takes `@render={{true}}`, which renders no element and yields `{ part, state }`: bind `part` to your own element as a modifier. Without it, each part still yields `{ part, state }` to its block, so the content can read its payload, as the row editor does.
 
 ```glimmer-ts title="custom-rendering.gts"
-import { Popover } from "@ui-sdk/ember/popover"
+import { Popover } from "ember-ui-sdk/popover"
 
 <template>
   <Popover as |p|>

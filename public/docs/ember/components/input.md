@@ -6,8 +6,8 @@ An input is a native text field for short values like a name, an email address o
 
 ```glimmer-ts title="basic.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { Input, InputGroup } from "@ui-sdk/ember/input"
+import { Field } from "ember-ui-sdk/field"
+import { Input, InputGroup } from "ember-ui-sdk/input"
 import { X } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -53,7 +53,7 @@ Edit the website, then press Clear website. The text clears, focus returns to th
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -75,7 +75,7 @@ InputGroup as |g|
 Import the parts and put them together:
 
 ```gts
-import { Input, InputGroup } from "@ui-sdk/ember/input"
+import { Input, InputGroup } from "ember-ui-sdk/input"
 
 <template>
   <InputGroup as |g|>
@@ -176,7 +176,7 @@ Call `details.cancel()` in `@onValueChange` to reject a change. The previous tex
 Create one with `createInputController()` for actions outside the input. Its methods update the input through the same change callbacks as typing.
 
 ```gts
-import { Input, createInputController } from "@ui-sdk/ember/input"
+import { Input, createInputController } from "ember-ui-sdk/input"
 
 const message = createInputController()
 

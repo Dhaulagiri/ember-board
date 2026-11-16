@@ -5,8 +5,8 @@ Choose one option, move the selection with arrow keys, and submit it with a form
 Use radios for a short list of choices where only one can be picked, like a shipping speed or a plan. The group keeps one value and gives the whole list a single tab stop.
 
 ```glimmer-ts title="basic.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 const speeds = [
   { value: "standard", label: "Standard" },
@@ -36,7 +36,7 @@ Choose Express, then use the arrow keys to move the selection between speeds.
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -58,8 +58,8 @@ Give each radio a `@value` and wrap it with its text in a label. The group's val
 Import the group and use the parts it yields:
 
 ```gts
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 <template>
   <Field as |f|>
@@ -89,8 +89,8 @@ The field's label names the group. Without a field, name it with `aria-label` or
 Put each radio in its own `Field` with a `f.Label` and `f.Description` when an option needs more explanation. That field connects both to its radio, while the outer field still names the group.
 
 ```glimmer-ts title="description.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 const frequencies = [
   { value: "instant", label: "Instantly", description: "An email right away." },
@@ -133,8 +133,8 @@ Choose Weekly digest by its label. Each radio is also described by the line unde
 Wrap an option's content in its label to make the whole card clickable. `:has([data-checked])` lets the card reflect the radio inside it.
 
 ```glimmer-ts title="choice-card.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 const plans = [
   {
@@ -181,8 +181,8 @@ Click anywhere on the Pro card to choose it. Arrow keys move the selection betwe
 Use a `fieldset` with a `legend` to describe a set of choices together. Connect the group to the legend with `aria-labelledby`, and to the description with `aria-describedby`.
 
 ```glimmer-ts title="legend.gts"
-import { FieldSet } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { FieldSet } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 const periods = [
   { value: "monthly", label: "Monthly", price: "$12 per month" },
@@ -221,8 +221,8 @@ Choose Yearly. The legend and the line under it describe both billing periods.
 Set `@disabled={{true}}` on the group or on one radio. Disabled radios can't be focused or checked, and arrow keys skip them. A disabled fieldset disables the group too, and a disabled group submits nothing.
 
 ```glimmer-ts title="disabled.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 const themes = [
   { value: "light", label: "Light" },
@@ -277,8 +277,8 @@ The Theme group is disabled. In Backups, Hourly is disabled, so the arrow keys m
 Set `@readOnly={{true}}` on the group to keep its value while still letting people focus and read the options. Arrow keys move focus without checking anything, and the value still submits with a form.
 
 ```glimmer-ts title="read-only.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 const plans = [
   { value: "free", label: "Free" },
@@ -314,8 +314,8 @@ Pass `@value` and update it in `@onValueChange` to own the value. Call `details.
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup, createRadioGroupController } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup, createRadioGroupController } from "ember-ui-sdk/radio"
 import { useLog } from "./log"
 
 const plans = [
@@ -377,8 +377,8 @@ Set `@form` to a form's id to join it from elsewhere on the page, as this group 
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 import { useLog } from "./log"
 
 const speeds = [
@@ -438,8 +438,8 @@ Put a required group in a [Field](./field.md) with an `f.Error`. Submitting with
 ```glimmer-ts title="invalid.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 import { useLog } from "./log"
 
 const channels = [
@@ -505,8 +505,8 @@ The indicator has `data-starting-style` as it appears and `data-ending-style` wh
 `@keepMounted={{true}}` keeps the indicator in the page while unchecked, with `data-unchecked`. Here it lets a hovered option preview its dot.
 
 ```glimmer-ts title="indicator.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 
 const themes = [
   { value: "light", label: "Light" },
@@ -546,8 +546,8 @@ Arrow keys wrap from the last radio to the first. Set `@loop={{false}}` to stop 
 Pass `@render={{true}}` to a radio or its indicator to render your own element. The part yields `{ part, state }`: bind `part` to the interactive element so its role, label and keyboard behavior stay connected, and read `state` to change its content.
 
 ```glimmer-ts title="render.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { RadioGroup } from "@ui-sdk/ember/radio"
+import { Field } from "ember-ui-sdk/field"
+import { RadioGroup } from "ember-ui-sdk/radio"
 import { Check } from "lucide"
 import { icon } from "./icon"
 

@@ -11,10 +11,10 @@ import * as emberTemplate from "@ember/template"
 import * as templateFactory from "@ember/template-factory"
 import { checkPattern, type Pattern } from "@ui-sdk/core/testing"
 import * as decoratorRuntime from "decorator-transforms/runtime"
-import emberPackage from "../../vendor/@ui-sdk/ember/package.json"
+import emberPackage from "../../vendor/ember-ui-sdk/package.json"
 
 const entries = import.meta.glob<Record<string, unknown>>(
-  "../../vendor/@ui-sdk/ember/src/*.ts",
+  "../../vendor/ember-ui-sdk/src/*.ts",
   { eager: true }
 )
 
@@ -35,16 +35,16 @@ const modules: Record<string, unknown> = {
 for (const [name, path] of Object.entries(
   emberPackage.exports as Record<string, string>
 )) {
-  const entry = entries[`../../vendor/@ui-sdk/ember/${path.slice(2)}`]
+  const entry = entries[`../../vendor/ember-ui-sdk/${path.slice(2)}`]
   if (entry) {
-    modules[`@ui-sdk/ember/${name.slice(2)}`] = entry
+    modules[`ember-ui-sdk/${name.slice(2)}`] = entry
   }
 }
 
 const require = (id: string) => {
   if (!(id in modules)) {
     throw new Error(
-      `"${id}" isn't available here. Use @glimmer/*, @ember/* and @ui-sdk/ember/* only.`
+      `"${id}" isn't available here. Use @glimmer/*, @ember/* and ember-ui-sdk/* only.`
     )
   }
   return { __esModule: true, ...(modules[id] as object) }

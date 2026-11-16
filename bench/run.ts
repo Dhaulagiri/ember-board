@@ -279,14 +279,14 @@ async function main() {
     `| --- | --- | --- | --- | --- | --- |`,
     ...summary.map(
       (row) =>
-        `| ${row.arm === "sdk" ? "@ui-sdk/ember" : "hand-rolled"} | ${row.passed} | ${row.seconds.toFixed(1)}s | ${row.toolCalls} | ${row.screenshots} | $${row.cost.toFixed(4)} |`
+        `| ${row.arm === "sdk" ? "ember-ui-sdk" : "hand-rolled"} | ${row.passed} | ${row.seconds.toFixed(1)}s | ${row.toolCalls} | ${row.screenshots} | $${row.cost.toFixed(4)} |`
     ),
   ]
   if (sdk && baseline) {
     const less = (a: number, b: number) => `${Math.round((1 - a / b) * 100)}%`
     lines.push(
       ``,
-      `With @ui-sdk/ember: ${less(sdk.seconds, baseline.seconds)} faster, ${less(sdk.toolCalls, baseline.toolCalls)} fewer tool calls, ${sdk.screenshots} screenshots, ${less(sdk.cost, baseline.cost)} cheaper.`
+      `With ember-ui-sdk: ${less(sdk.seconds, baseline.seconds)} faster, ${less(sdk.toolCalls, baseline.toolCalls)} fewer tool calls, ${sdk.screenshots} screenshots, ${less(sdk.cost, baseline.cost)} cheaper.`
     )
   }
   const report = lines.join("\n")

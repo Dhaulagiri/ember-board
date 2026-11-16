@@ -6,8 +6,8 @@ A trigger menu suggests what to insert when someone types a trigger character, l
 
 ```glimmer-ts title="demo.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 
 const people = [
   { value: "hollis", label: "Hollis Grant" },
@@ -57,7 +57,7 @@ Type @, narrow the list with a name, and press Enter to insert the highlighted p
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -82,7 +82,7 @@ TriggerMenu as |m|
 Import the root and use the parts it yields:
 
 ```gts
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 
 const triggers = [{ char: "@" }]
 
@@ -113,8 +113,8 @@ Give each trigger a `char` and its `items`. Items can be strings, objects, group
 
 ```glimmer-ts title="data.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 
 const people = [
   { value: "hollis", label: "Hollis Grant" },
@@ -186,8 +186,8 @@ A trigger with `boundary: "start"` matches only at the start of the text, so a l
 
 ```glimmer-ts title="commands.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 import { on } from "@ember/modifier"
 import { useLog } from "./log"
 
@@ -277,8 +277,8 @@ Put an item's icon in a `item.Icon`, before its text. Screen readers skip it, an
 ```glimmer-ts title="icons.gts"
 import Component from "@glimmer/component"
 import { Clock, Reply, Search, Share, Trash2 } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 import { icon } from "./icon"
 
 const commands = [
@@ -342,8 +342,8 @@ A trigger's `items` can be a loader, called with the query and an `AbortSignal` 
 
 ```glimmer-ts title="async.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 
 const channels = [
   "announcements",
@@ -425,8 +425,8 @@ Compose `m.Item`s with any content, in groups. `@label` is what's matched and in
 import Component from "@glimmer/component"
 import { array, concat } from "@ember/helper"
 import { Users } from "lucide"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 import { icon } from "./icon"
 
 const people = [
@@ -522,8 +522,8 @@ Render the input part as an `<input>` for a single line, using `@render={{true}}
 
 ```glimmer-ts title="input.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 
 const people = [
   { value: "hollis", label: "Hollis Grant" },
@@ -569,9 +569,9 @@ By default, the list opens below the trigger at the caret and flips to stay on s
 ```glimmer-ts title="positioning.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
-import { attach } from "@ui-sdk/ember/primitive"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
+import { attach } from "ember-ui-sdk/primitive"
 
 const people = [
   { value: "hollis", label: "Hollis Grant" },
@@ -631,8 +631,8 @@ Pass `@open` and update it in `@onOpenChange`, which receives the reason. `@onQu
 ```glimmer-ts title="controlled.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu } from "@ui-sdk/ember/trigger-menu"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu } from "ember-ui-sdk/trigger-menu"
 import { useLog } from "./log"
 
 const people = [
@@ -717,11 +717,11 @@ Create a controller with `createTriggerMenuController()` and pass it as `@contro
 ```glimmer-ts title="controller.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
+import { Field } from "ember-ui-sdk/field"
 import {
   createTriggerMenuController,
   TriggerMenu,
-} from "@ui-sdk/ember/trigger-menu"
+} from "ember-ui-sdk/trigger-menu"
 import { useLog } from "./log"
 
 const people = [
@@ -804,9 +804,9 @@ Pass `@editor` to connect the menu to a field you render yourself, or to another
 ```glimmer-ts title="editor.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { TriggerMenu, textFieldAdapter } from "@ui-sdk/ember/trigger-menu"
-import { attach } from "@ui-sdk/ember/primitive"
+import { Field } from "ember-ui-sdk/field"
+import { TriggerMenu, textFieldAdapter } from "ember-ui-sdk/trigger-menu"
+import { attach } from "ember-ui-sdk/primitive"
 
 const people = [
   { value: "hollis", label: "Hollis Grant" },

@@ -6,9 +6,9 @@ A dialog gives a task its own space: share a link, edit a record, or collect a f
 
 ```glimmer-ts title="basic.gts"
 import { X } from "lucide"
-import { Dialog } from "@ui-sdk/ember/dialog"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Dialog } from "ember-ui-sdk/dialog"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 import { icon } from "./icon"
 
 <template>
@@ -52,7 +52,7 @@ Open Share, then close it with either Close button, Escape, or a press outside. 
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -78,7 +78,7 @@ The backdrop is optional. Without one, style the content’s `::backdrop`. For a
 Import the root and use the parts it yields:
 
 ```gts
-import { Dialog } from "@ui-sdk/ember/dialog"
+import { Dialog } from "ember-ui-sdk/dialog"
 
 <template>
   <Dialog as |d|>
@@ -93,14 +93,14 @@ import { Dialog } from "@ui-sdk/ember/dialog"
 </template>
 ```
 
-`@ui-sdk/ember/dialog` also exports each part by name, such as `DialogContent` and `DialogTrigger`.
+`ember-ui-sdk/dialog` also exports each part by name, such as `DialogContent` and `DialogTrigger`.
 
 ## Scrollable Content
 
 Keep the header and actions outside the scrolling area. A viewport height limit, a shrinking middle grid row, and `overflow-y: auto` keep long content usable. `@initialFocus="content"` focuses the dialog itself so reading starts at the top.
 
 ```glimmer-ts title="scrollable.gts"
-import { Dialog } from "@ui-sdk/ember/dialog"
+import { Dialog } from "ember-ui-sdk/dialog"
 
 const paragraphs = [
   "These terms govern your use of the service. By creating an account, you agree to them and to the privacy policy that explains how we handle your data.",
@@ -142,9 +142,9 @@ A form with `method="dialog"` closes the dialog on a valid submission. The submi
 
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
-import { Dialog } from "@ui-sdk/ember/dialog"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Dialog } from "ember-ui-sdk/dialog"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 import { useLog } from "./log"
 
 export default class Form extends Component {
@@ -210,8 +210,8 @@ Pass `@open` and update it in `@onOpenChange`. Cancel a proposed change with `de
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Dialog } from "@ui-sdk/ember/dialog"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Dialog } from "ember-ui-sdk/dialog"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -300,9 +300,9 @@ A trigger’s `@shortcut` opens it from the keyboard. `mod+j` means Command+J on
 
 ```glimmer-ts title="shortcut.gts"
 import { Plus } from "lucide"
-import { Dialog } from "@ui-sdk/ember/dialog"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Dialog } from "ember-ui-sdk/dialog"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 import { icon } from "./icon"
 
 <template>
@@ -374,7 +374,7 @@ The content and backdrop have `data-starting-style` while they open and `data-en
 
 ```glimmer-ts title="animation.gts"
 import Component from "@glimmer/component"
-import { Dialog } from "@ui-sdk/ember/dialog"
+import { Dialog } from "ember-ui-sdk/dialog"
 import { useLog } from "./log"
 
 export default class Animation extends Component {
@@ -421,9 +421,9 @@ Dialogs render where you put them and use the browser's top layer. Set `@contain
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Dialog } from "@ui-sdk/ember/dialog"
-import { Select } from "@ui-sdk/ember/select"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Dialog } from "ember-ui-sdk/dialog"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const modes = [
@@ -535,9 +535,9 @@ Set `@dismissible={{false}}` while there are unsaved changes. Escape, an outside
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
-import { Dialog } from "@ui-sdk/ember/dialog"
-import { Field } from "@ui-sdk/ember/field"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Dialog } from "ember-ui-sdk/dialog"
+import { Field } from "ember-ui-sdk/field"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 export default class DirtyForm extends Component {
   @tracked open = false
@@ -624,9 +624,9 @@ Type a post, then press Escape or click outside. Keep editing returns to the fie
 A dialog opened inside another joins its stack. Escape closes the topmost dialog and returns focus to its trigger. Closing the parent also closes its children. `data-nested-open` and `--dialog-stack` let you show which layer is active.
 
 ```glimmer-ts title="nested.gts"
-import { Dialog } from "@ui-sdk/ember/dialog"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Dialog } from "ember-ui-sdk/dialog"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 
 <template>
   <Dialog as |d|>
@@ -678,10 +678,10 @@ Render the dialog outside the menu and open it with the dialog’s controller. W
 ```glimmer-ts title="from-menu.gts"
 import Component from "@glimmer/component"
 import { Copy, Ellipsis, Pencil } from "lucide"
-import { Dialog, createDialogController } from "@ui-sdk/ember/dialog"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Menu } from "@ui-sdk/ember/menu"
+import { Dialog, createDialogController } from "ember-ui-sdk/dialog"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Menu } from "ember-ui-sdk/menu"
 import { icon } from "./icon"
 
 export default class FromMenu extends Component {
@@ -749,7 +749,7 @@ import {
   createDialogController,
   Dialog,
   DialogTrigger,
-} from "@ui-sdk/ember/dialog"
+} from "ember-ui-sdk/dialog"
 import { useLog } from "./log"
 
 type Invoice = {
@@ -843,9 +843,9 @@ Open a reminder from either unpaid invoice, or press Open from Code. The same di
 Style `data-presentation` to support both layouts. The sheet manages its own position and movement, so do not apply the centered dialog’s translation to it. `--sheet-backdrop` styles the dimmed page when no Backdrop part is present.
 
 ```glimmer-ts title="presentation.gts"
-import { Dialog } from "@ui-sdk/ember/dialog"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Dialog } from "ember-ui-sdk/dialog"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 
 <template>
   <Dialog @presentation="sheet" as |d|>
@@ -879,7 +879,7 @@ Open Edit Profile as a sheet. On a touch screen, drag it down to dismiss it, or 
 Pass `@render={{true}}` to a part to render it as your own element. It yields `{ part, state }`: bind `part` to your element as a modifier, and read the state in the block.
 
 ```glimmer-ts title="custom-rendering.gts"
-import { Dialog } from "@ui-sdk/ember/dialog"
+import { Dialog } from "ember-ui-sdk/dialog"
 
 <template>
   <Dialog as |d|>

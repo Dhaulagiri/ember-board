@@ -5,7 +5,7 @@ Resize, collapse, and save panel layouts with pointer and keyboard controls.
 Use a resizable group to let people size the panes of a layout, like a file list beside an editor, by dragging the handle between them or with the keyboard.
 
 ```glimmer-ts title="basic.gts"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 
 <template>
   <Resizable as |r|>
@@ -40,7 +40,7 @@ Drag the handle beside Files, then the one between page.tsx and Terminal.
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -65,7 +65,7 @@ import {
   Resizable,
   ResizableHandle,
   ResizablePanel,
-} from "@ui-sdk/ember/resizable"
+} from "ember-ui-sdk/resizable"
 
 <template>
   <Resizable>
@@ -83,7 +83,7 @@ The panel without `@defaultSize` takes what's left, here 70%.
 Pass `@orientation="vertical"` to stack the panels, and give the group a height. ArrowUp and ArrowDown move the handle. Every part gets `data-orientation` with the group's direction, so a vertical group's handle is `[data-slot="resizable-handle"][data-orientation="vertical"]`.
 
 ```glimmer-ts title="vertical.gts"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 
 <template>
   <Resizable @orientation="vertical" as |r|>
@@ -107,7 +107,7 @@ Drag the handle between Inbox and Quarterly report, or focus it and use ArrowUp 
 Put anything inside a handle, like a grip that shows it can be dragged. The handle can stay a thin line: its hit area is at least 10 pixels across, centered on it, and 24 for touch, without any styles.
 
 ```glimmer-ts title="handle.gts"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 
 <template>
   <Resizable as |r|>
@@ -138,7 +138,7 @@ Grab the grip beside Channels, or focus the handle and use the arrow keys.
 
 ```glimmer-ts title="collapsible.gts"
 import { Folder, Search, Settings } from "lucide"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 import { icon } from "./icon"
 
 <template>
@@ -187,7 +187,7 @@ Drag the sidebar closed to leave only its icons, or focus its handle and press E
 Sizes are percentages as numbers, or strings with `%`, `px` or `rem`. Pixel and rem bounds hold as the group resizes, so a navigation with `@minSize="160px"` never gets narrower, and a change they cause reports the `resize` reason.
 
 ```glimmer-ts title="sizes.gts"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 
 <template>
   <Resizable as |r|>
@@ -218,7 +218,7 @@ Resize Docs. It stays between 160 and 320 pixels wide, whatever the width of the
 
 ```glimmer-ts title="default-layout.gts"
 import { array } from "@ember/helper"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 
 <template>
   <Resizable @defaultLayout={{array 25 35 40}} as |r|>
@@ -258,7 +258,7 @@ Pass `@layout` and update it in `@onLayoutChange`, which also receives the reaso
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 import { useLog } from "./log"
 
 const format = (layout: number[]) => layout.map(Math.round).join(" / ")
@@ -315,7 +315,7 @@ Resize Files to log the layout and its reason. Split Evenly and Reset set the la
 
 ```glimmer-ts title="complete.gts"
 import Component from "@glimmer/component"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 import { useLog } from "./log"
 
 export default class Complete extends Component {
@@ -352,7 +352,7 @@ Drag the handle and release it, or press an arrow key. The console logs the layo
 `@autoSaveId` saves the layout in `localStorage` when an interaction completes and restores it when the group attaches in the browser. Server markup starts with the default sizes. Each set of panels keeps its own layout, so a panel that comes and goes gets its sizes back. Give panels an `id` so the saved layout survives changes elsewhere on the page.
 
 ```glimmer-ts title="persistence.gts"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 
 <template>
   <Resizable @autoSaveId="docs-persistence" as |r|>
@@ -385,7 +385,7 @@ This example keeps the layout in `sessionStorage`, for the tab's session:
 
 ```glimmer-ts title="storage.gts"
 import Component from "@glimmer/component"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 
 export default class Storage extends Component {
   session = {
@@ -424,7 +424,7 @@ A controller, from `createResizableController()`, collapses, expands and resizes
 ```glimmer-ts title="controller.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Resizable, createResizableController } from "@ui-sdk/ember/resizable"
+import { Resizable, createResizableController } from "ember-ui-sdk/resizable"
 import { useLog } from "./log"
 
 export default class ControllerExample extends Component {
@@ -487,7 +487,7 @@ Use Collapse, Expand and 240px to move Files from outside the group, and Read to
 `@step` sets how far an arrow key moves a handle, 1% by default, and `@largeStep` how far Shift with an arrow moves it, 10% by default.
 
 ```glimmer-ts title="keyboard.gts"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 
 <template>
   <Resizable @step={{5}} @largeStep={{25}} as |r|>
@@ -514,8 +514,8 @@ Focus the handle between Original and Changes. The arrow keys move it 5%, Shift 
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Resizable } from "ember-ui-sdk/resizable"
 import { icon } from "./icon"
 
 export default class Disabled extends Component {
@@ -582,7 +582,7 @@ Pass `@render={{true}}` to a part to render it as your own element. It yields `{
 
 ```glimmer-ts title="render.gts"
 import Component from "@glimmer/component"
-import { Resizable } from "@ui-sdk/ember/resizable"
+import { Resizable } from "ember-ui-sdk/resizable"
 
 const percent = (size: number) => `${Math.round(size)}%`
 

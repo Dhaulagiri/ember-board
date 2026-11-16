@@ -6,7 +6,7 @@ Button renders a native `button` and adds what it doesn't do on its own: it stay
 
 ```glimmer-ts title="basic.gts"
 import Component from "@glimmer/component"
-import { Button } from "@ui-sdk/ember/button"
+import { Button } from "ember-ui-sdk/button"
 import { useLog } from "./log"
 
 export default class Basic extends Component {
@@ -25,7 +25,7 @@ Click Button, or focus it and press Enter or Space. The console logs each press.
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ npm install @ui-sdk/ember @ui-sdk/core
 Use `@onClick` to run an action. Button renders a native `<button>` with `type="button"` by default.
 
 ```gts
-import { Button } from "@ui-sdk/ember/button"
+import { Button } from "ember-ui-sdk/button"
 
 <template>
   <Button @onClick={{this.save}}>Save</Button>
@@ -54,7 +54,7 @@ After one second, it announces "Loading" to screen readers. Set `@pendingAnnounc
 
 ```glimmer-ts title="pending.gts"
 import Component from "@glimmer/component"
-import { Button } from "@ui-sdk/ember/button"
+import { Button } from "ember-ui-sdk/button"
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -90,7 +90,7 @@ To change what the button shows while it waits, mark content with `data-show="id
 
 ```glimmer-ts title="pending-content.gts"
 import Component from "@glimmer/component"
-import { Button } from "@ui-sdk/ember/button"
+import { Button } from "ember-ui-sdk/button"
 import { ArrowDownToLine, LoaderCircle } from "lucide"
 import { icon } from "./icon"
 
@@ -136,7 +136,7 @@ If the handler throws or its Promise rejects, `state.error` holds the error. Pas
 
 ```glimmer-ts title="render.gts"
 import Component from "@glimmer/component"
-import { Button } from "@ui-sdk/ember/button"
+import { Button } from "ember-ui-sdk/button"
 import { useLog } from "./log"
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -179,7 +179,7 @@ Set `@disabled={{true}}` to prevent presses and remove the button from the tab o
 ```
 
 ```glimmer-ts title="disabled.gts"
-import { Button } from "@ui-sdk/ember/button"
+import { Button } from "ember-ui-sdk/button"
 
 <template>
   <Button @disabled={{true}}>Disabled</Button>
@@ -204,9 +204,9 @@ Use `aria-describedby` to explain why the action is unavailable:
 ```glimmer-ts title="focusable-when-disabled.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Button } from "@ui-sdk/ember/button"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Button } from "ember-ui-sdk/button"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 import { useLog } from "./log"
 
 export default class FocusableWhenDisabled extends Component {
@@ -266,7 +266,7 @@ Pass `@render={{true}}` to render an `<a>`, and spread the part onto it with `{{
 ```
 
 ```glimmer-ts title="link.gts"
-import { Button } from "@ui-sdk/ember/button"
+import { Button } from "ember-ui-sdk/button"
 
 <template>
   <div data-slot="row">
@@ -294,9 +294,9 @@ Set `@type="submit"` to submit a form or `@type="reset"` to restore its default 
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Button } from "@ui-sdk/ember/button"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Button } from "ember-ui-sdk/button"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 import { useLog } from "./log"
 
 export default class Form extends Component {

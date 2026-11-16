@@ -5,8 +5,8 @@ Enter a one-time code with support for pasting, autofill, and native form valida
 Use an OTP Input for a short code sent by text or email, like a sign-in or verification code. Each character gets its own slot, and a pasted or autofilled code fills them all at once.
 
 ```glimmer-ts title="basic.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { OTPInput } from "@ui-sdk/ember/otp-input"
+import { Field } from "ember-ui-sdk/field"
+import { OTPInput } from "ember-ui-sdk/otp-input"
 import { Minus } from "lucide"
 import { icon } from "./icon"
 
@@ -45,7 +45,7 @@ Type a six-digit code or paste 123-456. Click a slot to edit it, use the arrow k
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -68,7 +68,7 @@ Groups and separators change the presentation of one value. They do not create a
 Import the root and use the parts it yields:
 
 ```gts
-import { OTPInput } from "@ui-sdk/ember/otp-input"
+import { OTPInput } from "ember-ui-sdk/otp-input"
 
 <template>
   <OTPInput @maxLength={{4}} aria-label="Verification code" as |o|>
@@ -87,8 +87,8 @@ import { OTPInput } from "@ui-sdk/ember/otp-input"
 Set `@maxLength` to the code's length and render that many slots. The default length is six.
 
 ```glimmer-ts title="four-digits.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { OTPInput } from "@ui-sdk/ember/otp-input"
+import { Field } from "ember-ui-sdk/field"
+import { OTPInput } from "ember-ui-sdk/otp-input"
 
 <template>
   <Field as |f|>
@@ -112,8 +112,8 @@ Enter four digits in PIN. Once it is full, typing another digit replaces the sel
 Set `@pattern` to `digits`, `letters`, or `alphanumeric`. The default is `digits`. The pattern filters characters and selects a suitable keyboard on touch devices.
 
 ```glimmer-ts title="alphanumeric.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { OTPInput } from "@ui-sdk/ember/otp-input"
+import { Field } from "ember-ui-sdk/field"
+import { OTPInput } from "ember-ui-sdk/otp-input"
 import { Minus } from "lucide"
 import { icon } from "./icon"
 
@@ -156,8 +156,8 @@ Type letters and digits into Recovery code, or paste ab12-cd34. The hyphen is re
 Pass a regular expression, such as `/[0-9A-F]/i` to accept hexadecimal characters. Use `inputMode` to choose the keyboard separately. The example displays letters in uppercase without changing their stored case.
 
 ```glimmer-ts title="pattern.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { OTPInput } from "@ui-sdk/ember/otp-input"
+import { Field } from "ember-ui-sdk/field"
+import { OTPInput } from "ember-ui-sdk/otp-input"
 
 const hex = /[0-9A-F]/i
 
@@ -187,8 +187,8 @@ Inside a [Field](./field.md), pass `@invalid={{true}}` when your code rejects th
 ```glimmer-ts title="invalid.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { OTPInput } from "@ui-sdk/ember/otp-input"
+import { Field } from "ember-ui-sdk/field"
+import { OTPInput } from "ember-ui-sdk/otp-input"
 
 export default class Invalid extends Component {
   @tracked invalid = true
@@ -225,8 +225,8 @@ Pass `@value` and update it in `@onValueChange`. Call `details.cancel()` in the 
 ```glimmer-ts title="controlled.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { OTPInput } from "@ui-sdk/ember/otp-input"
+import { Field } from "ember-ui-sdk/field"
+import { OTPInput } from "ember-ui-sdk/otp-input"
 import { useLog } from "./log"
 
 export default class Controlled extends Component {
@@ -266,8 +266,8 @@ The [reason](#reasons) distinguishes typing, pasting, undo, and controller actio
 
 ```glimmer-ts title="complete.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { OTPInput } from "@ui-sdk/ember/otp-input"
+import { Field } from "ember-ui-sdk/field"
+import { OTPInput } from "ember-ui-sdk/otp-input"
 import { useLog } from "./log"
 
 export default class Complete extends Component {
@@ -304,8 +304,8 @@ Set `@name` to include the code in `FormData`. `@required={{true}}` blocks an em
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { OTPInput } from "@ui-sdk/ember/otp-input"
+import { Field } from "ember-ui-sdk/field"
+import { OTPInput } from "ember-ui-sdk/otp-input"
 import { useLog } from "./log"
 
 export default class Form extends Component {
@@ -392,7 +392,7 @@ A disabled input cannot be focused, changed, or submitted. `@readOnly={{true}}` 
 Create one with `createOTPInputController()` and pass it as `@controller` to read, fill, clear, or focus the input from another control. Writes use the `imperative` reason and pass through the same filtering and change callbacks as typing.
 
 ```gts
-import { OTPInput, createOTPInputController } from "@ui-sdk/ember/otp-input"
+import { OTPInput, createOTPInputController } from "ember-ui-sdk/otp-input"
 
 const code = createOTPInputController()
 

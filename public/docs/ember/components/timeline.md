@@ -5,7 +5,7 @@ Show dated events in order, like an activity feed, a changelog or an order's pro
 Use a Timeline for a list of things that happened, or will: a project's activity, an order's status history, a release's milestones. It's a list for screen readers, with one tab stop for keyboards, and the arrow keys move between events.
 
 ```glimmer-ts title="demo.gts"
-import { Timeline } from "@ui-sdk/ember/timeline"
+import { Timeline } from "ember-ui-sdk/timeline"
 
 const events = [
   {
@@ -54,7 +54,7 @@ Tab into the activity, then use Up and Down to move between events. Home and End
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -87,7 +87,7 @@ import {
   TimelineMarker,
   TimelineTime,
   TimelineTitle,
-} from "@ui-sdk/ember/timeline"
+} from "ember-ui-sdk/timeline"
 
 <template>
   <Timeline aria-label="Activity">
@@ -111,7 +111,7 @@ When focus lands on an event, screen readers read its title as its name, then it
 Pass `@orientation="horizontal"` for a row, like a roadmap. Left and Right move between events instead of Up and Down, and they swap in right-to-left text. Pass `@loop={{false}}` to stop at either end.
 
 ```glimmer-ts title="horizontal.gts"
-import { Timeline } from "@ui-sdk/ember/timeline"
+import { Timeline } from "ember-ui-sdk/timeline"
 
 const milestones = [
   { title: "Kickoff", dateTime: "2026-01", time: "January" },
@@ -152,7 +152,7 @@ import {
   createTimelineController,
   Timeline,
   TimelineItem,
-} from "@ui-sdk/ember/timeline"
+} from "ember-ui-sdk/timeline"
 import { icon } from "./icon"
 
 const steps = [
@@ -247,8 +247,8 @@ Put a [Collapsible](./collapsible.md) inside an item for details that can open. 
 
 ```glimmer-ts title="details.gts"
 import { ChevronDown } from "lucide"
-import { Collapsible } from "@ui-sdk/ember/collapsible"
-import { Timeline } from "@ui-sdk/ember/timeline"
+import { Collapsible } from "ember-ui-sdk/collapsible"
+import { Timeline } from "ember-ui-sdk/timeline"
 import { icon } from "./icon"
 
 const releases = [
@@ -331,7 +331,7 @@ Pass `@busy={{true}}` while you load or change articles. It sets `aria-busy`, so
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
-import { Timeline } from "@ui-sdk/ember/timeline"
+import { Timeline } from "ember-ui-sdk/timeline"
 import { useLog } from "./log"
 
 const updates = [

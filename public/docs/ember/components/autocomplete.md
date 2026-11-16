@@ -5,7 +5,7 @@ Suggest text while someone types, without limiting what they can enter.
 Use Autocomplete for a text field with helpful suggestions. Choosing one fills in the field, but any text is a valid value. Use [Combobox](./combobox.md) when the value should be a selected option instead.
 
 ```glimmer-ts title="demo.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const fruits = [
   "Apple",
@@ -50,7 +50,7 @@ Type “man”, press Down Arrow, then Enter to fill in Mango. You can also leav
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -75,7 +75,7 @@ Name the input, then put suggestions in a list inside the popup. Each suggestion
 Import the root and use the parts it yields:
 
 ```gts
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 <template>
   <Autocomplete as |c|>
@@ -103,7 +103,7 @@ Both filter a list as you type. They differ in what the value is.
 A disabled field cannot be focused or changed and submits nothing. A read-only field stays focusable and submits its value, but does not open or accept changes. Disabled suggestions are skipped by keyboard navigation and cannot fill in the field.
 
 ```glimmer-ts title="disabled.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const fruits = [
   "Apple",
@@ -165,7 +165,7 @@ Try the Disabled and Read-only fields. In Disabled suggestion, type “b”: arr
 `c.Clear` empties the field and returns focus to it. `c.Trigger` lets someone open the suggestions without typing. Give the trigger a label that describes what it opens.
 
 ```glimmer-ts title="clear.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 import { ChevronDown, X } from "lucide"
 import { icon } from "./icon"
 
@@ -228,7 +228,7 @@ Clear Mango, then press Show fruits to open the suggestions. The clear button di
 Add `@openOnFocus={{true}}` to offer suggestions as soon as the input receives focus. This works well when there are useful choices before someone types.
 
 ```glimmer-ts title="open-on-focus.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const recent = ["react hooks", "tailwind grid", "web components", "vue v-model"]
 
@@ -259,7 +259,7 @@ Focus Search docs to see recent searches before typing. Escape closes them; pres
 `@autoHighlight={{true}}` highlights the first match while typing, so Enter can choose it immediately. Set `@loop={{false}}` to stop arrow keys at either end of the list.
 
 ```glimmer-ts title="auto-highlight.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const fruits = [
   "Apple",
@@ -306,7 +306,7 @@ Type “pe” and press Enter to choose the first match. Arrow keys stop at the 
 `@inlineComplete={{true}}` fills in the rest of the first suggestion that starts with the typed text, with the added text selected. Arrow keys fill in the suggestion they highlight. End or Right Arrow accepts the completion; Backspace or Escape takes it back out.
 
 ```glimmer-ts title="inline.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const fruits = [
   "Apple",
@@ -353,7 +353,7 @@ Type “bl” to complete blackberry inline. Backspace removes the completion; D
 `c.ItemText` marks the matching text, ignoring case and accents using the current locale. Its state exposes the matching segments when you want to render them yourself, as this example does in bold.
 
 ```glimmer-ts title="highlight.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const fruits = [
   "Apple",
@@ -401,7 +401,7 @@ The default filter matches text anywhere in a suggestion. Use `@filter="startsWi
 
 ```glimmer-ts title="filter.gts"
 import { get } from "@ember/helper"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const tags = [
   {
@@ -444,7 +444,7 @@ Type “bug” to find fix through its keywords. Type “re” to find labels or
 Use `c.Group` and `c.GroupLabel` to name related suggestions. Filtering hides empty groups and separators.
 
 ```glimmer-ts title="groups.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const fruitGroups = [
   {
@@ -496,7 +496,7 @@ Type “an”. Banana and Mango remain in Tropical; groups with no matches disap
 
 ```glimmer-ts title="icons.gts"
 import { Archive, Clock, File, Pencil, Reply, Star } from "lucide"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 import { icon } from "./icon"
 
 const mailSearches = [
@@ -545,7 +545,7 @@ Type “rep” and choose Replies. The icon stays out of the text put in the fie
 Map an array into parts when you want to write the markup yourself. This example maps fruit groups and adds a separator between them.
 
 ```glimmer-ts title="data.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const fruitGroups = [
   {
@@ -600,7 +600,7 @@ The value is always a string. Control it with `@value` and `@onValueChange`, or 
 ```glimmer-ts title="controlled.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 import { useLog } from "./log"
 
 const fruits = [
@@ -692,7 +692,7 @@ import { on } from "@ember/modifier"
 import {
   Autocomplete,
   createAutocompleteController,
-} from "@ui-sdk/ember/autocomplete"
+} from "ember-ui-sdk/autocomplete"
 
 const fruits = [
   "Apple",
@@ -775,8 +775,8 @@ Use `@side`, `@align`, offsets, or a custom `@anchor` to position the suggestion
 ```glimmer-ts title="positioning.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
-import { attach } from "@ui-sdk/ember/primitive"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
+import { attach } from "ember-ui-sdk/primitive"
 
 const fruits = [
   "Apple",
@@ -844,7 +844,7 @@ The content has `data-starting-style` while it opens and `data-ending-style` whi
 ```
 
 ```glimmer-ts title="animation.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const fruits = [
   "Apple",
@@ -895,7 +895,7 @@ The same input moves into the sheet’s header. Opening by touch leaves the keyb
 A sheet is modal unless `@modal` is `false`. Give it a height, keep suggestions inside `c.List`, and leave the content’s `translate` alone so dragging can move it. Use `data-presentation` to style both presentations and `--sheet-backdrop` to set the dimmed background.
 
 ```glimmer-ts title="presentation.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const fruits = [
   "Apple",
@@ -944,8 +944,8 @@ The native input is the form control: `@name` gives its submitted key, `@require
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
-import { Field } from "@ui-sdk/ember/field"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
+import { Field } from "ember-ui-sdk/field"
 import { useLog } from "./log"
 
 const fruits = [
@@ -1024,7 +1024,7 @@ Choosing a suggestion normally only fills in the field. Add `@submitOnSelect={{t
 ```glimmer-ts title="search.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 import { useLog } from "./log"
 
 const recent = ["react hooks", "tailwind grid", "web components", "vue v-model"]
@@ -1067,7 +1067,7 @@ Type “kotlin” and press Enter to search. Choose a suggestion to search for t
 Pair `@emptyItems` with `@items` to show one collection while the field is empty and search the full collection once someone types. Add `@openOnFocus={{true}}` to show the recent searches on focus.
 
 ```glimmer-ts title="recent.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const recent = ["react hooks", "tailwind grid", "web components", "vue v-model"]
 const topics = [
@@ -1123,14 +1123,14 @@ Focus the empty field to see Recent searches. Type “react” to search all top
 
 ## Async Suggestions
 
-Use `useAsyncOptions` from `@ui-sdk/ember/async-options` to wait for typing to pause and discard stale results. Pass its `items` and `status`, set `@filter={{false}}`, and send text changes to its `setQuery()` method.
+Use `useAsyncOptions` from `ember-ui-sdk/async-options` to wait for typing to pause and discard stale results. Pass its `items` and `status`, set `@filter={{false}}`, and send text changes to its `setQuery()` method.
 
 `c.Status` and `c.Empty` provide loading, error, and empty messages. Without a status part, `@announcement` controls what screen readers hear when typing pauses. `@onLoadMore` can request another page when scrolling or highlighting reaches the last suggestion.
 
 ```glimmer-ts title="async.gts"
 import Component from "@glimmer/component"
-import { useAsyncOptions } from "@ui-sdk/ember/async-options"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { useAsyncOptions } from "ember-ui-sdk/async-options"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 function searchCities(query: string, { signal }: { signal: AbortSignal }) {
   const cities = [
@@ -1219,7 +1219,7 @@ Type “b” and wait for the city suggestions. Keep typing to replace the searc
 Pass `@render={{true}}` to a suggestion to give it a different element. Here each suggestion is a link, so the autocomplete works as a jump-to menu: Enter or a click follows the highlighted link, and the text after the title is a hint that doesn't affect filtering.
 
 ```glimmer-ts title="custom-rendering.gts"
-import { Autocomplete } from "@ui-sdk/ember/autocomplete"
+import { Autocomplete } from "ember-ui-sdk/autocomplete"
 
 const pages = [
   { title: "Installation", section: "Get Started", href: "#installation" },

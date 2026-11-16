@@ -5,7 +5,7 @@ Page through slides with native scrolling, keyboard controls, and optional rotat
 Use a Carousel to show a set of slides one view at a time, like product photos or featured stories. It scrolls natively, so swipes and trackpads work, and Previous and Next buttons page through the slides.
 
 ```glimmer-ts title="basic.gts"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { ChevronLeft, ChevronRight } from "lucide"
 import { icon } from "./icon"
 
@@ -45,7 +45,7 @@ Use Previous and Next, swipe the slides, or focus the viewport and use the arrow
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -71,7 +71,7 @@ The viewport is the scrolling window, and the content is the row of slides insid
 Import the root and use the parts it yields:
 
 ```gts
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 
 <template>
   <Carousel aria-label="Featured" as |c|>
@@ -92,7 +92,7 @@ import { Carousel } from "@ui-sdk/ember/carousel"
 `@orientation="vertical"` scrolls up and down. Give the viewport a height. Up and down arrows page it, not left and right.
 
 ```glimmer-ts title="vertical.gts"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { ChevronDown, ChevronUp } from "lucide"
 import { icon } from "./icon"
 
@@ -136,7 +136,7 @@ Scroll vertically, or use the up and down controls.
 The slides take turns at the ends of the content with CSS `order` while the carousel rests, so the current page always has slides on both sides. They keep their place in the document, so screen readers and Tab follow the slides' own order. The content needs to lay its slides out in a row with even gaps, as flex and grid do, and hold a page of slides to either side of the current one. With fewer, like two slides one to a view, Next on the last page scrolls back to the first instead.
 
 ```glimmer-ts title="loop.gts"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { ChevronLeft, ChevronRight } from "lucide"
 import { icon } from "./icon"
 
@@ -181,8 +181,8 @@ Keep moving forward or backward to wrap around the slides.
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown, ChevronLeft, ChevronRight } from "lucide"
-import { Select } from "@ui-sdk/ember/select"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Select } from "ember-ui-sdk/select"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { icon } from "./icon"
 
 const photos = [
@@ -267,7 +267,7 @@ Choose Start, Center or End, then page through the slides. Centered slides let t
 `@defaultPage` is the page it starts on, when uncontrolled. It's 1 by default.
 
 ```glimmer-ts title="default-page.gts"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { ChevronLeft, ChevronRight } from "lucide"
 import { icon } from "./icon"
 
@@ -312,7 +312,7 @@ Write one per page inside `c.IndicatorGroup`. Those past the page count hide the
 
 ```glimmer-ts title="indicators.gts"
 import Component from "@glimmer/component"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 
 const photos = [
   { name: "Dunes" },
@@ -359,7 +359,7 @@ Choose a named indicator, then use arrows, Home, and End to move between them.
 
 ```glimmer-ts title="pages.gts"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { icon } from "./icon"
 
 const products = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -414,7 +414,7 @@ import Component from "@glimmer/component"
 import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 
 const photos = [
   { name: "Dunes" },
@@ -493,7 +493,7 @@ As the carousel pattern asks, rotation stops when keyboard focus moves in and do
 ```glimmer-ts title="autoplay.gts"
 import Component from "@glimmer/component"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -570,7 +570,7 @@ Start or stop rotation. Hover to pause it, or move keyboard focus inside to stop
 ```glimmer-ts title="progress.gts"
 import Component from "@glimmer/component"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -633,7 +633,7 @@ Every change carries a [reason](#reasons): `next-press` and `previous-press` for
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -698,7 +698,7 @@ import {
   CarouselNext,
   CarouselPrevious,
   createCarouselController,
-} from "@ui-sdk/ember/carousel"
+} from "ember-ui-sdk/carousel"
 import { icon } from "./icon"
 
 const slides = [1, 2, 3, 4, 5]
@@ -766,9 +766,9 @@ Pass `@render={{true}}` to a part to render your own element, and bind its yield
 
 ```glimmer-ts title="render.gts"
 import Component from "@glimmer/component"
-import { Carousel } from "@ui-sdk/ember/carousel"
+import { Carousel } from "ember-ui-sdk/carousel"
 import { ChevronLeft, ChevronRight } from "lucide"
-import { attach } from "@ui-sdk/ember/primitive"
+import { attach } from "ember-ui-sdk/primitive"
 import { icon } from "./icon"
 
 const photos = [

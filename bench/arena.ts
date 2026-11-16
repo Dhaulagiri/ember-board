@@ -235,7 +235,7 @@ async function main() {
     "",
     `${flags.replay ? `Replay "${flags.replay}" (not live builds)` : flags.model}, ${chosen.length} prompts × ${runs} runs. Medians per build unless noted.`,
     "",
-    "| | Ember | Ember + @ui-sdk/ember |",
+    "| | Ember | Ember + ember-ui-sdk |",
     "| --- | --- | --- |",
     `| Asked-for widgets built (all builds) | ${fmt(plain.coverage * 100, 0, "%")} | ${fmt(sdk.coverage * 100, 0, "%")} |`,
     `| Builds that failed to render | ${plain.failed}/${plain.builds} | ${sdk.failed}/${sdk.builds} |`,

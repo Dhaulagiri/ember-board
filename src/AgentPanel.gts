@@ -3,7 +3,7 @@ import { tracked } from "@glimmer/tracking"
 import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
 import { Sparkles, Square } from "lucide"
-import type { createAgent } from "@ui-sdk/ember/agent"
+import type { createAgent } from "ember-ui-sdk/agent"
 import { costOf, runAgent, type AgentEvent, type Usage } from "./agent-loop"
 import { icon } from "./icon"
 

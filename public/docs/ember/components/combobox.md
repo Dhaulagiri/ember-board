@@ -6,7 +6,7 @@ Use a Combobox when people need to find a choice by typing. Start with an input 
 
 ```glimmer-ts title="demo.gts"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const frameworks = [
@@ -62,7 +62,7 @@ Type “sv” to find SvelteKit. Press Down Arrow to highlight it, then Enter to
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -86,7 +86,7 @@ Name the input, give each option a unique value, and put the options in a list i
 Import the root and use the parts it yields:
 
 ```gts
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 
 <template>
   <Combobox as |c|>
@@ -117,7 +117,7 @@ A disabled combobox cannot be focused or changed and submits nothing. A read-onl
 
 ```glimmer-ts title="disabled.gts"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const countries = [
@@ -217,7 +217,7 @@ Billing country is disabled and Shipping from is read-only. Open Shipping to: ar
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown, X } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -295,7 +295,7 @@ Add `@autoHighlight={{true}}` to highlight the first match while typing, so Ente
 
 ```glimmer-ts title="auto-highlight.gts"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const countries = [
@@ -360,7 +360,7 @@ Type “sw” and press Enter. The first matching country is already highlighted
 
 ```glimmer-ts title="highlight.gts"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const countries = [
@@ -443,8 +443,8 @@ Use `keywords` for text that should match without appearing in the label, such a
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
-import { Select } from "@ui-sdk/ember/select"
+import { Combobox } from "ember-ui-sdk/combobox"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const countries = [
@@ -575,7 +575,7 @@ Use `c.Group` and `c.GroupLabel` to name groups. Filtering hides empty groups an
 
 ```glimmer-ts title="groups.gts"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const timezones = [
@@ -672,7 +672,7 @@ import {
   CircleCheck,
   CircleX,
 } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 <template>
@@ -733,7 +733,7 @@ Show useful context beside a label, such as a username or role. Set `@label` exp
 ```glimmer-ts title="custom-items.gts"
 import { array } from "@ember/helper"
 import { ChevronDown, Check } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const users = [
@@ -796,7 +796,7 @@ Search for a person’s name or username. Choose a result to put that person’s
 Pass `@items` when the combobox needs the whole collection, such as recent items or server results. It can render bare parts for you, or you can render the parts yourself from the list's `state.items`. Each item's `label` supplies the text for filtering and the input; `keywords` and `disabled` work the same as with items you render yourself. Lists and Menus covers the `ListData` format.
 
 ```gts
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 
 const fruits = [
   { value: "apple", label: "Apple" },
@@ -823,7 +823,7 @@ Items can change while the list is open. Selection and highlight stay on their i
 
 ```glimmer-ts title="recent.gts"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const countries = [
@@ -934,7 +934,7 @@ Add `@keepQuery={{true}}` to choose several matches without retyping the query.
 ```glimmer-ts title="multiple.gts"
 import { array, get } from "@ember/helper"
 import { Check, ChevronDown, X } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const frameworks = [
@@ -1005,7 +1005,7 @@ Choose several frameworks. Remove one with its chip button, or press Backspace i
 ```glimmer-ts title="select-all.gts"
 import { array, get } from "@ember/helper"
 import { Check, Minus, X } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const timezones = [
@@ -1113,7 +1113,7 @@ Add `c.ChipsOverflow` to keep chips on one line. It measures which chips fit, hi
 ```glimmer-ts title="chips-overflow.gts"
 import { array, concat, get } from "@ember/helper"
 import { Check, X } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const countries = [
@@ -1206,7 +1206,7 @@ Add or remove countries. Chips that no longer fit are replaced by an overflow co
 ```glimmer-ts title="max-selected.gts"
 import { array } from "@ember/helper"
 import { Check, X } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const labels = [
@@ -1276,7 +1276,7 @@ While saving, the option reports `data-pending`, `aria-busy` and `aria-disabled`
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, LoaderCircle, Plus, X } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 function saveLabel(name: string) {
@@ -1380,7 +1380,7 @@ Use `@allowCustomValue={{true}}` when suggestions are optional, like a datalist.
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -1445,7 +1445,7 @@ The input can live inside the popup, opened by a button showing the current valu
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown, Search } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const countries = [
@@ -1544,7 +1544,7 @@ Press Country to open the search field inside the popup. Choose a country; closi
 
 ## Async Search
 
-Use `useAsyncOptions` from `@ui-sdk/ember/async-options` to debounce a search and discard stale results. Pass its `items` and `status` to the combobox, set `@filter` to `false`, and send query changes to the loader.
+Use `useAsyncOptions` from `ember-ui-sdk/async-options` to debounce a search and discard stale results. Pass its `items` and `status` to the combobox, set `@filter` to `false`, and send query changes to the loader.
 
 `c.Status` and `c.Empty` provide loading, error, and empty messages. Without a custom status, the combobox announces the result count once typing pauses.
 
@@ -1552,8 +1552,8 @@ Use `useAsyncOptions` from `@ui-sdk/ember/async-options` to debounce a search an
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { Check, ChevronDown } from "lucide"
-import { useAsyncOptions } from "@ui-sdk/ember/async-options"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { useAsyncOptions } from "ember-ui-sdk/async-options"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const movieTitles = [
@@ -1679,8 +1679,8 @@ Replace “the” with another movie title. The status shows the pending search,
 ```glimmer-ts title="infinite.gts"
 import Component from "@glimmer/component"
 import { Check, ChevronDown } from "lucide"
-import { useAsyncOptions } from "@ui-sdk/ember/async-options"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { useAsyncOptions } from "ember-ui-sdk/async-options"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const movieTitles = [
@@ -1812,9 +1812,9 @@ import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { htmlSafe } from "@ember/template"
 import { tracked } from "@glimmer/tracking"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { ChevronDown } from "lucide"
-import { attach } from "@ui-sdk/ember/primitive"
+import { attach } from "ember-ui-sdk/primitive"
 import { icon } from "./icon"
 
 const manyItems = Array.from({ length: 10_000 }, (_, index) => ({
@@ -1946,7 +1946,7 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -2065,7 +2065,7 @@ Pass a controller from `createComboboxController()`. It can read or set the valu
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { Check, ChevronDown } from "lucide"
-import { Combobox, createComboboxController } from "@ui-sdk/ember/combobox"
+import { Combobox, createComboboxController } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -2176,9 +2176,9 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { Check, ChevronDown } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Combobox } from "@ui-sdk/ember/combobox"
-import { Select } from "@ui-sdk/ember/select"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Combobox } from "ember-ui-sdk/combobox"
+import { Select } from "ember-ui-sdk/select"
 import { icon } from "./icon"
 
 const frameworks = [
@@ -2329,7 +2329,7 @@ The content has `data-starting-style` while it opens and `data-ending-style` whi
 ```glimmer-ts title="animation.gts"
 import Component from "@glimmer/component"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -2401,7 +2401,7 @@ Keep the options inside `c.List` so the header stays outside the listbox. Give s
 
 ```glimmer-ts title="presentation.gts"
 import { Check, ChevronDown } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const frameworks = [
@@ -2461,8 +2461,8 @@ import Component from "@glimmer/component"
 import { array } from "@ember/helper"
 import { on } from "@ember/modifier"
 import { Check, ChevronDown, X } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
-import { Field } from "@ui-sdk/ember/field"
+import { Combobox } from "ember-ui-sdk/combobox"
+import { Field } from "ember-ui-sdk/field"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -2587,7 +2587,7 @@ Pass `@render={{true}}` to render a part as your own element: it yields `{ part,
 import Component from "@glimmer/component"
 import { array } from "@ember/helper"
 import { ChevronDown, ChevronUp, Check, Search } from "lucide"
-import { Combobox } from "@ui-sdk/ember/combobox"
+import { Combobox } from "ember-ui-sdk/combobox"
 import { icon } from "./icon"
 
 const users = [
@@ -2965,7 +2965,7 @@ Each item in `@items`. Groups are `{ type: "group", label, items }` and separato
 
 ### Async Options
 
-Async Options, in `@ui-sdk/ember/async-options`, covers loading, paging, and retries.
+Async Options, in `ember-ui-sdk/async-options`, covers loading, paging, and retries.
 
 ### State
 

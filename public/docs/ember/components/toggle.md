@@ -5,7 +5,7 @@ Keep a button pressed, or group toggles with a shared value and arrow-key naviga
 Use a toggle for a button that stays on until you press it again, like starring a document or turning on Bold. Put several in a toggle group to share one value, as a text editor's formatting buttons or a view switcher do.
 
 ```glimmer-ts title="basic.gts"
-import { Toggle } from "@ui-sdk/ember/toggle"
+import { Toggle } from "ember-ui-sdk/toggle"
 import { Star } from "lucide"
 import { icon } from "./icon"
 
@@ -37,7 +37,7 @@ Press the star beside Q3 Roadmap, or focus it and press Enter or Space. It fills
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -66,7 +66,7 @@ ToggleGroup as |g|
 Import the root and use the parts it yields:
 
 ```gts
-import { Toggle } from "@ui-sdk/ember/toggle"
+import { Toggle } from "ember-ui-sdk/toggle"
 
 <template>
   <Toggle aria-label="Star" as |t|>
@@ -79,10 +79,10 @@ Keep the label the same in both states: screen readers announce whether the butt
 
 ## Group
 
-Put toggles in a `ToggleGroup`, from the same `@ui-sdk/ember/toggle` entry, to share a value and arrow-key navigation. Give the group an accessible name and each toggle a `@value`. Set `@multiple={{true}}` to let several toggles stay pressed.
+Put toggles in a `ToggleGroup`, from the same `ember-ui-sdk/toggle` entry, to share a value and arrow-key navigation. Give the group an accessible name and each toggle a `@value`. Set `@multiple={{true}}` to let several toggles stay pressed.
 
 ```glimmer-ts title="group.gts"
-import { ToggleGroup } from "@ui-sdk/ember/toggle"
+import { ToggleGroup } from "ember-ui-sdk/toggle"
 import { Bold, Italic, Underline } from "lucide"
 import { icon } from "./icon"
 
@@ -121,7 +121,7 @@ Without `@multiple`, pressing a toggle unpresses the others. Pressing the presse
 
 ```glimmer-ts title="group-single.gts"
 import { array } from "@ember/helper"
-import { ToggleGroup } from "@ui-sdk/ember/toggle"
+import { ToggleGroup } from "ember-ui-sdk/toggle"
 import { TextAlignCenter, TextAlignEnd, TextAlignStart } from "lucide"
 import { icon } from "./icon"
 
@@ -204,7 +204,7 @@ Set `@focusableWhenDisabled={{true}}` to keep a disabled toggle focusable. It us
 Pass `@pressed` and update it in `@onPressedChange` to own the state. Call `details.cancel()` in `@onPressedChange` to keep the current state. A [controller](#toggle-controller) from `createToggleController()` presses the toggle from anywhere, such as a keyboard shortcut. Create one controller per mounted toggle.
 
 ```gts
-import { Toggle, createToggleController } from "@ui-sdk/ember/toggle"
+import { Toggle, createToggleController } from "ember-ui-sdk/toggle"
 
 const star = createToggleController()
 
@@ -250,7 +250,7 @@ Pass `@render={{true}}` to a toggle, its icon or its group to render your own el
 ```glimmer-ts title="render.gts"
 import Component from "@glimmer/component"
 import { createElement, Heart } from "lucide"
-import { Toggle } from "@ui-sdk/ember/toggle"
+import { Toggle } from "ember-ui-sdk/toggle"
 
 export default class Render extends Component {
   heart = (pressed: boolean) =>

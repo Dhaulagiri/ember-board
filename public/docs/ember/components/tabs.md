@@ -13,7 +13,7 @@ Use Tabs when several views share the same space, such as settings sections or a
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -36,7 +36,7 @@ Give each tab and its panel the same unique `@value`. Give the list an accessibl
 Import the root and use the parts it yields:
 
 ```gts
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 <template>
   <Tabs @defaultValue="account" as |t|>
@@ -50,14 +50,14 @@ import { Tabs } from "@ui-sdk/ember/tabs"
 </template>
 ```
 
-`@ui-sdk/ember/tabs` also exports each part by name, such as `TabsList` and `TabsTab`.
+`ember-ui-sdk/tabs` also exports each part by name, such as `TabsList` and `TabsTab`.
 
 ## Vertical
 
 Set `@orientation="vertical"` to use Up and Down Arrow instead. Style the list as a column beside the panels to match.
 
 ```glimmer-ts title="vertical.gts"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 <template>
   <Tabs @defaultValue="general" @orientation="vertical" as |t|>
@@ -83,7 +83,7 @@ Focus General, then press Down Arrow to choose Security. Up Arrow moves back thr
 Add `@disabled={{true}}` to a tab to prevent selection. Arrow keys can still focus it so people can discover it.
 
 ```glimmer-ts title="disabled.gts"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 <template>
   <Tabs @defaultValue="overview" as |t|>
@@ -109,7 +109,7 @@ Put decorative icons in `t.TabIcon` so they stay out of the tab’s accessible n
 
 ```glimmer-ts title="icons.gts"
 import { Archive, Mail, Reply } from "lucide"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 import { icon } from "./icon"
 
 <template>
@@ -159,9 +159,9 @@ Set `@activation="manual"` when opening a panel takes time, such as a view that 
 A panel becomes a tab stop only when it has no focusable content. A panel with a field lets Tab go straight to the field.
 
 ```glimmer-ts title="manual.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 <template>
   <Tabs @defaultValue="preview" @activation="manual" as |t|>
@@ -190,7 +190,7 @@ Focus Preview, then press Right Arrow. Code receives focus; press Enter or Space
 Arrow keys normally wrap around at either end. Set `@loop={{false}}` to stop there instead.
 
 ```glimmer-ts title="loop.gts"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 const ranges = [
   {
@@ -262,7 +262,7 @@ import { fn } from "@ember/helper"
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 const orientations = [
   { value: "horizontal", label: "Horizontal" },
@@ -317,9 +317,9 @@ Choose Podcasts, then choose Vertical. The same indicator measures and follows t
 Panels normally unmount when another tab is selected. Add `@keepMounted={{true}}` to a panel to keep its content hidden in the page, preserving local state such as a draft.
 
 ```glimmer-ts title="keep-mounted.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Tabs } from "@ui-sdk/ember/tabs"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Field } from "ember-ui-sdk/field"
+import { Tabs } from "ember-ui-sdk/tabs"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 <template>
   <Tabs @defaultValue="reply" as |t|>
@@ -349,7 +349,7 @@ Write a message, switch to Formatting, then return to Reply. Your draft is still
 Add `@hiddenUntilFound={{true}}` to the tabs or a panel to keep closed content available to the browser’s Find command. A match selects its tab with the reason `find-in-page`. This also keeps the panel mounted.
 
 ```glimmer-ts title="find-in-page.gts"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 const policies = [
   {
@@ -392,7 +392,7 @@ Panels expose `data-starting-style` as they enter and `data-ending-style` as the
 Use `data-activation-direction` to choose a slide direction. Put the panels in the same grid cell so they overlap during the transition, as this example does.
 
 ```glimmer-ts title="animation.gts"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 <template>
   <Tabs @defaultValue="overview" as |t|>
@@ -427,7 +427,7 @@ Pass `@value` and update it in `@onValueChange` to own the selected tab. Call `d
 import { on } from "@ember/modifier"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { Tabs, createTabsController } from "@ui-sdk/ember/tabs"
+import { Tabs, createTabsController } from "ember-ui-sdk/tabs"
 import { useLog } from "./log"
 
 export default class Controlled extends Component {
@@ -478,7 +478,7 @@ Render a tab as a link when selection should navigate. It keeps its tab role; ar
 ```
 
 ```glimmer-ts title="links.gts"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 const pages = [
   {
@@ -558,7 +558,7 @@ If the list scrolls, selecting a tab through a controller or the URL scrolls it 
 Pass `@render={{true}}` to render a part as your own element. The part yields `{ part, state }`: bind `part` to your element as a modifier, as in the [links](#links) example, and read `state` to add to its content. Each part’s state is listed under [State](#state).
 
 ```glimmer-ts title="render.gts"
-import { Tabs } from "@ui-sdk/ember/tabs"
+import { Tabs } from "ember-ui-sdk/tabs"
 
 const folders = [
   {

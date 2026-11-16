@@ -9,7 +9,7 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { Minus, Plus } from "lucide"
-import { Drawer } from "@ui-sdk/ember/drawer"
+import { Drawer } from "ember-ui-sdk/drawer"
 import { icon } from "./icon"
 
 const goal = { initial: 350, min: 200, max: 400, step: 10 }
@@ -94,7 +94,7 @@ Open the drawer, adjust the daily goal, then Submit or Cancel. You can also pres
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -118,7 +118,7 @@ The content is the sheet. The drawer positions it inside a full-screen viewport 
 Import the root and use the parts it yields:
 
 ```gts
-import { Drawer } from "@ui-sdk/ember/drawer"
+import { Drawer } from "ember-ui-sdk/drawer"
 
 <template>
   <Drawer as |d|>
@@ -138,7 +138,7 @@ import { Drawer } from "@ui-sdk/ember/drawer"
 Put long content in an inner `min-h-0 flex-1 overflow-y-auto` area. A downward drag scrolls that area first; when it reaches the top, the same gesture can move the drawer. `@initialFocus="content"` starts focus on the sheet itself.
 
 ```glimmer-ts title="scrollable.gts"
-import { Drawer } from "@ui-sdk/ember/drawer"
+import { Drawer } from "ember-ui-sdk/drawer"
 
 const paragraphs = [
   "The drawer rises from any edge, rests on snap points and follows your finger with the same spring as a system sheet.",
@@ -185,7 +185,7 @@ Open the long sheet and scroll its text. At the top, drag downward to move the s
 Side drawers can opt into `@preventEdgeSwipe={{true}}` to keep an edge gesture from starting iOS Safari’s back or forward navigation. It also prevents clicks right at those edges, so use it only when you need that tradeoff.
 
 ```glimmer-ts title="sides.gts"
-import { Drawer } from "@ui-sdk/ember/drawer"
+import { Drawer } from "ember-ui-sdk/drawer"
 
 const sides = [
   {
@@ -258,7 +258,7 @@ A `d.Handle` is a button with an accessible name. Pressing it moves to the next 
 For a sheet with one snap point, use a decorative bar instead of an inactive button.
 
 ```glimmer-ts title="snap-points.gts"
-import { Drawer } from "@ui-sdk/ember/drawer"
+import { Drawer } from "ember-ui-sdk/drawer"
 
 const places = [
   { name: "Blue Bottle Coffee", detail: "Coffee · 0.2 mi" },
@@ -351,7 +351,7 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { fn } from "@ember/helper"
-import { Drawer } from "@ui-sdk/ember/drawer"
+import { Drawer } from "ember-ui-sdk/drawer"
 
 const places = [
   { name: "Blue Bottle Coffee", detail: "Coffee · 0.2 mi" },
@@ -427,9 +427,9 @@ Open directions at the small snap point and choose another place behind the shee
 A drawer opened inside another joins its stack. Escape and outside presses affect the topmost one; closing a parent closes its children. `--drawer-stack` follows the sheets above it as they open and drag, so a parent can scale back with `[scale:calc(1-var(--drawer-stack)*0.04)]`.
 
 ```glimmer-ts title="nested.gts"
-import { Drawer } from "@ui-sdk/ember/drawer"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Drawer } from "ember-ui-sdk/drawer"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 
 <template>
   <Drawer as |d|>
@@ -495,10 +495,10 @@ A `d.Outlet` makes another element follow the sheet’s progress. Its `@keyframe
 
 ```glimmer-ts title="outlet.gts"
 import Component from "@glimmer/component"
-import { Drawer } from "@ui-sdk/ember/drawer"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
-import { Textarea } from "@ui-sdk/ember/textarea"
+import { Drawer } from "ember-ui-sdk/drawer"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
+import { Textarea } from "ember-ui-sdk/textarea"
 
 const messages = [
   { from: "Inès", text: "The proofs are back from the printer." },
@@ -564,7 +564,7 @@ Connect external triggers and the drawer to one `createDrawerController<Payload,
 Calling `open({ payload })` on the controller returns a Promise with the closing `reason` and `returnValue`. `getSnapPoint()` and `setSnapPoint()` also let code read or move the sheet.
 
 ```gts
-import { Drawer, createDrawerController } from "@ui-sdk/ember/drawer"
+import { Drawer, createDrawerController } from "ember-ui-sdk/drawer"
 
 const share = createDrawerController<SharedFile, "copy" | "email">()
 
@@ -586,7 +586,7 @@ Put the least risky action first because a keyboard or code open starts there. U
 ```glimmer-ts title="action-sheet.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Drawer, createDrawerController } from "@ui-sdk/ember/drawer"
+import { Drawer, createDrawerController } from "ember-ui-sdk/drawer"
 import { useLog } from "./log"
 
 type PhotoAction = "share" | "duplicate" | "delete" | "cancel"

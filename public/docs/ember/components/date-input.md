@@ -5,8 +5,8 @@ Type a date one part at a time, in the order your user's language writes it.
 Use a Date Input for dates people know by heart, like a birthday or a booking date. Each part of the date is its own small input, ordered the way the locale writes it.
 
 ```glimmer-ts title="basic.gts"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 <template>
   <Field as |f|>
@@ -21,7 +21,7 @@ Click the month and type 11042026. Each part moves to the next as it fills. Pres
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -41,8 +41,8 @@ DateInput as |d|
 Put the input in a [Field](./field.md) and give it a label:
 
 ```gts
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 <template>
   <Field as |f|>
@@ -61,8 +61,8 @@ Type digits and each segment fills, then moves on. A month that can't take anoth
 The Field's label names the group, and clicking it focuses the first segment. Its description is read with the input.
 
 ```glimmer-ts title="field.gts"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 <template>
   <Field as |f|>
@@ -80,8 +80,8 @@ Click Birthday to focus the month, then type a date. Screen readers read the des
 Set `@granularity` to `"hour"`, `"minute"` or `"second"` to add the time. The value becomes a local date and time like `"2026-11-02T14:30"`. For a time alone, use [Time Input](./time-input.md).
 
 ```glimmer-ts title="date-time.gts"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 <template>
   <Field as |f|>
@@ -98,8 +98,8 @@ Tab through the date and time. Type a P or an A in the last segment to switch be
 `@min` and `@max` take ISO dates. A date outside them is invalid: the input sets `data-invalid`, and its form won't submit.
 
 ```glimmer-ts title="min-max.gts"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 <template>
   <Field as |f|>
@@ -118,8 +118,8 @@ Change the year of Check-in to 2027 to see it turn invalid, then back to 2026.
 `@unavailable` takes the same matchers as [Calendar](./calendar.md#unavailable-dates): ISO dates, `{ from, to }` ranges, weekdays like `{ weekday: [0, 6] }`, or a function. An unavailable date is invalid with the message "This date isn't available."
 
 ```glimmer-ts title="unavailable.gts"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 const unavailable = { weekday: [0, 6] }
 
@@ -140,8 +140,8 @@ Step the day of Delivery date back from Monday the 2nd to Sunday the 1st. The in
 The input reads its order, separators and clock from `@locale`, or from the page's language when you leave it out. The digits are always 0 to 9, and the calendar is always the Gregorian one, so the value means the same date everywhere. On the server, the input renders in English until it reads the page's language; set `@locale` when that first render matters.
 
 ```glimmer-ts title="locale.gts"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 <template>
   <div data-slot="stack">
@@ -168,8 +168,8 @@ The same date in British English, German and Japanese. Each orders its parts its
 Set `@disabled={{true}}` on the input, or on its Field or fieldset, to keep it from focus and from its form.
 
 ```glimmer-ts title="disabled.gts"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 <template>
   <Field as |f|>
@@ -186,8 +186,8 @@ Click Start date or press Tab to reach it. Focus skips it, and the date stays No
 Set `@readOnly={{true}}` for a date people can focus, read and submit as it is.
 
 ```glimmer-ts title="read-only.gts"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 <template>
   <Field as |f|>
@@ -206,9 +206,9 @@ A hidden input submits the ISO date under `@name`. An empty or partly typed date
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
-import { TimeInput } from "@ui-sdk/ember/time-input"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
+import { TimeInput } from "ember-ui-sdk/time-input"
 import { useLog } from "./log"
 
 export default class Form extends Component {
@@ -255,8 +255,8 @@ Pass `@value` and update it in `@onValueChange`, which also receives the change 
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 import { useLog } from "./log"
 
 export default class Controlled extends Component {
@@ -297,8 +297,8 @@ Create a controller with `createDateInputController()` and pass it as `@controll
 ```glimmer-ts title="controller.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { createDateInputController, DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { createDateInputController, DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 export default class Controller extends Component {
   publish = createDateInputController()
@@ -338,8 +338,8 @@ Choose Christmas to set the date, Edit Year to focus the year, or Clear to empty
 Render the segments yourself with a block. Its `d.state.segments` lists each segment in order, with the text between them. Render a `d.Segment` for each one that is editable, and give the text between segments content of your own.
 
 ```glimmer-ts title="segments.gts"
-import { DateInput } from "@ui-sdk/ember/date-input"
-import { Field } from "@ui-sdk/ember/field"
+import { DateInput } from "ember-ui-sdk/date-input"
+import { Field } from "ember-ui-sdk/field"
 
 <template>
   <Field as |f|>

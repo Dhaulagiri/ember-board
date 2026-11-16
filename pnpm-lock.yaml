@@ -27,11 +27,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2
       '@ui-sdk/core':
-        specifier: link:./vendor/@ui-sdk/core
-        version: link:vendor/@ui-sdk/core
-      '@ui-sdk/ember':
-        specifier: link:./vendor/@ui-sdk/ember
-        version: link:vendor/@ui-sdk/ember
+        specifier: ^0.1.0-beta.5
+        version: 0.1.0-beta.5
       babel-plugin-ember-template-compilation:
         specifier: ^4.0.1
         version: 4.0.1
@@ -44,6 +41,9 @@ importers:
       ember-source:
         specifier: ~7.4.0
         version: 7.4.0(@glimmer/component@2.2.1)
+      ember-ui-sdk:
+        specifier: link:./vendor/ember-ui-sdk
+        version: link:vendor/ember-ui-sdk
       lucide:
         specifier: 1.54.0
         version: 1.54.0
@@ -549,6 +549,9 @@ packages:
 
   '@types/node@24.19.2':
     resolution: {integrity: sha512-93d49wCWJkCyN87MxLpNN6KXPCwFw7bVUg79mGUV1OS40JGWwVCr8n61DXCSqz7CV6/VfPkb7xec7uP2M+QHWQ==}
+
+  '@ui-sdk/core@0.1.0-beta.5':
+    resolution: {integrity: sha512-dmunrxWrZ+vwldKJ6THQNYyyfbLFY6K82hBvIZSnuGwpEQmXKmM0iuANgGXtaqw8unSB2p9E5s3y7zfE9rgP6Q==}
 
   '@volar/kit@2.4.31':
     resolution: {integrity: sha512-pQgvegC28dfdNcs/iDNZVHkMs+dG7rpD9Aj+sNU2hildv1QuH7/MIoff/cSJW/IR25AGOeHWbJXWWFKDXXWtVw==}
@@ -1710,6 +1713,8 @@ snapshots:
   '@types/node@24.19.2':
     dependencies:
       undici-types: 7.24.6
+
+  '@ui-sdk/core@0.1.0-beta.5': {}
 
   '@volar/kit@2.4.31(typescript@5.9.3)':
     dependencies:

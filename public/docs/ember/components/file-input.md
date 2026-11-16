@@ -6,7 +6,7 @@ A file input holds the files someone chooses, drops, or pastes, checks them agai
 
 ```glimmer-ts title="basic.gts"
 import { File, Upload, X } from "lucide"
-import { FileInput, formatFileSize } from "@ui-sdk/ember/file-input"
+import { FileInput, formatFileSize } from "ember-ui-sdk/file-input"
 import { icon } from "./icon"
 
 <template>
@@ -44,7 +44,7 @@ Browse Files or drop a few files on the zone, then remove one. Tab to the list t
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -67,7 +67,7 @@ The trigger opens the system file picker. The drop zone takes files that are dro
 Import the root and use the parts it yields:
 
 ```gts
-import { FileInput, formatFileSize } from "@ui-sdk/ember/file-input"
+import { FileInput, formatFileSize } from "ember-ui-sdk/file-input"
 
 <template>
   <FileInput @multiple={{true}} name="attachments" as |i|>
@@ -122,7 +122,7 @@ Set `@target="document"` to take files dropped anywhere on the page. The zone sh
 
 ```glimmer-ts title="page.gts"
 import { File, Upload, X } from "lucide"
-import { FileInput, formatFileSize } from "@ui-sdk/ember/file-input"
+import { FileInput, formatFileSize } from "ember-ui-sdk/file-input"
 import { icon } from "./icon"
 
 <template>

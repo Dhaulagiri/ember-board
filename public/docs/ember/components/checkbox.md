@@ -5,7 +5,7 @@ Choose one or more options, individually or as a group.
 Use a checkbox for a choice someone can check or uncheck. Use a group when several choices belong to one value.
 
 ```glimmer-ts title="basic.gts"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
+import { Checkbox } from "ember-ui-sdk/checkbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -34,7 +34,7 @@ Click the checkbox or its label, or focus it and press Space, to accept the term
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -53,7 +53,7 @@ Wrap the checkbox and its text in a label. The indicator shows while the checkbo
 Import the root and use the parts it yields:
 
 ```gts
-import { Checkbox } from "@ui-sdk/ember/checkbox"
+import { Checkbox } from "ember-ui-sdk/checkbox"
 
 <template>
   <label>
@@ -70,8 +70,8 @@ import { Checkbox } from "@ui-sdk/ember/checkbox"
 Use `Field` with its `f.Label` and `f.Description` when a choice needs more explanation. The field connects both to the checkbox.
 
 ```glimmer-ts title="description.gts"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Field } from "@ui-sdk/ember/field"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Field } from "ember-ui-sdk/field"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -107,7 +107,7 @@ Click Accept terms and conditions. The field connects the label and description 
 `@disabled={{true}}` prevents focus and changes, and leaves the checkbox out of form submissions. A disabled `fieldset` does the same.
 
 ```glimmer-ts title="disabled.gts"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
+import { Checkbox } from "ember-ui-sdk/checkbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -146,8 +146,8 @@ Security alerts are always on, so that checkbox is disabled. Clicking its label 
 `@readOnly={{true}}` keeps the checkbox focusable and included in form submissions, while preventing the user from changing it.
 
 ```glimmer-ts title="read-only.gts"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Field } from "@ui-sdk/ember/field"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Field } from "ember-ui-sdk/field"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -200,7 +200,7 @@ import {
   Checkbox,
   createCheckboxController,
   type CheckedState,
-} from "@ui-sdk/ember/checkbox"
+} from "ember-ui-sdk/checkbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -261,8 +261,8 @@ Set `@name` and `@value` to include a checked checkbox in a native form. Uncheck
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { Field } from "@ui-sdk/ember/field"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { Field } from "ember-ui-sdk/field"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -328,7 +328,7 @@ Create the account with the terms unchecked to see native validation, then accep
 
 ```glimmer-ts title="group.gts"
 import { array } from "@ember/helper"
-import { CheckboxGroup } from "@ui-sdk/ember/checkbox"
+import { CheckboxGroup } from "ember-ui-sdk/checkbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -376,7 +376,7 @@ Pass `@allValues` to the group so the parent has the right state on the first re
 
 ```glimmer-ts title="group-parent.gts"
 import { array } from "@ember/helper"
-import { CheckboxGroup } from "@ui-sdk/ember/checkbox"
+import { CheckboxGroup } from "ember-ui-sdk/checkbox"
 import { Check, Minus } from "lucide"
 import { icon } from "./icon"
 
@@ -440,7 +440,7 @@ Disable the group to lock every checkbox, or disable one child to keep just that
 
 ```glimmer-ts title="group-disabled.gts"
 import { array } from "@ember/helper"
-import { CheckboxGroup } from "@ui-sdk/ember/checkbox"
+import { CheckboxGroup } from "ember-ui-sdk/checkbox"
 import { Check, Minus } from "lucide"
 import { icon } from "./icon"
 
@@ -535,7 +535,7 @@ import { on } from "@ember/modifier"
 import {
   CheckboxGroup,
   createCheckboxGroupController,
-} from "@ui-sdk/ember/checkbox"
+} from "ember-ui-sdk/checkbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -615,8 +615,8 @@ Set `@name` on the group to submit every checked value under that name. `@requir
 ```glimmer-ts title="group-field.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { CheckboxGroup } from "@ui-sdk/ember/checkbox"
-import { Field } from "@ui-sdk/ember/field"
+import { CheckboxGroup } from "ember-ui-sdk/checkbox"
+import { Field } from "ember-ui-sdk/field"
 import { Check } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -682,7 +682,7 @@ The same parent checkbox can select rows from a table header. Each row supplies 
 ```glimmer-ts title="table.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
-import { CheckboxGroup } from "@ui-sdk/ember/checkbox"
+import { CheckboxGroup } from "ember-ui-sdk/checkbox"
 import { Check, Minus } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -802,7 +802,7 @@ The indicator has `data-starting-style` as it appears and `data-ending-style` wh
 `@keepMounted={{true}}` keeps the indicator in the page while unchecked, with `data-unchecked`, for styles that show both states.
 
 ```glimmer-ts title="indicator.gts"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
+import { Checkbox } from "ember-ui-sdk/checkbox"
 import { Check } from "lucide"
 import { icon } from "./icon"
 
@@ -843,7 +843,7 @@ Check and uncheck a task. The check scales and fades in, and out before it unmou
 Pass `@render={{true}}` to a checkbox, indicator, or group to render your own element. The part yields `{ part, state }`: bind `part` to the interactive element so its role, label, and keyboard behavior stay connected, and read `state` to change its content.
 
 ```glimmer-ts title="render.gts"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
+import { Checkbox } from "ember-ui-sdk/checkbox"
 import { Check, Plus } from "lucide"
 import { icon } from "./icon"
 

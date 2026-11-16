@@ -4,7 +4,7 @@ Navigate pages with buttons, links, or your router.
 
 ```glimmer-ts title="basic.gts"
 import Component from "@glimmer/component"
-import { Pagination } from "@ui-sdk/ember/pagination"
+import { Pagination } from "ember-ui-sdk/pagination"
 import { ChevronLeft, ChevronRight, Ellipsis } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -68,7 +68,7 @@ Choose a page, or use Previous and Next. The console logs each page and its reas
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -103,7 +103,7 @@ Give Previous, Next, First, and Last text or an `aria-label`. At an end, a step 
 Import the root and use the parts it yields:
 
 ```gts
-import { Pagination } from "@ui-sdk/ember/pagination"
+import { Pagination } from "ember-ui-sdk/pagination"
 
 <template>
   <Pagination aria-label="Pagination" @pageCount={{10}} as |p|>
@@ -130,7 +130,7 @@ import { Pagination } from "@ui-sdk/ember/pagination"
 </template>
 ```
 
-`@ui-sdk/ember/pagination` also exports each part by name, such as `PaginationLink` and `PaginationNext`.
+`ember-ui-sdk/pagination` also exports each part by name, such as `PaginationLink` and `PaginationNext`.
 
 ## Total and Page Size
 
@@ -142,7 +142,7 @@ A page past the end, like after the count shrinks, reads as the last page.
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { Pagination } from "@ui-sdk/ember/pagination"
+import { Pagination } from "ember-ui-sdk/pagination"
 import { ChevronLeft, ChevronRight, Ellipsis } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -305,7 +305,7 @@ Pass `@render={{true}}` to any part to render your own element. The part yields 
 ```glimmer-ts title="render.gts"
 import Component from "@glimmer/component"
 import { concat } from "@ember/helper"
-import { Pagination } from "@ui-sdk/ember/pagination"
+import { Pagination } from "ember-ui-sdk/pagination"
 import { ArrowLeft, ArrowRight } from "lucide"
 import { icon } from "./icon"
 

@@ -6,7 +6,7 @@ Date Picker combines a text field with [Calendar](./calendar.md). People can typ
 
 ```glimmer-ts title="basic.gts"
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 
 <template>
@@ -43,7 +43,7 @@ Type a date and press Enter, or open the calendar and choose a day. The field fo
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -67,7 +67,7 @@ In range mode, the picker renders an input for each end; pass `@end={{true}}` to
 Import the root and use the parts it yields:
 
 ```gts
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 
 <template>
   <DatePicker @defaultValue="2026-10-16" as |dp|>
@@ -101,7 +101,7 @@ The field formats a valid date after it is committed, leaving your typing alone 
 
 ```glimmer-ts title="invalid.gts"
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 
 <template>
@@ -146,7 +146,7 @@ For two months side by side, set `@months={{2}}` and render a second `dp.Grid` w
 ```glimmer-ts title="range.gts"
 import { array } from "@ember/helper"
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 
 <template>
@@ -197,7 +197,7 @@ Choose October 20, then October 23. The calendar stays open after the first date
 ```glimmer-ts title="presets.gts"
 import { array } from "@ember/helper"
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 
 <template>
@@ -254,7 +254,7 @@ For ranges, `@minDays` and `@maxDays` count both endpoints. `@allowUnavailable={
 
 ```glimmer-ts title="min-max.gts"
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 
 const unavailable = [{ weekday: [0, 6] }]
@@ -306,7 +306,7 @@ Calendar’s `@weekStartsOn`, `@weekdayFormat`, `@fixedWeeks`, `@showOutsideDays
 
 ```glimmer-ts title="locale.gts"
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 
 <template>
@@ -348,7 +348,7 @@ Enter 3.12.2026 and press Enter. The field, format hint, and calendar use German
 
 ```glimmer-ts title="clear.gts"
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 
 <template>
@@ -411,7 +411,7 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
 import type { DatePickerValue } from "@ui-sdk/core/date-picker"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 
 export default class Dismissible extends Component {
@@ -490,7 +490,7 @@ Choose a check-in date, then press outside the calendar. The message asks for a 
 ```glimmer-ts title="popup.gts"
 import Component from "@glimmer/component"
 import { ChevronLeft, ChevronRight, Calendar } from "lucide"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -559,8 +559,8 @@ In a [Field](./field.md), the field connects the label, description, and errors 
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
-import { Field } from "@ui-sdk/ember/field"
+import { DatePicker } from "ember-ui-sdk/date-picker"
+import { Field } from "ember-ui-sdk/field"
 import { ChevronLeft, ChevronRight, Calendar } from "lucide"
 import { icon } from "./icon"
 import { useLog } from "./log"
@@ -629,7 +629,7 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
 import type { DatePickerValue } from "@ui-sdk/core/date-picker"
-import { DatePicker } from "@ui-sdk/ember/date-picker"
+import { DatePicker } from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -685,7 +685,7 @@ import { ChevronLeft, ChevronRight, Calendar, X } from "lucide"
 import {
   DatePicker,
   createDatePickerController,
-} from "@ui-sdk/ember/date-picker"
+} from "ember-ui-sdk/date-picker"
 import { icon } from "./icon"
 
 export default class Controller extends Component {

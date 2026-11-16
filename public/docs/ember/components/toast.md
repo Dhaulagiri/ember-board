@@ -7,7 +7,7 @@ A toast tells someone that something happened, like a saved change or a sent mes
 ```glimmer-ts title="demo.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import { useLog } from "./log"
 
 export default class Demo extends Component {
@@ -48,7 +48,7 @@ Press Create Event. Choose Undo, swipe the toast away, or wait for it to close. 
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -74,7 +74,7 @@ The region renders one `t.Toast` for each toast in its queue, newest first. A to
 Import the region and create a toaster, then call it from a handler when an action finishes, such as `notify("Event created", { description: "Friday at 10:00 AM" })`:
 
 ```gts
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 
 const notify = createToaster()
 
@@ -107,7 +107,7 @@ import {
   OctagonX,
   TriangleAlert,
 } from "lucide"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import { icon } from "./icon"
 
 export default class Types extends Component {
@@ -192,8 +192,8 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { Check, ChevronDown } from "lucide"
-import { Select } from "@ui-sdk/ember/select"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { Select } from "ember-ui-sdk/select"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import { icon } from "./icon"
 
 const sides = [
@@ -299,7 +299,7 @@ Add an `action`, like Undo, and a `cancel` button that dismisses the toast. Thei
 ```glimmer-ts title="action.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import { useLog } from "./log"
 
 export default class Action extends Component {
@@ -347,7 +347,7 @@ Give an action an `href` to render it as a link. It keeps normal link behavior, 
 ```glimmer-ts title="link.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 
 export default class Link extends Component {
   toast = createToaster()
@@ -390,7 +390,7 @@ Press Send Invoice, then follow View in the toast.
 ```glimmer-ts title="promise.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 
 export default class PromiseExample extends Component {
   toast = createToaster()
@@ -449,8 +449,8 @@ import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { Check } from "lucide"
-import { Checkbox } from "@ui-sdk/ember/checkbox"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { Checkbox } from "ember-ui-sdk/checkbox"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import { icon } from "./icon"
 
 const notifications = [
@@ -526,7 +526,7 @@ Set `duration` in milliseconds, on the toaster or on one toast, or `Infinity` fo
 ```glimmer-ts title="duration.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 
 export default class Duration extends Component {
   toast = createToaster()
@@ -584,7 +584,7 @@ Keep the id the toaster returns to update or dismiss that toast, or pass your ow
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { CircleCheck, LoaderCircle } from "lucide"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import { icon } from "./icon"
 import { useLog } from "./log"
 
@@ -665,7 +665,7 @@ Return a promise from an action to keep the toast open while it runs. The action
 ```glimmer-ts title="async-action.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import { useLog } from "./log"
 
 const wait = (ms: number) =>
@@ -723,7 +723,7 @@ F6 moves focus to the newest toast and back. Set the region's `@shortcut` to use
 ```glimmer-ts title="shortcut.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import { useLog } from "./log"
 
 export default class Shortcut extends Component {
@@ -759,16 +759,16 @@ Press Send Message, then Alt+T (Option+T on a Mac) to focus the toast. Press Esc
 
 ## Overlay Host and Confirm
 
-Instead of placing a region, render `OverlayHost` from `@ui-sdk/ember/overlays` once near your app's root. It renders the toaster's region, and `confirm()` questions as alert dialogs. A region you place yourself takes over from the host for its toaster. [Alert Dialog](./alert-dialog.md#confirm-from-anywhere) covers `confirm()`.
+Instead of placing a region, render `OverlayHost` from `ember-ui-sdk/overlays` once near your app's root. It renders the toaster's region, and `confirm()` questions as alert dialogs. A region you place yourself takes over from the host for its toaster. [Alert Dialog](./alert-dialog.md#confirm-from-anywhere) covers `confirm()`.
 
 ```glimmer-ts title="overlay-host.gts"
 import Component from "@glimmer/component"
 import { tracked } from "@glimmer/tracking"
 import { on } from "@ember/modifier"
 import { fn } from "@ember/helper"
-import { AlertDialog, createConfirm } from "@ui-sdk/ember/alert-dialog"
-import { createOverlays, OverlayHost } from "@ui-sdk/ember/overlays"
-import { createToaster } from "@ui-sdk/ember/toast"
+import { AlertDialog, createConfirm } from "ember-ui-sdk/alert-dialog"
+import { createOverlays, OverlayHost } from "ember-ui-sdk/overlays"
+import { createToaster } from "ember-ui-sdk/toast"
 import { icon } from "./icon"
 import { CircleCheck } from "lucide"
 
@@ -882,7 +882,7 @@ Pass anything else your toast needs in `data`, and read it from the toast the re
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { X } from "lucide"
-import { createToaster, ToastRegion } from "@ui-sdk/ember/toast"
+import { createToaster, ToastRegion } from "ember-ui-sdk/toast"
 import { icon } from "./icon"
 import { useLog } from "./log"
 

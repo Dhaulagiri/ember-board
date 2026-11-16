@@ -5,7 +5,7 @@ Show a measurement within a known range, such as storage used or an account quot
 Use a Meter for a value within a known range, such as storage used, a battery level or an account quota. It fills a track to show the value, and screen readers announce the same value.
 
 ```glimmer-ts title="basic.gts"
-import { Meter } from "@ui-sdk/ember/meter"
+import { Meter } from "ember-ui-sdk/meter"
 
 <template>
   <Meter @value={{68}} as |m|>
@@ -23,7 +23,7 @@ Read the storage meter. The label names it, and both the visible value and scree
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -50,7 +50,7 @@ The value is already part of the root's accessible description. The visible valu
 Import the root and use the parts it yields:
 
 ```gts
-import { Meter } from "@ui-sdk/ember/meter"
+import { Meter } from "ember-ui-sdk/meter"
 
 <template>
   <Meter @value={{40}} as |m|>
@@ -63,14 +63,14 @@ import { Meter } from "@ui-sdk/ember/meter"
 </template>
 ```
 
-`@ui-sdk/ember/meter` also exports each part by name, such as `MeterLabel` and `MeterTrack`.
+`ember-ui-sdk/meter` also exports each part by name, such as `MeterLabel` and `MeterTrack`.
 
 ## Bounds
 
 `@min` and `@max` set the range. They default to 0 and 100. A value outside the range is clamped for the fill, the percentage and `aria-valuenow`, but the state's `value` and a format other than percent keep it as you passed it. Here, 720 sits about 76% of the way from 300 to 850. Decimal formatting keeps the visible value as 720.
 
 ```glimmer-ts title="min-max.gts"
-import { Meter } from "@ui-sdk/ember/meter"
+import { Meter } from "ember-ui-sdk/meter"
 
 const decimal = { style: "decimal" } as const
 
@@ -92,7 +92,7 @@ Compare the score with the filled track. The number shows 720; the fill shows it
 Pass `Intl.NumberFormat` options to `@format` for units, currency, or decimal places. A function can return custom text, such as the number of occupied seats.
 
 ```glimmer-ts title="format.gts"
-import { Meter } from "@ui-sdk/ember/meter"
+import { Meter } from "ember-ui-sdk/meter"
 
 const meters = [
   {
@@ -148,7 +148,7 @@ Set `dir="rtl"` on the surrounding content to fill the track from the right.
 Use `@getValueLabel` when a screen reader needs more context than the visible number. It receives the value and details containing `formatted`, `percent`, `min`, and `max`.
 
 ```glimmer-ts title="value-label.gts"
-import { Meter } from "@ui-sdk/ember/meter"
+import { Meter } from "ember-ui-sdk/meter"
 
 const valueLabel = (
   value: number,

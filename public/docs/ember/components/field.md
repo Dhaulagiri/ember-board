@@ -5,8 +5,8 @@ Connect a form control to its label, description, and validation errors.
 A field connects a form control to its label, its description and the errors it shows, and wires up `id`, `for` and `aria-describedby` for you.
 
 ```glimmer-ts title="input.gts"
-import { Field, FieldDescription } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Field, FieldDescription } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 
 <template>
   <div data-slot="stack">
@@ -29,7 +29,7 @@ Press Username to focus the input, then type a name.
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -49,8 +49,8 @@ Field as |f|
 Import the field and pass its `f.field` to the control as `@field`:
 
 ```gts
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 
 <template>
   <Field name="username" as |f|>
@@ -79,7 +79,7 @@ Group related fields in a [field set](#field-sets):
 </FieldSet>
 ```
 
-`@ui-sdk/ember/field` exports each part by name, such as `FieldSet` and `FieldLegend`.
+`ember-ui-sdk/field` exports each part by name, such as `FieldSet` and `FieldLegend`.
 
 ## Controls
 
@@ -103,8 +103,8 @@ Leave an error empty to show the browser's message, or use `@match="valueMissing
 ```glimmer-ts title="validation.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Field } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 import { useLog } from "./log"
 
 export default class Validation extends Component {
@@ -187,8 +187,8 @@ The control submits its value under its own `name`, or the field's name if it ha
 A field set groups related fields under a legend, and disables them together.
 
 ```glimmer-ts title="field-set.gts"
-import { Field, FieldGroup, FieldSet } from "@ui-sdk/ember/field"
-import { Input } from "@ui-sdk/ember/input"
+import { Field, FieldGroup, FieldSet } from "ember-ui-sdk/field"
+import { Input } from "ember-ui-sdk/input"
 
 <template>
   <FieldSet as |s|>

@@ -5,7 +5,7 @@ Show an image with a fallback while it loads or if it fails.
 Use an Avatar for a person or a team, like in a comment, a member list or an account menu. It shows initials or an icon until the image loads, and keeps showing them if the image fails.
 
 ```glimmer-ts title="basic.gts"
-import { Avatar } from "@ui-sdk/ember/avatar"
+import { Avatar } from "ember-ui-sdk/avatar"
 
 const person = {
   name: "shadcn",
@@ -29,7 +29,7 @@ The image replaces the initials once it loads. A screen reader can read the pers
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -53,7 +53,7 @@ The image is a real `img`, including in server markup. The browser can start fet
 Import the root and use the parts it yields:
 
 ```gts
-import { Avatar } from "@ui-sdk/ember/avatar"
+import { Avatar } from "ember-ui-sdk/avatar"
 
 <template>
   <Avatar as |a|>
@@ -63,7 +63,7 @@ import { Avatar } from "@ui-sdk/ember/avatar"
 </template>
 ```
 
-`@ui-sdk/ember/avatar` also exports each part by name, such as `AvatarImage` and `AvatarFallback`.
+`ember-ui-sdk/avatar` also exports each part by name, such as `AvatarImage` and `AvatarFallback`.
 
 ## Fallback Delay
 

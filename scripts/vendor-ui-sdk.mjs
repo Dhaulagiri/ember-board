@@ -2,43 +2,42 @@ import { cpSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { execFileSync } from "node:child_process"
 import { join, resolve } from "node:path"
 
-const ui = resolve(process.argv[2] ?? join(import.meta.dirname, "..", "..", "ui"))
-const vendor = join(import.meta.dirname, "..", "vendor", "@ui-sdk")
+const repo = resolve(
+  process.argv[2] ?? join(import.meta.dirname, "..", "..", "ui-sdk-ember")
+)
+const pkgDir = join(repo, "packages", "ember-ui-sdk")
+const root = join(import.meta.dirname, "..")
+const vendor = join(root, "vendor")
+const to = join(vendor, "ember-ui-sdk")
 const skip = /(\.test\.ts|\.spec\.ts|__tests__)/
 
 rmSync(vendor, { recursive: true, force: true })
-for (const name of ["core", "ember"]) {
-  const from = join(ui, "packages", name)
-  const to = join(vendor, name)
-  cpSync(join(from, "src"), join(to, "src"), {
-    recursive: true,
-    filter: (path) => !skip.test(path),
-  })
-  const pkg = JSON.parse(readFileSync(join(from, "package.json"), "utf8"))
-  delete pkg.publishConfig
-  delete pkg.scripts
-  delete pkg.devDependencies
-  if (pkg.dependencies?.["@ui-sdk/core"]) {
-    pkg.dependencies["@ui-sdk/core"] = "file:../core"
-  }
-  writeFileSync(join(to, "package.json"), `${JSON.stringify(pkg, null, 2)}\n`)
-}
+cpSync(join(pkgDir, "src"), join(to, "src"), {
+  recursive: true,
+  filter: (path) => !skip.test(path),
+})
+const pkg = JSON.parse(readFileSync(join(pkgDir, "package.json"), "utf8"))
+delete pkg.publishConfig
+delete pkg.scripts
+delete pkg.devDependencies
+delete pkg.dependencies
+writeFileSync(join(to, "package.json"), `${JSON.stringify(pkg, null, 2)}\n`)
 
-const docs = join(import.meta.dirname, "..", "public", "docs", "ember")
+const docs = join(root, "public", "docs", "ember")
 rmSync(docs, { recursive: true, force: true })
-cpSync(join(ui, "packages", "ember", "docs", "llms.txt"), join(docs, "llms.txt"))
-cpSync(join(ui, "packages", "ember", "docs", "components"), join(docs, "components"), {
+cpSync(join(pkgDir, "docs", "llms.txt"), join(docs, "llms.txt"))
+cpSync(join(pkgDir, "docs", "components"), join(docs, "components"), {
   recursive: true,
 })
 
-const commit = execFileSync("git", ["-C", ui, "rev-parse", "--short", "HEAD"], {
-  encoding: "utf8",
-}).trim()
-const dirty = execFileSync("git", ["-C", ui, "status", "--porcelain", "packages/core", "packages/ember"], {
-  encoding: "utf8",
-}).trim()
+const git = (...args) =>
+  execFileSync("git", ["-C", repo, ...args], { encoding: "utf8" }).trim()
+const commit = git("rev-parse", "--short", "HEAD")
+const dirty = git("status", "--porcelain", "packages/ember-ui-sdk")
 writeFileSync(
   join(vendor, "VERSION"),
   `${commit}${dirty ? " plus uncommitted changes" : ""}\n`
 )
-console.log(`Vendored @ui-sdk/core and @ui-sdk/ember from ${ui} at ${commit}${dirty ? " (dirty)" : ""}.`)
+console.log(
+  `Vendored ember-ui-sdk from ${repo} at ${commit}${dirty ? " (dirty)" : ""}.`
+)

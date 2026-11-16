@@ -13,7 +13,7 @@ Use a slider to pick a number or a range along a scale, like a volume or a price
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -47,7 +47,7 @@ A single thumb is named by a `f.Label` in a `Field`, or by `aria-label` on the t
 Import the root and use the parts it yields:
 
 ```gts
-import { Slider } from "@ui-sdk/ember/slider"
+import { Slider } from "ember-ui-sdk/slider"
 
 <template>
   <Slider @defaultValue={{50}} as |s|>
@@ -68,8 +68,8 @@ Pass an array for a range, then render one thumb per number. Give each thumb its
 
 ```glimmer-ts title="range.gts"
 import { array } from "@ember/helper"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 const currency = {
   style: "currency",
@@ -110,8 +110,8 @@ Any number of thumbs works the same way. They never pass each other, and a press
 
 ```glimmer-ts title="multiple.gts"
 import { array } from "@ember/helper"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 const thumbs = ["Low", "Medium", "High"]
 const percent = { style: "unit", unit: "percent" } as const
@@ -143,8 +143,8 @@ Adjust Low, Medium and High independently, without moving one past another.
 Set `@orientation="vertical"` and give the slider a height. The bottom is the minimum, ArrowUp increases the value, and every part gets `data-orientation`, so `[data-orientation="vertical"]` styles the vertical axis.
 
 ```glimmer-ts title="vertical.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 const channels = [
   { label: "Bass", value: 50 },
@@ -177,8 +177,8 @@ Drag up or down, or use the arrow keys, to adjust Bass and Treble.
 Put the slider in a `Field`. The label names the thumb, the description describes it, and `s.Value` shows the value beside the label. Screen readers don't announce `s.Value` as it changes, since the thumb already says its value.
 
 ```glimmer-ts title="field.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 const percent = { style: "percent" } as const
 
@@ -216,8 +216,8 @@ Click the Volume label to focus the thumb, then use the arrow keys to change the
 Set `@disabled={{true}}`. A disabled slider can't be focused or moved, and isn't submitted. A disabled fieldset around it disables it too.
 
 ```glimmer-ts title="disabled.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 <template>
   <Field as |f|>
@@ -248,8 +248,8 @@ Pass `@value` and update it in `@onValueChange` to control the slider. The value
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { tracked } from "@glimmer/tracking"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 import { useLog } from "./log"
 
 export default class Controlled extends Component {
@@ -305,8 +305,8 @@ Drag either Temperature thumb to log the range and its reason. Reset sets the va
 `@min` and `@max` set the bounds, 0 and 100 by default, and `@step` sets how far one step moves, counted from `@min`. Decimal steps avoid floating-point drift, so a 0.1 step can reach 0.3 cleanly. When the steps from `@min` don't land on `@max`, the highest step below it is the end.
 
 ```glimmer-ts title="step.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 const years = { useGrouping: false } as const
 const nine = Array.from({ length: 9 }, (_, index) => index)
@@ -371,8 +371,8 @@ Move Year in steps of five, and Opacity in steps of 0.05.
 Arrow keys move one step. Page Up, Page Down and Shift with an arrow key move by `@largeStep`, which is ten steps unless you set it. Home and End go to the bounds.
 
 ```glimmer-ts title="large-step.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 const percent = { style: "unit", unit: "percent" } as const
 
@@ -410,8 +410,8 @@ Set `@minStepsBetweenThumbs` to keep neighbouring thumbs that many steps apart. 
 
 ```glimmer-ts title="min-steps.gts"
 import { array } from "@ember/helper"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 const time = (minutes: number) =>
   `${Math.floor(minutes / 60)}:${String(minutes % 60).padStart(2, "0")}`
@@ -452,8 +452,8 @@ Move either end of Opening hours. The thumbs stay at least four hours apart.
 
 ```glimmer-ts title="format.gts"
 import Component from "@glimmer/component"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 const sliders = [
   {
@@ -532,8 +532,8 @@ Adjust Budget, Opacity, Weight, Duration and Preis to compare currency, a percen
 `@onValueChange` runs on every step of a drag. `@onValueCommit` runs once, when the interaction that changed the value ends: the pointer lifts, the key comes up, or a screen reader adjusts it. Use the commit callback to save once per interaction. A press that doesn't change the value commits nothing.
 
 ```glimmer-ts title="commit.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 import { useLog } from "./log"
 import Component from "@glimmer/component"
 
@@ -572,8 +572,8 @@ A controller, from `createSliderController()` and passed as `@controller`, moves
 ```glimmer-ts title="controller.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider, createSliderController } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider, createSliderController } from "ember-ui-sdk/slider"
 import { useLog } from "./log"
 
 export default class Controller extends Component {
@@ -638,8 +638,8 @@ A hidden input beside the slider is what the form sees. It takes the slider's `@
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
 import { array } from "@ember/helper"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 import { useLog } from "./log"
 
 const distance = { style: "unit", unit: "kilometer" } as const
@@ -757,8 +757,8 @@ Set `@readOnly={{true}}` to keep the slider focusable and submitted, while drags
 Pass `@render={{true}}` to a part to render your own element. The part yields `{ part, state }`: bind `part` to the element, and read `state` to change its content. The state includes whether a thumb is being dragged, its `thumbValue` and its `percent` along the track. Here the thumb renders a `span`, and a bubble shows its value above it.
 
 ```glimmer-ts title="render.gts"
-import { Field } from "@ui-sdk/ember/field"
-import { Slider } from "@ui-sdk/ember/slider"
+import { Field } from "ember-ui-sdk/field"
+import { Slider } from "ember-ui-sdk/slider"
 
 <template>
   <Field as |f|>

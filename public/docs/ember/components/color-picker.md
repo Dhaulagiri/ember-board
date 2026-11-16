@@ -13,7 +13,7 @@ Use a color picker to choose a color, like a brand or theme color. The value is 
 ## Installation
 
 ```bash
-npm install @ui-sdk/ember @ui-sdk/core
+npm install ember-ui-sdk @ui-sdk/core
 ```
 
 ## Composition
@@ -57,7 +57,7 @@ Each part writes the color as `--color-picker-color`, so a thumb or a swatch fil
 Import the root and use the parts it yields:
 
 ```gts
-import { ColorPicker } from "@ui-sdk/ember/color-picker"
+import { ColorPicker } from "ember-ui-sdk/color-picker"
 
 <template>
   <ColorPicker @defaultValue="#0ea5e9" aria-label="Brand color" as |c|>
@@ -106,7 +106,7 @@ The parts keep a hue while the color turns gray or black, so dragging back out o
 OKLCH spaces its colors evenly for the eye, so two colors with the same lightness look equally bright. Its edge with the colors a screen can show is a curve, which no gradient can draw. Add `a.Canvas` to the area, and it paints the colors inside that edge and leaves the rest clear.
 
 ```glimmer-ts title="oklch.gts"
-import { ColorPicker } from "@ui-sdk/ember/color-picker"
+import { ColorPicker } from "ember-ui-sdk/color-picker"
 
 <template>
   <ColorPicker
@@ -155,7 +155,7 @@ Put `c.SwatchItem`s inside `c.Swatches` for preset colors. Each one is selected 
 
 ```glimmer-ts title="swatches.gts"
 import { Pipette } from "lucide"
-import { ColorPicker } from "@ui-sdk/ember/color-picker"
+import { ColorPicker } from "ember-ui-sdk/color-picker"
 import { icon } from "./icon"
 
 const presets = [
@@ -205,8 +205,8 @@ Choose a preset, or use the arrow keys between them. Type 255 into the first num
 Put a `Popover` inside the picker to open it from a swatch. The parts inside the popup edit the same color, and the swatch in the trigger shows it.
 
 ```glimmer-ts title="popover.gts"
-import { ColorPicker } from "@ui-sdk/ember/color-picker"
-import { Popover } from "@ui-sdk/ember/popover"
+import { ColorPicker } from "ember-ui-sdk/color-picker"
+import { Popover } from "ember-ui-sdk/popover"
 
 <template>
   <ColorPicker aria-label="Background" @defaultValue="#22c55e" as |c|>
@@ -235,7 +235,7 @@ Press the Background swatch to open the picker, then drag to change the color.
 Set `@disabled={{true}}`. A disabled picker can't be focused or changed, and isn't submitted. A disabled `<fieldset>` around it disables it too.
 
 ```glimmer-ts title="disabled.gts"
-import { ColorPicker } from "@ui-sdk/ember/color-picker"
+import { ColorPicker } from "ember-ui-sdk/color-picker"
 
 <template>
   <ColorPicker aria-label="Brand color" @defaultValue="#0ea5e9" @disabled={{true}} as |c|>
@@ -267,7 +267,7 @@ import { on } from "@ember/modifier"
 import {
   ColorPicker,
   createColorPickerController,
-} from "@ui-sdk/ember/color-picker"
+} from "ember-ui-sdk/color-picker"
 import { useLog } from "./log"
 
 export default class Controlled extends Component {
@@ -322,8 +322,8 @@ The hidden input submits the value under `@name`, like `#f97316`, and a disabled
 ```glimmer-ts title="form.gts"
 import Component from "@glimmer/component"
 import { on } from "@ember/modifier"
-import { Field } from "@ui-sdk/ember/field"
-import { ColorPicker } from "@ui-sdk/ember/color-picker"
+import { Field } from "ember-ui-sdk/field"
+import { ColorPicker } from "ember-ui-sdk/color-picker"
 import { useLog } from "./log"
 
 export default class Form extends Component {
